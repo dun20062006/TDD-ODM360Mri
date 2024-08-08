@@ -1,0 +1,1046 @@
+                        .module isr.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile App\isr.c
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0000                   .dbfunc e Delay_MS _Delay_MS fV
+ 0000           ;              t -> R16,R17
+                        .even
+ 0000           _Delay_MS::
+ 0000                   .dbline -1
+ 0000                   .dbline 3
+ 0000           ; #include "includes.h"
+ 0000           ; void Delay_MS(unsigned int t)
+ 0000           ; {
+ 0000                   .dbline 4
+ 0000           ;   DelayMs=t;
+ 0000 10930100          sts _DelayMs+1,R17
+ 0004 00930000          sts _DelayMs,R16
+ 0008           L6:
+ 0008                   .dbline 5
+ 0008           ;   while(DelayMs>0);
+ 0008           L7:
+ 0008                   .dbline 5
+ 0008 20900000          lds R2,_DelayMs
+ 000C 30900100          lds R3,_DelayMs+1
+ 0010 2220              tst R2
+ 0012 D1F7              brne L6
+ 0014 3320              tst R3
+ 0016 C1F7              brne L6
+ 0018           X0:
+ 0018                   .dbline -2
+ 0018           L5:
+ 0018                   .dbline 0 ; func end
+ 0018 0895              ret
+ 001A                   .dbsym r t 16 i
+ 001A                   .dbend
+ 001A                   .dbfunc e Delay_10MS _Delay_10MS fV
+ 001A           ;              t -> R16,R17
+                        .even
+ 001A           _Delay_10MS::
+ 001A                   .dbline -1
+ 001A                   .dbline 8
+ 001A           ; }
+ 001A           ; void Delay_10MS(unsigned int t)
+ 001A           ; {
+ 001A                   .dbline 9
+ 001A           ;   Clk=0;
+ 001A 2224              clr R2
+ 001C 20920000          sts _Clk,R2
+ 0020           L10:
+ 0020                   .dbline 10
+ 0020           ;   while(Clk<t);
+ 0020           L11:
+ 0020                   .dbline 10
+ 0020 20900000          lds R2,_Clk
+ 0024 3324              clr R3
+ 0026 2016              cp R2,R16
+ 0028 3106              cpc R3,R17
+ 002A D0F3              brlo L10
+ 002C           X1:
+ 002C                   .dbline -2
+ 002C           L9:
+ 002C                   .dbline 0 ; func end
+ 002C 0895              ret
+ 002E                   .dbsym r t 16 i
+ 002E                   .dbend
+ 002E                   .dbfunc e start_pwm _start_pwm fV
+                        .even
+ 002E           _start_pwm::
+ 002E                   .dbline -1
+ 002E                   .dbline 13
+ 002E           ; }
+ 002E           ; void start_pwm(void)
+ 002E           ;  {
+ 002E                   .dbline 14
+ 002E           ;     timer2_init();
+ 002E 0E940000          xcall _timer2_init
+ 0032                   .dbline 15
+ 0032           ;     TCCR2 = 0x72; 
+ 0032 82E7              ldi R24,114
+ 0034 85BD              out 0x25,R24
+ 0036                   .dbline -2
+ 0036           L13:
+ 0036                   .dbline 0 ; func end
+ 0036 0895              ret
+ 0038                   .dbend
+ 0038                   .dbfunc e stop_pwm _stop_pwm fV
+                        .even
+ 0038           _stop_pwm::
+ 0038                   .dbline -1
+ 0038                   .dbline 18
+ 0038           ;  }    
+ 0038           ; void stop_pwm(void)
+ 0038           ;  {
+ 0038                   .dbline 19
+ 0038           ;    timer2_init();
+ 0038 0E940000          xcall _timer2_init
+ 003C                   .dbline 20
+ 003C           ;    PORTB &=0x7f;
+ 003C 88B3              in R24,0x18
+ 003E 8F77              andi R24,127
+ 0040 88BB              out 0x18,R24
+ 0042                   .dbline -2
+ 0042           L14:
+ 0042                   .dbline 0 ; func end
+ 0042 0895              ret
+ 0044                   .dbend
+ 0044                   .dbfunc e out_pulse _out_pulse fV
+                        .even
+ 0044           _out_pulse::
+ 0044                   .dbline -1
+ 0044                   .dbline 23
+ 0044           ;  } 
+ 0044           ; void out_pulse(void)
+ 0044           ; {
+ 0044                   .dbline 24
+ 0044           ;   TCNT1H = 0x00; 
+ 0044 2224              clr R2
+ 0046 2DBC              out 0x2d,R2
+ 0048                   .dbline 25
+ 0048           ;   TCNT1L = 0x01;
+ 0048 81E0              ldi R24,1
+ 004A 8CBD              out 0x2c,R24
+ 004C                   .dbline 26
+ 004C           ;   OCR1C  = 1250; 
+ 004C 82EE              ldi R24,1250
+ 004E 94E0              ldi R25,4
+ 0050 90937900          sts 120+1,R25
+ 0054 80937800          sts 120,R24
+ 0058                   .dbline 27
+ 0058           ;   ETIMSK |=0X01;
+ 0058 80917D00          lds R24,125
+ 005C 8160              ori R24,1
+ 005E 80937D00          sts 125,R24
+ 0062                   .dbline -2
+ 0062           L15:
+ 0062                   .dbline 0 ; func end
+ 0062 0895              ret
+ 0064                   .dbend
+ 0064                   .dbfunc e sound _sound fV
+                        .even
+ 0064           _sound::
+ 0064                   .dbline -1
+ 0064                   .dbline 30
+ 0064           ; } 
+ 0064           ; void sound(void)//???
+ 0064           ; {
+ 0064                   .dbline 31
+ 0064           ;   if(Sound_Count>0)
+ 0064 80E0              ldi R24,0
+ 0066 20900000          lds R2,_Sound_Count
+ 006A 8215              cp R24,R2
+ 006C 30F4              brsh L17
+ 006E           X2:
+ 006E                   .dbline 32
+ 006E           ;   {
+ 006E                   .dbline 33
+ 006E           ;     Sound_Count--;
+ 006E 822D              mov R24,R2
+ 0070 8150              subi R24,1
+ 0072 80930000          sts _Sound_Count,R24
+ 0076                   .dbline 34
+ 0076           ;       SPK_ON;
+ 0076 D89A              sbi 0x1b,0
+ 0078                   .dbline 35
+ 0078           ;   }
+ 0078 01C0              xjmp L18
+ 007A           L17:
+ 007A                   .dbline 36
+ 007A           ;   else SPK_OFF;
+ 007A D898              cbi 0x1b,0
+ 007C           L18:
+ 007C                   .dbline -2
+ 007C           L16:
+ 007C                   .dbline 0 ; func end
+ 007C 0895              ret
+ 007E                   .dbend
+                        .area data(ram, con, rel)
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0000           L20:
+ 0000                   .blkb 2
+                        .area idata
+ 0000 0000              .word 0
+                        .area data(ram, con, rel)
+ 0002                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0002           L21:
+ 0002                   .blkb 2
+                        .area idata
+ 0002 0000              .word 0
+                        .area data(ram, con, rel)
+ 0004                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+                        .area text(rom, con, rel)
+ 007E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 007E                   .dbfunc e water_count _water_count fV
+ 007E                   .dbsym s w_bit L21 i
+ 007E                   .dbsym s w_cnt L20 i
+                        .even
+ 007E           _water_count::
+ 007E                   .dbline -1
+ 007E                   .dbline 39
+ 007E           ; }
+ 007E           ; void water_count(void)
+ 007E           ; {
+ 007E                   .dbline 42
+ 007E           ;   static unsigned int w_cnt=0;
+ 007E           ;   static unsigned int w_bit=0;
+ 007E           ;   w_cnt++; 
+ 007E 80910000          lds R24,L20
+ 0082 90910100          lds R25,L20+1
+ 0086 0196              adiw R24,1
+ 0088 90930100          sts L20+1,R25
+ 008C 80930000          sts L20,R24
+ 0090                   .dbline 43
+ 0090           ;   if(w_cnt>80)
+ 0090 80E5              ldi R24,80
+ 0092 90E0              ldi R25,0
+ 0094 20900000          lds R2,L20
+ 0098 30900100          lds R3,L20+1
+ 009C 8215              cp R24,R2
+ 009E 9305              cpc R25,R3
+ 00A0 80F4              brsh L22
+ 00A2           X3:
+ 00A2                   .dbline 44
+ 00A2           ;   {
+ 00A2                   .dbline 45
+ 00A2           ;       water=w_buf;
+ 00A2 20900000          lds R2,_w_buf
+ 00A6 30900100          lds R3,_w_buf+1
+ 00AA 20920000          sts _water,R2
+ 00AE                   .dbline 46
+ 00AE           ;       w_buf=0;
+ 00AE 2224              clr R2
+ 00B0 3324              clr R3
+ 00B2 30920100          sts _w_buf+1,R3
+ 00B6 20920000          sts _w_buf,R2
+ 00BA                   .dbline 47
+ 00BA           ;       w_cnt=0;
+ 00BA 30920100          sts L20+1,R3
+ 00BE 20920000          sts L20,R2
+ 00C2                   .dbline 48
+ 00C2           ;   }
+ 00C2           L22:
+ 00C2                   .dbline 49
+ 00C2           ;   if(w_bit!=(PINF&0x04))
+ 00C2 80B1              in R24,0x0
+ 00C4 9927              clr R25
+ 00C6 8470              andi R24,4
+ 00C8 9070              andi R25,0
+ 00CA 20900200          lds R2,L21
+ 00CE 30900300          lds R3,L21+1
+ 00D2 2816              cp R2,R24
+ 00D4 3906              cpc R3,R25
+ 00D6 A9F0              breq L24
+ 00D8           X4:
+ 00D8                   .dbline 50
+ 00D8           ;   {
+ 00D8                   .dbline 51
+ 00D8           ;     w_bit=PINF&0x04;
+ 00D8 80B1              in R24,0x0
+ 00DA 9927              clr R25
+ 00DC 8470              andi R24,4
+ 00DE 9070              andi R25,0
+ 00E0 90930300          sts L21+1,R25
+ 00E4 80930200          sts L21,R24
+ 00E8                   .dbline 52
+ 00E8           ;       if(w_buf<255) 
+ 00E8 80910000          lds R24,_w_buf
+ 00EC 90910100          lds R25,_w_buf+1
+ 00F0 8F3F              cpi R24,255
+ 00F2 E0E0              ldi R30,0
+ 00F4 9E07              cpc R25,R30
+ 00F6 28F4              brsh L26
+ 00F8           X5:
+ 00F8                   .dbline 53
+ 00F8           ;       w_buf++;
+ 00F8 0196              adiw R24,1
+ 00FA 90930100          sts _w_buf+1,R25
+ 00FE 80930000          sts _w_buf,R24
+ 0102           L26:
+ 0102                   .dbline 54
+ 0102           ;   }
+ 0102           L24:
+ 0102                   .dbline -2
+ 0102           L19:
+ 0102                   .dbline 0 ; func end
+ 0102 0895              ret
+ 0104                   .dbend
+                        .area vector(rom, abs)
+                        .org 60
+ 003C 0C948200          jmp _timer0_comp_isr
+                        .area text(rom, con, rel)
+ 0104                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+                        .area data(ram, con, rel)
+ 0004                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0004           L29:
+ 0004                   .blkb 2
+                        .area idata
+ 0004 0000              .word 0
+                        .area data(ram, con, rel)
+ 0006                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0006           L30:
+ 0006                   .blkb 2
+                        .area idata
+ 0006 0000              .word 0
+                        .area data(ram, con, rel)
+ 0008                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+                        .area text(rom, con, rel)
+ 0104                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0104                   .dbfunc e timer0_comp_isr _timer0_comp_isr fV
+ 0104                   .dbsym s xf L30 i
+ 0104                   .dbsym s count L29 i
+                        .even
+ 0104           _timer0_comp_isr::
+ 0104 0A92              st -y,R0
+ 0106 1A92              st -y,R1
+ 0108 2A92              st -y,R2
+ 010A 3A92              st -y,R3
+ 010C 4A92              st -y,R4
+ 010E 5A92              st -y,R5
+ 0110 6A92              st -y,R6
+ 0112 7A92              st -y,R7
+ 0114 8A92              st -y,R8
+ 0116 9A92              st -y,R9
+ 0118 0A93              st -y,R16
+ 011A 1A93              st -y,R17
+ 011C 2A93              st -y,R18
+ 011E 3A93              st -y,R19
+ 0120 8A93              st -y,R24
+ 0122 9A93              st -y,R25
+ 0124 AA93              st -y,R26
+ 0126 BA93              st -y,R27
+ 0128 EA93              st -y,R30
+ 012A FA93              st -y,R31
+ 012C 0FB6              IN R0,63
+ 012E 0A92              st -y,R0
+ 0130                   .dbline -1
+ 0130                   .dbline 59
+ 0130           ; }
+ 0130           ; #pragma interrupt_handler timer0_comp_isr:16
+ 0130           ; 
+ 0130           ; void timer0_comp_isr(void)
+ 0130           ; {
+ 0130                   .dbline 62
+ 0130           ;   static unsigned int count=0;
+ 0130           ;   static unsigned int xf=0;
+ 0130           ;   TCNT0=0;
+ 0130 2224              clr R2
+ 0132 22BE              out 0x32,R2
+ 0134                   .dbline 63
+ 0134           ;   OCR0 = 0x97;
+ 0134 87E9              ldi R24,151
+ 0136 81BF              out 0x31,R24
+ 0138                   .dbline 64
+ 0138           ;   Clk++;
+ 0138 80910000          lds R24,_Clk
+ 013C 8F5F              subi R24,255    ; addi 1
+ 013E 80930000          sts _Clk,R24
+ 0142                   .dbline 65
+ 0142           ;   sound();
+ 0142 90DF              xcall _sound
+ 0144                   .dbline 66
+ 0144           ;   if(DelayMs>0) DelayMs--;
+ 0144 20900000          lds R2,_DelayMs
+ 0148 30900100          lds R3,_DelayMs+1
+ 014C 2220              tst R2
+ 014E 11F4              brne X6
+ 0150 3320              tst R3
+ 0152 31F0              breq L31
+ 0154           X6:
+ 0154                   .dbline 66
+ 0154 C101              movw R24,R2
+ 0156 0197              sbiw R24,1
+ 0158 90930100          sts _DelayMs+1,R25
+ 015C 80930000          sts _DelayMs,R24
+ 0160           L31:
+ 0160                   .dbline 68
+ 0160           ;   //Updata(); 
+ 0160           ;   if(MACHINE_STATE.WORK_STATE==0) return;
+ 0160 20900100          lds R2,_MACHINE_STATE+1
+ 0164 2220              tst R2
+ 0166 09F4              brne L33
+ 0168           X7:
+ 0168                   .dbline 68
+ 0168 69C0              xjmp L28
+ 016A           L33:
+ 016A                   .dbline 69
+ 016A           ;   if(MACHINE_STATE.HANDLE_ID==5)return;
+ 016A 80910000          lds R24,_MACHINE_STATE
+ 016E 8530              cpi R24,5
+ 0170 09F4              brne L36
+ 0172           X8:
+ 0172                   .dbline 69
+ 0172 64C0              xjmp L28
+ 0174           L36:
+ 0174                   .dbline 71
+ 0174           ; 
+ 0174           ;   if((Intensity[5]==0)||(Intensity[6]==0)) XF_OFF; //吸放气 H
+ 0174 20900500          lds R2,_Intensity+5
+ 0178 2220              tst R2
+ 017A 21F0              breq L42
+ 017C           X9:
+ 017C 20900600          lds R2,_Intensity+6
+ 0180 2220              tst R2
+ 0182 31F4              brne L38
+ 0184           X10:
+ 0184           L42:
+ 0184                   .dbline 71
+ 0184 80916500          lds R24,101
+ 0188 8260              ori R24,2
+ 018A 80936500          sts 101,R24
+ 018E 56C0              xjmp L39
+ 0190           L38:
+ 0190                   .dbline 72
+ 0190           ;   else if(xf==0)
+ 0190 20900600          lds R2,L30
+ 0194 30900700          lds R3,L30+1
+ 0198 2220              tst R2
+ 019A 79F5              brne L43
+ 019C 3320              tst R3
+ 019E 69F5              brne L43
+ 01A0           X11:
+ 01A0                   .dbline 73
+ 01A0           ;   {
+ 01A0                   .dbline 74
+ 01A0           ;     if(count<Intensity[5]*20) count++;
+ 01A0 10910500          lds R17,_Intensity+5
+ 01A4 04E1              ldi R16,20
+ 01A6 0103              mulsu R16,R17
+ 01A8 20900400          lds R2,L29
+ 01AC 30900500          lds R3,L29+1
+ 01B0 2014              cp R2,R0
+ 01B2 3104              cpc R3,R1
+ 01B4 38F4              brsh L45
+ 01B6           X12:
+ 01B6                   .dbline 74
+ 01B6 C101              movw R24,R2
+ 01B8 0196              adiw R24,1
+ 01BA 90930500          sts L29+1,R25
+ 01BE 80930400          sts L29,R24
+ 01C2 3CC0              xjmp L44
+ 01C4           L45:
+ 01C4                   .dbline 76
+ 01C4           ;       else 
+ 01C4           ;       {
+ 01C4                   .dbline 77
+ 01C4           ;         count=0;
+ 01C4 2224              clr R2
+ 01C6 3324              clr R3
+ 01C8 30920500          sts L29+1,R3
+ 01CC 20920400          sts L29,R2
+ 01D0                   .dbline 78
+ 01D0           ;         xf=1;
+ 01D0 81E0              ldi R24,1
+ 01D2 90E0              ldi R25,0
+ 01D4 90930700          sts L30+1,R25
+ 01D8 80930600          sts L30,R24
+ 01DC                   .dbline 79
+ 01DC           ;         if((Intensity[5]>0)&&(Intensity[6]>0)) XF_ON; 
+ 01DC 80E0              ldi R24,0
+ 01DE 20900500          lds R2,_Intensity+5
+ 01E2 8215              cp R24,R2
+ 01E4 58F5              brsh L44
+ 01E6           X13:
+ 01E6 20900600          lds R2,_Intensity+6
+ 01EA 8215              cp R24,R2
+ 01EC 38F5              brsh L44
+ 01EE           X14:
+ 01EE                   .dbline 79
+ 01EE 80916500          lds R24,101
+ 01F2 8D7F              andi R24,253
+ 01F4 80936500          sts 101,R24
+ 01F8                   .dbline 80
+ 01F8           ;       }
+ 01F8                   .dbline 81
+ 01F8           ;   }
+ 01F8 21C0              xjmp L44
+ 01FA           L43:
+ 01FA                   .dbline 83
+ 01FA           ;   else
+ 01FA           ;   {
+ 01FA                   .dbline 85
+ 01FA           ;     //if(count<Intensity[6]*20) count++;
+ 01FA           ;       if(count<Intensity[6]*10) count++;//20190410改
+ 01FA 10910600          lds R17,_Intensity+6
+ 01FE 0AE0              ldi R16,10
+ 0200 0103              mulsu R16,R17
+ 0202 20900400          lds R2,L29
+ 0206 30900500          lds R3,L29+1
+ 020A 2014              cp R2,R0
+ 020C 3104              cpc R3,R1
+ 020E 38F4              brsh L52
+ 0210           X15:
+ 0210                   .dbline 85
+ 0210 C101              movw R24,R2
+ 0212 0196              adiw R24,1
+ 0214 90930500          sts L29+1,R25
+ 0218 80930400          sts L29,R24
+ 021C 0FC0              xjmp L53
+ 021E           L52:
+ 021E                   .dbline 87
+ 021E           ;       else 
+ 021E           ;       {
+ 021E                   .dbline 88
+ 021E           ;         count=0;
+ 021E 2224              clr R2
+ 0220 3324              clr R3
+ 0222 30920500          sts L29+1,R3
+ 0226 20920400          sts L29,R2
+ 022A                   .dbline 89
+ 022A           ;         xf=0;
+ 022A 30920700          sts L30+1,R3
+ 022E 20920600          sts L30,R2
+ 0232                   .dbline 90
+ 0232           ;         XF_OFF; 
+ 0232 80916500          lds R24,101
+ 0236 8260              ori R24,2
+ 0238 80936500          sts 101,R24
+ 023C                   .dbline 91
+ 023C           ;       }
+ 023C           L53:
+ 023C                   .dbline 92
+ 023C           ;   }
+ 023C           L44:
+ 023C           L39:
+ 023C                   .dbline -2
+ 023C           L28:
+ 023C                   .dbline 0 ; func end
+ 023C 0990              ld R0,y+
+ 023E 0FBE              OUT 63,R0
+ 0240 F991              ld R31,y+
+ 0242 E991              ld R30,y+
+ 0244 B991              ld R27,y+
+ 0246 A991              ld R26,y+
+ 0248 9991              ld R25,y+
+ 024A 8991              ld R24,y+
+ 024C 3991              ld R19,y+
+ 024E 2991              ld R18,y+
+ 0250 1991              ld R17,y+
+ 0252 0991              ld R16,y+
+ 0254 9990              ld R9,y+
+ 0256 8990              ld R8,y+
+ 0258 7990              ld R7,y+
+ 025A 6990              ld R6,y+
+ 025C 5990              ld R5,y+
+ 025E 4990              ld R4,y+
+ 0260 3990              ld R3,y+
+ 0262 2990              ld R2,y+
+ 0264 1990              ld R1,y+
+ 0266 0990              ld R0,y+
+ 0268 1895              reti
+ 026A                   .dbend
+                        .area vector(rom, abs)
+                        .org 96
+ 0060 0C943501          jmp _timer1_compc_isr
+                        .area text(rom, con, rel)
+ 026A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 026A                   .dbfunc e timer1_compc_isr _timer1_compc_isr fV
+                        .even
+ 026A           _timer1_compc_isr::
+ 026A                   .dbline -1
+ 026A                   .dbline 99
+ 026A           ; }
+ 026A           ; 
+ 026A           ; 
+ 026A           ; #pragma interrupt_handler timer1_compc_isr:25
+ 026A           ; 
+ 026A           ; void timer1_compc_isr(void)
+ 026A           ; {
+ 026A                   .dbline -2
+ 026A           L55:
+ 026A                   .dbline 0 ; func end
+ 026A 1895              reti
+ 026C                   .dbend
+                        .area vector(rom, abs)
+                        .org 36
+ 0024 0C943601          jmp _timer2_comp_isr
+                        .area text(rom, con, rel)
+ 026C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 026C                   .dbfunc e timer2_comp_isr _timer2_comp_isr fV
+                        .even
+ 026C           _timer2_comp_isr::
+ 026C 2A92              st -y,R2
+ 026E 2FB6              IN R2,63
+ 0270 2A92              st -y,R2
+ 0272                   .dbline -1
+ 0272                   .dbline 111
+ 0272           ; 
+ 0272           ; }
+ 0272           ; 
+ 0272           ; //TIMER2 initialize - prescale:64
+ 0272           ; // WGM: PWM Fast
+ 0272           ; // desired value: 500Hz
+ 0272           ; // actual value: 488.281Hz (2.4%)
+ 0272           ; 
+ 0272           ; 
+ 0272           ; #pragma interrupt_handler timer2_comp_isr:10
+ 0272           ; void timer2_comp_isr(void)
+ 0272           ; {
+ 0272                   .dbline 118
+ 0272           ;   /*
+ 0272           ;   if((Intensity[8]==0)&&(Intensity[2]>0)&&(Work>0))
+ 0272           ;   {
+ 0272           ;    OCR2=Intensity[2]*25; 
+ 0272           ;   }
+ 0272           ;   else OCR2=0;*/
+ 0272           ;  OCR2=0;
+ 0272 2224              clr R2
+ 0274 23BC              out 0x23,R2
+ 0276                   .dbline -2
+ 0276           L56:
+ 0276                   .dbline 0 ; func end
+ 0276 2990              ld R2,y+
+ 0278 2FBE              OUT 63,R2
+ 027A 2990              ld R2,y+
+ 027C 1895              reti
+ 027E                   .dbend
+                        .area vector(rom, abs)
+                        .org 40
+ 0028 0C943F01          jmp _timer2_ovf_isr
+                        .area text(rom, con, rel)
+ 027E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+                        .area data(ram, con, rel)
+ 0008                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0008           L58:
+ 0008                   .blkb 1
+                        .area idata
+ 0008 00                .byte 0
+                        .area data(ram, con, rel)
+ 0009                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+                        .area text(rom, con, rel)
+ 027E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 027E                   .dbfunc e timer2_ovf_isr _timer2_ovf_isr fV
+ 027E                   .dbsym s count L58 c
+                        .even
+ 027E           _timer2_ovf_isr::
+ 027E 0A92              st -y,R0
+ 0280 1A92              st -y,R1
+ 0282 2A92              st -y,R2
+ 0284 3A92              st -y,R3
+ 0286 0A93              st -y,R16
+ 0288 1A93              st -y,R17
+ 028A 2A93              st -y,R18
+ 028C 3A93              st -y,R19
+ 028E 8A93              st -y,R24
+ 0290 0FB6              IN R0,63
+ 0292 0A92              st -y,R0
+ 0294                   .dbline -1
+ 0294                   .dbline 122
+ 0294           ; }
+ 0294           ; #pragma interrupt_handler timer2_ovf_isr:11
+ 0294           ; void timer2_ovf_isr(void)
+ 0294           ; {
+ 0294                   .dbline 124
+ 0294           ;   static unsigned char count=0;
+ 0294           ;   TCNT2 = 0x01;
+ 0294 81E0              ldi R24,1
+ 0296 84BD              out 0x24,R24
+ 0298                   .dbline 128
+ 0298           ;   //water_count();
+ 0298           ; 
+ 0298           ;   
+ 0298           ;   if(MACHINE_STATE.WORK_STATE==0)
+ 0298 20900100          lds R2,_MACHINE_STATE+1
+ 029C 2220              tst R2
+ 029E 41F4              brne L59
+ 02A0           X16:
+ 02A0                   .dbline 129
+ 02A0           ;   {
+ 02A0                   .dbline 130
+ 02A0           ;    BitSet(PORTA,6);
+ 02A0 DE9A              sbi 0x1b,6
+ 02A2                   .dbline 131
+ 02A2           ;    BitSet(PORTA,7);
+ 02A2 DF9A              sbi 0x1b,7
+ 02A4                   .dbline 132
+ 02A4           ;    LED2_OFF;
+ 02A4 C09A              sbi 0x18,0
+ 02A6                   .dbline 133
+ 02A6           ;    LD2_OFF;
+ 02A6 C19A              sbi 0x18,1
+ 02A8                   .dbline 134
+ 02A8           ;    RFE_OFF;
+ 02A8 C698              cbi 0x18,6
+ 02AA                   .dbline 135
+ 02AA           ;    MD_OFF;
+ 02AA 1D98              cbi 0x3,5
+ 02AC                   .dbline 136
+ 02AC           ;    LED3_OFF;
+ 02AC 1F9A              sbi 0x3,7
+ 02AE                   .dbline 137
+ 02AE           ;    return;
+ 02AE A4C0              xjmp L57
+ 02B0           L59:
+ 02B0                   .dbline 139
+ 02B0           ;   }
+ 02B0           ;   if(MACHINE_STATE.HANDLE_ID==5)return;
+ 02B0 80910000          lds R24,_MACHINE_STATE
+ 02B4 8530              cpi R24,5
+ 02B6 09F4              brne L62
+ 02B8           X17:
+ 02B8                   .dbline 139
+ 02B8 9FC0              xjmp L57
+ 02BA           L62:
+ 02BA                   .dbline 140
+ 02BA           ;   BitClr(PORTA,6); //负压真空泵打开 H
+ 02BA DE98              cbi 0x1b,6
+ 02BC                   .dbline 141
+ 02BC           ;   if(Intensity[8]<2) BitClr(PORTA,7);// 没用到 H
+ 02BC 80910800          lds R24,_Intensity+8
+ 02C0 8230              cpi R24,2
+ 02C2 08F4              brsh L64
+ 02C4           X18:
+ 02C4                   .dbline 141
+ 02C4 DF98              cbi 0x1b,7
+ 02C6           L64:
+ 02C6                   .dbline 142
+ 02C6           ;   count=(count+1)%50;
+ 02C6 12E3              ldi R17,50
+ 02C8 00910800          lds R16,L58
+ 02CC 0F5F              subi R16,255    ; addi 1
+ 02CE 0E940000          xcall mod8u
+ 02D2 00930800          sts L58,R16
+ 02D6                   .dbline 143
+ 02D6           ;   RfPer=SettingDdata.SET_WORKPOWER;
+ 02D6 20904600          lds R2,_SettingDdata+70
+ 02DA 20920000          sts _RfPer,R2
+ 02DE                   .dbline 144
+ 02DE           ;   if(Intensity[8]==0)//1号手柄 射频等级 H
+ 02DE 20900800          lds R2,_Intensity+8
+ 02E2 2220              tst R2
+ 02E4 C1F4              brne L68
+ 02E6           X19:
+ 02E6                   .dbline 145
+ 02E6           ;   {
+ 02E6                   .dbline 146
+ 02E6           ;     if((Intensity[2]*5*RfPer/100)>count) RFE_ON;
+ 02E6 10910200          lds R17,_Intensity+2
+ 02EA 05E0              ldi R16,5
+ 02EC 0103              mulsu R16,R17
+ 02EE 8001              movw R16,R0
+ 02F0 20910000          lds R18,_RfPer
+ 02F4 3327              clr R19
+ 02F6 0E940000          xcall empy16s
+ 02FA 24E6              ldi R18,100
+ 02FC 30E0              ldi R19,0
+ 02FE 0E940000          xcall div16s
+ 0302 20900800          lds R2,L58
+ 0306 3324              clr R3
+ 0308 2016              cp R2,R16
+ 030A 3106              cpc R3,R17
+ 030C 14F4              brge L71
+ 030E           X20:
+ 030E                   .dbline 146
+ 030E C69A              sbi 0x18,6
+ 0310 73C0              xjmp L69
+ 0312           L71:
+ 0312                   .dbline 147
+ 0312           ;     else RFE_OFF;
+ 0312 C698              cbi 0x18,6
+ 0314                   .dbline 148
+ 0314           ;   }
+ 0314 71C0              xjmp L69
+ 0316           L68:
+ 0316                   .dbline 149
+ 0316           ;   else if(Intensity[8]==1)//2号手柄 LED 射频  电机转速等级  H
+ 0316 80910800          lds R24,_Intensity+8
+ 031A 8130              cpi R24,1
+ 031C 81F5              brne L74
+ 031E           X21:
+ 031E                   .dbline 150
+ 031E           ;   {
+ 031E                   .dbline 151
+ 031E           ;     if(Intensity[0]*5>count) LED2_ON;
+ 031E 10910000          lds R17,_Intensity
+ 0322 05E0              ldi R16,5
+ 0324 0103              mulsu R16,R17
+ 0326 20900800          lds R2,L58
+ 032A 3324              clr R3
+ 032C 2014              cp R2,R0
+ 032E 3104              cpc R3,R1
+ 0330 14F4              brge L77
+ 0332           X22:
+ 0332                   .dbline 151
+ 0332 C098              cbi 0x18,0
+ 0334 01C0              xjmp L78
+ 0336           L77:
+ 0336                   .dbline 152
+ 0336           ;     else LED2_OFF;
+ 0336 C09A              sbi 0x18,0
+ 0338           L78:
+ 0338                   .dbline 153
+ 0338           ;     if((Intensity[2]*4*RfPer/100)>count) RFE_ON;
+ 0338 10910000          lds R17,_RfPer
+ 033C 00910200          lds R16,_Intensity+2
+ 0340 000F              lsl R16
+ 0342 000F              lsl R16
+ 0344 0103              mulsu R16,R17
+ 0346 8001              movw R16,R0
+ 0348 24E6              ldi R18,100
+ 034A 30E0              ldi R19,0
+ 034C 0E940000          xcall div16s
+ 0350 20900800          lds R2,L58
+ 0354 3324              clr R3
+ 0356 2016              cp R2,R16
+ 0358 3106              cpc R3,R17
+ 035A 14F4              brge L79
+ 035C           X23:
+ 035C                   .dbline 153
+ 035C C69A              sbi 0x18,6
+ 035E 01C0              xjmp L80
+ 0360           L79:
+ 0360                   .dbline 154
+ 0360           ;     else RFE_OFF;
+ 0360 C698              cbi 0x18,6
+ 0362           L80:
+ 0362                   .dbline 155
+ 0362           ;     if(Intensity[3]*5>count) MD_ON;
+ 0362 10910300          lds R17,_Intensity+3
+ 0366 05E0              ldi R16,5
+ 0368 0103              mulsu R16,R17
+ 036A 20900800          lds R2,L58
+ 036E 3324              clr R3
+ 0370 2014              cp R2,R0
+ 0372 3104              cpc R3,R1
+ 0374 14F4              brge L82
+ 0376           X24:
+ 0376                   .dbline 155
+ 0376 1D9A              sbi 0x3,5
+ 0378 3FC0              xjmp L75
+ 037A           L82:
+ 037A                   .dbline 156
+ 037A           ;     else MD_OFF;
+ 037A 1D98              cbi 0x3,5
+ 037C                   .dbline 157
+ 037C           ;   }
+ 037C 3DC0              xjmp L75
+ 037E           L74:
+ 037E                   .dbline 158
+ 037E           ;   else if(Intensity[8]==2)//3号手柄  LED 射频等级 H
+ 037E 80910800          lds R24,_Intensity+8
+ 0382 8230              cpi R24,2
+ 0384 11F5              brne L85
+ 0386           X25:
+ 0386                   .dbline 159
+ 0386           ;   {
+ 0386                   .dbline 160
+ 0386           ;     if(Intensity[0]*5>count) LED3_ON;
+ 0386 10910000          lds R17,_Intensity
+ 038A 05E0              ldi R16,5
+ 038C 0103              mulsu R16,R17
+ 038E 20900800          lds R2,L58
+ 0392 3324              clr R3
+ 0394 2014              cp R2,R0
+ 0396 3104              cpc R3,R1
+ 0398 14F4              brge L88
+ 039A           X26:
+ 039A                   .dbline 160
+ 039A 1F98              cbi 0x3,7
+ 039C 01C0              xjmp L89
+ 039E           L88:
+ 039E                   .dbline 161
+ 039E           ;     else LED3_OFF;
+ 039E 1F9A              sbi 0x3,7
+ 03A0           L89:
+ 03A0                   .dbline 162
+ 03A0           ;     if((Intensity[2]*2*RfPer/100)>count) RFE_ON;
+ 03A0 10910000          lds R17,_RfPer
+ 03A4 00910200          lds R16,_Intensity+2
+ 03A8 000F              lsl R16
+ 03AA 0103              mulsu R16,R17
+ 03AC 8001              movw R16,R0
+ 03AE 24E6              ldi R18,100
+ 03B0 30E0              ldi R19,0
+ 03B2 0E940000          xcall div16s
+ 03B6 20900800          lds R2,L58
+ 03BA 3324              clr R3
+ 03BC 2016              cp R2,R16
+ 03BE 3106              cpc R3,R17
+ 03C0 14F4              brge L90
+ 03C2           X27:
+ 03C2                   .dbline 162
+ 03C2 C69A              sbi 0x18,6
+ 03C4 19C0              xjmp L86
+ 03C6           L90:
+ 03C6                   .dbline 163
+ 03C6           ;     else RFE_OFF;
+ 03C6 C698              cbi 0x18,6
+ 03C8                   .dbline 164
+ 03C8           ;   }
+ 03C8 17C0              xjmp L86
+ 03CA           L85:
+ 03CA                   .dbline 165
+ 03CA           ;   else if(Intensity[8]==3)//4号手柄射频等级  H
+ 03CA 80910800          lds R24,_Intensity+8
+ 03CE 8330              cpi R24,3
+ 03D0 99F4              brne L93
+ 03D2           X28:
+ 03D2                   .dbline 166
+ 03D2           ;   {
+ 03D2                   .dbline 167
+ 03D2           ;     if((Intensity[2]*RfPer/100)>count) RFE_ON;
+ 03D2 10910000          lds R17,_RfPer
+ 03D6 00910200          lds R16,_Intensity+2
+ 03DA 0103              mulsu R16,R17
+ 03DC 8001              movw R16,R0
+ 03DE 24E6              ldi R18,100
+ 03E0 30E0              ldi R19,0
+ 03E2 0E940000          xcall div16s
+ 03E6 20900800          lds R2,L58
+ 03EA 3324              clr R3
+ 03EC 2016              cp R2,R16
+ 03EE 3106              cpc R3,R17
+ 03F0 14F4              brge L96
+ 03F2           X29:
+ 03F2                   .dbline 167
+ 03F2 C69A              sbi 0x18,6
+ 03F4 01C0              xjmp L97
+ 03F6           L96:
+ 03F6                   .dbline 168
+ 03F6           ;     else RFE_OFF;
+ 03F6 C698              cbi 0x18,6
+ 03F8           L97:
+ 03F8                   .dbline 169
+ 03F8           ;   }
+ 03F8           L93:
+ 03F8           L86:
+ 03F8           L75:
+ 03F8           L69:
+ 03F8                   .dbline -2
+ 03F8           L57:
+ 03F8                   .dbline 0 ; func end
+ 03F8 0990              ld R0,y+
+ 03FA 0FBE              OUT 63,R0
+ 03FC 8991              ld R24,y+
+ 03FE 3991              ld R19,y+
+ 0400 2991              ld R18,y+
+ 0402 1991              ld R17,y+
+ 0404 0991              ld R16,y+
+ 0406 3990              ld R3,y+
+ 0408 2990              ld R2,y+
+ 040A 1990              ld R1,y+
+ 040C 0990              ld R0,y+
+ 040E 1895              reti
+ 0410                   .dbend
+                        .area vector(rom, abs)
+                        .org 112
+ 0070 0C940802          jmp _timer3_compc_isr
+                        .area text(rom, con, rel)
+ 0410                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0410                   .dbfunc e timer3_compc_isr _timer3_compc_isr fV
+                        .even
+ 0410           _timer3_compc_isr::
+ 0410 8A93              st -y,R24
+ 0412 8FB7              IN R24,63
+ 0414 8A93              st -y,R24
+ 0416                   .dbline -1
+ 0416                   .dbline 180
+ 0416           ;   
+ 0416           ; }
+ 0416           ; //TIMER3 initialize - prescale:64
+ 0416           ; // WGM: 1) PWM 8bit Phz correct, TOP=0x00FF
+ 0416           ; // desired value: 245Hz
+ 0416           ; // actual value: 245.098Hz (0.0%)
+ 0416           ; 
+ 0416           ; 
+ 0416           ; #pragma interrupt_handler timer3_compc_isr:29
+ 0416           ; void timer3_compc_isr(void)
+ 0416           ; {
+ 0416                   .dbline 182
+ 0416           ;  //compare occured TCNT3
+ 0416           ;  OCR3CH = 0xff;
+ 0416 8FEF              ldi R24,255
+ 0418 80938300          sts 131,R24
+ 041C                   .dbline 183
+ 041C           ;  OCR3CL =255;
+ 041C 80938200          sts 130,R24
+ 0420                   .dbline -2
+ 0420           L99:
+ 0420                   .dbline 0 ; func end
+ 0420 8991              ld R24,y+
+ 0422 8FBF              OUT 63,R24
+ 0424 8991              ld R24,y+
+ 0426 1895              reti
+ 0428                   .dbend
+                        .area vector(rom, abs)
+                        .org 116
+ 0074 0C941402          jmp _timer3_ovf_isr
+                        .area text(rom, con, rel)
+ 0428                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0428                   .dbfunc e timer3_ovf_isr _timer3_ovf_isr fV
+                        .even
+ 0428           _timer3_ovf_isr::
+ 0428 8A93              st -y,R24
+ 042A 8FB7              IN R24,63
+ 042C 8A93              st -y,R24
+ 042E                   .dbline -1
+ 042E                   .dbline 188
+ 042E           ;  //PORTE &= 0x7F;
+ 042E           ; }
+ 042E           ; #pragma interrupt_handler timer3_ovf_isr:30
+ 042E           ; void timer3_ovf_isr(void)
+ 042E           ; {
+ 042E                   .dbline 189
+ 042E           ;  TCNT3H = 0xFF; //reload counter high value
+ 042E 8FEF              ldi R24,255
+ 0430 80938900          sts 137,R24
+ 0434                   .dbline 190
+ 0434           ;  TCNT3L = 0x01; //reload counter low value
+ 0434 81E0              ldi R24,1
+ 0436 80938800          sts 136,R24
+ 043A                   .dbline -2
+ 043A           L100:
+ 043A                   .dbline 0 ; func end
+ 043A 8991              ld R24,y+
+ 043C 8FBF              OUT 63,R24
+ 043E 8991              ld R24,y+
+ 0440 1895              reti
+ 0442                   .dbend
+                        .area vector(rom, abs)
+                        .org 84
+ 0054 0C942102          jmp _adc_isr
+                        .area text(rom, con, rel)
+ 0442                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\isr.c
+ 0442                   .dbfunc e adc_isr _adc_isr fV
+                        .even
+ 0442           _adc_isr::
+ 0442                   .dbline -1
+ 0442                   .dbline 196
+ 0442           ;  //PORTE |=0x80;
+ 0442           ; }
+ 0442           ; 
+ 0442           ; #pragma interrupt_handler adc_isr:22
+ 0442           ; void adc_isr(void)
+ 0442           ; {
+ 0442                   .dbline -2
+ 0442           L101:
+ 0442                   .dbline 0 ; func end
+ 0442 1895              reti
+ 0444                   .dbend
+ 0444           ;    //conversion complete, read value (int) using...
+ 0444           ;    //i=ADCL;
+ 0444           ;    //adc_value=i;            //Read 8 low bits first (important)
+ 0444           ;    //j=ADCH;
+ 0444           ;    //adc_value|=(int)j << 8; //read 2 high bits and shift into top byte
+ 0444           ;    //adc_value&=0x3fFF;
+ 0444           ;    //x=j;
+ 0444           ; }

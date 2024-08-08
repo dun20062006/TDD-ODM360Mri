@@ -1,0 +1,29 @@
+XL
+H 1 areas 5 global symbols
+M main.c
+S _HandpieceKey Ref0000
+S _init_system Ref0000
+S _DataSynchronization Ref0000
+S _Sound_Count Ref0000
+A text size 1C flags 0
+dbfile App\main.c
+dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\main.c
+dbfunc e main 0 fV
+dbsym r x A i
+dbline FFFFFFFF 0
+dbline 5 0
+dbline 6 0
+dbline 7 4
+dbline 8 8
+dbline A 10
+dbline C 10
+dbline D 14
+dbline E 18
+dbline 9 18
+dbline FFFFFFFE 1A
+dbline 0 1A
+S _main Def0000
+T 00 00 AA 24 BB 24 0E 94 00 00 84 E1 80 93 00 00
+R 00 00 00 00 12 08 01 00 02 0E 03 00
+T 0E 00 04 C0 0E 94 00 00 0E 94 00 00 FB CF 08 95
+R 00 00 00 00 12 06 02 00 12 0A 00 00

@@ -1,0 +1,847 @@
+                        .module ms5540.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile App\ms5540.c
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\ms5540.c
+ 0000                   .dbfunc e ms_w _ms_w fV
+ 0000           ;              i -> R20
+ 0000           ;            dat -> R16
+                        .even
+ 0000           _ms_w::
+ 0000 4A93              st -y,R20
+ 0002                   .dbline -1
+ 0002                   .dbline 15
+ 0002           ; #include "includes.h"
+ 0002           ; #define        dout   (PINF&0x02)
+ 0002           ; 
+ 0002           ; #define        din_set        BitClr(PORTF,2) 
+ 0002           ; #define        din_clr        BitSet(PORTF,2)
+ 0002           ; 
+ 0002           ; #define        clk_set        BitSet(PORTF,3)
+ 0002           ; #define        clk_clr        BitClr(PORTF,3)
+ 0002           ; 
+ 0002           ; #define  uchar unsigned char /*宏定义*/
+ 0002           ; #define  uint  unsigned int
+ 0002           ; 
+ 0002           ; 
+ 0002           ; void ms_w(char dat)//发送8位命令      
+ 0002           ; {
+ 0002                   .dbline 18
+ 0002           ;       char    i;
+ 0002           ; 
+ 0002           ;       for     (i=0;i<8;i++)
+ 0002 4427              clr R20
+ 0004 5AC0              xjmp L9
+ 0006           L6:
+ 0006                   .dbline 19
+ 0006           ;               {
+ 0006                   .dbline 20
+ 0006           ;                       if ((dat & 0x80)==0)din_clr;//数据送0
+ 0006 07FD              sbrc R16,7
+ 0008 06C0              rjmp L10
+ 000A           X0:
+ 000A                   .dbline 20
+ 000A 80916200          lds R24,98
+ 000E 8460              ori R24,4
+ 0010 80936200          sts 98,R24
+ 0014 05C0              xjmp L11
+ 0016           L10:
+ 0016                   .dbline 21
+ 0016           ;                       else    din_set;                        //数据送1
+ 0016 80916200          lds R24,98
+ 001A 8B7F              andi R24,251
+ 001C 80936200          sts 98,R24
+ 0020           L11:
+ 0020                   .dbline 22
+ 0020           ;                       dat <<= 1;      
+ 0020 000F              lsl R16
+ 0022                   .dbline 24
+ 0022           ;                                                                                       
+ 0022           ;                       clk_clr;        //CLK上升沿写命令??                                     
+ 0022 80916200          lds R24,98
+ 0026 877F              andi R24,247
+ 0028 80936200          sts 98,R24
+ 002C                   .dbline 25
+ 002C           ;                       clk_clr;        //CLK上升沿写命令??                                     
+ 002C 80916200          lds R24,98
+ 0030 877F              andi R24,247
+ 0032 80936200          sts 98,R24
+ 0036                   .dbline 26
+ 0036           ;                       clk_clr;        //CLK上升沿写命令??                                     
+ 0036 80916200          lds R24,98
+ 003A 877F              andi R24,247
+ 003C 80936200          sts 98,R24
+ 0040                   .dbline 27
+ 0040           ;                       clk_clr;        //CLK上升沿写命令??                                     
+ 0040 80916200          lds R24,98
+ 0044 877F              andi R24,247
+ 0046 80936200          sts 98,R24
+ 004A                   .dbline 28
+ 004A           ;                       clk_clr;        //CLK上升沿写命令??                                     
+ 004A 80916200          lds R24,98
+ 004E 877F              andi R24,247
+ 0050 80936200          sts 98,R24
+ 0054                   .dbline 29
+ 0054           ;                       clk_clr;        //CLK上升沿写命令??                     
+ 0054 80916200          lds R24,98
+ 0058 877F              andi R24,247
+ 005A 80936200          sts 98,R24
+ 005E                   .dbline 30
+ 005E           ;                       clk_clr;        //CLK上升沿写命令??                                     
+ 005E 80916200          lds R24,98
+ 0062 877F              andi R24,247
+ 0064 80936200          sts 98,R24
+ 0068                   .dbline 31
+ 0068           ;                       clk_clr;        //CLK上升沿写命令??                                     
+ 0068 80916200          lds R24,98
+ 006C 877F              andi R24,247
+ 006E 80936200          sts 98,R24
+ 0072                   .dbline 32
+ 0072           ;                       clk_clr;        //CLK上升沿写命令??                                     
+ 0072 80916200          lds R24,98
+ 0076 877F              andi R24,247
+ 0078 80936200          sts 98,R24
+ 007C                   .dbline 33
+ 007C           ;                       clk_clr;        //CLK上升沿写命令??
+ 007C 80916200          lds R24,98
+ 0080 877F              andi R24,247
+ 0082 80936200          sts 98,R24
+ 0086                   .dbline 34
+ 0086           ;                       clk_set;                
+ 0086 80916200          lds R24,98
+ 008A 8860              ori R24,8
+ 008C 80936200          sts 98,R24
+ 0090                   .dbline 35
+ 0090           ;                       clk_set;                
+ 0090 80916200          lds R24,98
+ 0094 8860              ori R24,8
+ 0096 80936200          sts 98,R24
+ 009A                   .dbline 36
+ 009A           ;                       clk_set;                
+ 009A 80916200          lds R24,98
+ 009E 8860              ori R24,8
+ 00A0 80936200          sts 98,R24
+ 00A4                   .dbline 37
+ 00A4           ;                       clk_set;                
+ 00A4 80916200          lds R24,98
+ 00A8 8860              ori R24,8
+ 00AA 80936200          sts 98,R24
+ 00AE                   .dbline 38
+ 00AE           ;                       clk_set;                
+ 00AE 80916200          lds R24,98
+ 00B2 8860              ori R24,8
+ 00B4 80936200          sts 98,R24
+ 00B8                   .dbline 39
+ 00B8           ;               }
+ 00B8           L7:
+ 00B8                   .dbline 18
+ 00B8 4395              inc R20
+ 00BA           L9:
+ 00BA                   .dbline 18
+ 00BA 4830              cpi R20,8
+ 00BC 08F4              brsh X2
+ 00BE A3CF              xjmp L6
+ 00C0           X2:
+ 00C0           X1:
+ 00C0                   .dbline -2
+ 00C0           L5:
+ 00C0                   .dbline 0 ; func end
+ 00C0 4991              ld R20,y+
+ 00C2 0895              ret
+ 00C4                   .dbsym r i 20 c
+ 00C4                   .dbsym r dat 16 c
+ 00C4                   .dbend
+ 00C4                   .dbfunc e ms_r _ms_r fi
+ 00C4           ;            dat -> R16,R17
+ 00C4           ;              i -> R18
+                        .even
+ 00C4           _ms_r::
+ 00C4                   .dbline -1
+ 00C4                   .dbline 43
+ 00C4           ; }
+ 00C4           ; 
+ 00C4           ; uint ms_r(void)//读取16位数据
+ 00C4           ; {
+ 00C4                   .dbline 45
+ 00C4           ;       char    i;
+ 00C4           ;       uint dat=0;
+ 00C4 0027              clr R16
+ 00C6 1127              clr R17
+ 00C8                   .dbline 47
+ 00C8           ; 
+ 00C8           ;       for     (i=0;i<16;i++)
+ 00C8 2227              clr R18
+ 00CA 56C0              xjmp L16
+ 00CC           L13:
+ 00CC                   .dbline 48
+ 00CC           ;               {
+ 00CC                   .dbline 49
+ 00CC           ;                       clk_set;                        //CLK下降沿读数据
+ 00CC 80916200          lds R24,98
+ 00D0 8860              ori R24,8
+ 00D2 80936200          sts 98,R24
+ 00D6                   .dbline 50
+ 00D6           ;                       clk_set;                        //CLK下降沿读数据
+ 00D6 80916200          lds R24,98
+ 00DA 8860              ori R24,8
+ 00DC 80936200          sts 98,R24
+ 00E0                   .dbline 51
+ 00E0           ;                       clk_set;                        //CLK下降沿读数据
+ 00E0 80916200          lds R24,98
+ 00E4 8860              ori R24,8
+ 00E6 80936200          sts 98,R24
+ 00EA                   .dbline 52
+ 00EA           ;                       clk_set;                        //CLK下降沿读数据
+ 00EA 80916200          lds R24,98
+ 00EE 8860              ori R24,8
+ 00F0 80936200          sts 98,R24
+ 00F4                   .dbline 53
+ 00F4           ;                       clk_set;                        //CLK下降沿读数据
+ 00F4 80916200          lds R24,98
+ 00F8 8860              ori R24,8
+ 00FA 80936200          sts 98,R24
+ 00FE                   .dbline 54
+ 00FE           ;                       clk_set;                        //CLK下降沿读数据
+ 00FE 80916200          lds R24,98
+ 0102 8860              ori R24,8
+ 0104 80936200          sts 98,R24
+ 0108                   .dbline 55
+ 0108           ;                       clk_set;                        //CLK下降沿读数据
+ 0108 80916200          lds R24,98
+ 010C 8860              ori R24,8
+ 010E 80936200          sts 98,R24
+ 0112                   .dbline 56
+ 0112           ;                       clk_set;                        //CLK下降沿读数据
+ 0112 80916200          lds R24,98
+ 0116 8860              ori R24,8
+ 0118 80936200          sts 98,R24
+ 011C                   .dbline 57
+ 011C           ;                       clk_set;                        //CLK下降沿读数据
+ 011C 80916200          lds R24,98
+ 0120 8860              ori R24,8
+ 0122 80936200          sts 98,R24
+ 0126                   .dbline 58
+ 0126           ;                       clk_set;                        //CLK下降沿读数据
+ 0126 80916200          lds R24,98
+ 012A 8860              ori R24,8
+ 012C 80936200          sts 98,R24
+ 0130                   .dbline 59
+ 0130           ;                       clk_clr;
+ 0130 80916200          lds R24,98
+ 0134 877F              andi R24,247
+ 0136 80936200          sts 98,R24
+ 013A                   .dbline 60
+ 013A           ;                       clk_clr;
+ 013A 80916200          lds R24,98
+ 013E 877F              andi R24,247
+ 0140 80936200          sts 98,R24
+ 0144                   .dbline 61
+ 0144           ;                       clk_clr;
+ 0144 80916200          lds R24,98
+ 0148 877F              andi R24,247
+ 014A 80936200          sts 98,R24
+ 014E                   .dbline 62
+ 014E           ;                       clk_clr;
+ 014E 80916200          lds R24,98
+ 0152 877F              andi R24,247
+ 0154 80936200          sts 98,R24
+ 0158                   .dbline 63
+ 0158           ;                       clk_clr;
+ 0158 80916200          lds R24,98
+ 015C 877F              andi R24,247
+ 015E 80936200          sts 98,R24
+ 0162                   .dbline 64
+ 0162           ;                       clk_clr;
+ 0162 80916200          lds R24,98
+ 0166 877F              andi R24,247
+ 0168 80936200          sts 98,R24
+ 016C                   .dbline 66
+ 016C           ;                       
+ 016C           ;                       if (dout) dat|=1;                       
+ 016C 019B              sbis 0x0,1
+ 016E 01C0              rjmp L17
+ 0170           X3:
+ 0170                   .dbline 66
+ 0170 0160              ori R16,1
+ 0172           L17:
+ 0172                   .dbline 67
+ 0172           ;                       dat <<= 1;                                              
+ 0172 000F              lsl R16
+ 0174 111F              rol R17
+ 0176                   .dbline 68
+ 0176           ;               }
+ 0176           L14:
+ 0176                   .dbline 47
+ 0176 2395              inc R18
+ 0178           L16:
+ 0178                   .dbline 47
+ 0178 2031              cpi R18,16
+ 017A 08F4              brsh X5
+ 017C A7CF              xjmp L13
+ 017E           X5:
+ 017E           X4:
+ 017E                   .dbline 69
+ 017E           ;       return(dat);
+ 017E                   .dbline -2
+ 017E           L12:
+ 017E                   .dbline 0 ; func end
+ 017E 0895              ret
+ 0180                   .dbsym r dat 16 i
+ 0180                   .dbsym r i 18 c
+ 0180                   .dbend
+ 0180                   .dbfunc e ms_rst _ms_rst fV
+                        .even
+ 0180           _ms_rst::
+ 0180                   .dbline -1
+ 0180                   .dbline 73
+ 0180           ; }     
+ 0180           ; 
+ 0180           ; void ms_rst(void)
+ 0180           ; {
+ 0180                   .dbline 74
+ 0180           ;       ms_w(0x15);
+ 0180 05E1              ldi R16,21
+ 0182 3EDF              xcall _ms_w
+ 0184                   .dbline 75
+ 0184           ;       ms_w(0x55);
+ 0184 05E5              ldi R16,85
+ 0186 3CDF              xcall _ms_w
+ 0188                   .dbline 76
+ 0188           ;       ms_w(0x40);
+ 0188 00E4              ldi R16,64
+ 018A                   .dbline -2
+ 018A           L19:
+ 018A                   .dbline 0 ; func end
+ 018A 3ACF              xjmp _ms_w
+ 018C                   .dbend
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\ms5540.c
+ 0000           L21:
+ 0000                   .blkb 2
+ 0002           L22:
+ 0002                   .blkb 2
+ 0004           L23:
+ 0004                   .blkb 2
+ 0006           L24:
+ 0006                   .blkb 2
+ 0008           L25:
+ 0008                   .blkb 2
+ 000A           L26:
+ 000A                   .blkb 2
+                        .area data(ram, con, rel)
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\ms5540.c
+ 0000           L27:
+ 0000                   .blkb 1
+                        .area idata
+ 0000 00                .byte 0
+                        .area data(ram, con, rel)
+ 0001                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\ms5540.c
+                        .area text(rom, con, rel)
+ 018C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\ms5540.c
+ 018C                   .dbfunc e READ_P_T _READ_P_T fV
+ 018C                   .dbsym s branch L27 c
+ 018C                   .dbsym s d2 L26 i
+ 018C                   .dbsym s d1 L25 i
+ 018C                   .dbsym s W4 L24 i
+ 018C                   .dbsym s W3 L23 i
+ 018C                   .dbsym s W2 L22 i
+ 018C                   .dbsym s W1 L21 i
+ 018C           ;            off -> y+8
+ 018C           ;             c6 -> R12,R13
+ 018C           ;             c5 -> R10,R11
+ 018C           ;             c4 -> R14,R15
+ 018C           ;             c3 -> y+16
+ 018C           ;             c2 -> y+14
+ 018C           ;             c1 -> y+12
+ 018C           ;           sens -> y+4
+ 018C           ;             dt -> y+0
+ 018C           ;    temperature -> y+30
+ 018C           ;       pressure -> y+28
+                        .even
+ 018C           _READ_P_T::
+ 018C 0E940000          xcall push_arg4
+ 0190 0E940000          xcall push_xgsetF0FC
+ 0194 6297              sbiw R28,18
+ 0196                   .dbline -1
+ 0196                   .dbline 81
+ 0196           ; }
+ 0196           ; 
+ 0196           ; 
+ 0196           ; void READ_P_T(unsigned char *pressure, uint *temperature)//读取压强和温度
+ 0196           ; {
+ 0196                   .dbline 84
+ 0196           ;       static unsigned int W1,W2,W3,W4,d1,d2;
+ 0196           ;       static unsigned char branch = 0;
+ 0196           ;       switch(branch)
+ 0196 A0900000          lds R10,L27
+ 019A BB24              clr R11
+ 019C C501              movw R24,R10
+ 019E 8430              cpi R24,4
+ 01A0 E0E0              ldi R30,0
+ 01A2 9E07              cpc R25,R30
+ 01A4 09F4              brne X10
+ 01A6 3CC0              xjmp L32
+ 01A8           X10:
+ 01A8           X6:
+ 01A8 84E0              ldi R24,4
+ 01AA 8A15              cp R24,R10
+ 01AC 9B05              cpc R25,R11
+ 01AE 2CF0              brlt L35
+ 01B0           X7:
+ 01B0           L34:
+ 01B0 AA20              tst R10
+ 01B2 11F4              brne X8
+ 01B4 BB20              tst R11
+ 01B6 41F0              breq L31
+ 01B8           X8:
+ 01B8 6FC1              xjmp L29
+ 01BA           L35:
+ 01BA C501              movw R24,R10
+ 01BC 8830              cpi R24,8
+ 01BE E0E0              ldi R30,0
+ 01C0 9E07              cpc R25,R30
+ 01C2 09F4              brne X11
+ 01C4 38C0              xjmp L33
+ 01C6           X11:
+ 01C6           X9:
+ 01C6 68C1              xjmp L29
+ 01C8           L31:
+ 01C8                   .dbline 86
+ 01C8           ;       {
+ 01C8           ;           case 0: ms_rst();//复位器件
+ 01C8 DBDF              xcall _ms_rst
+ 01CA                   .dbline 87
+ 01CA           ;                   ms_w(0x1d);
+ 01CA 0DE1              ldi R16,29
+ 01CC 19DF              xcall _ms_w
+ 01CE                   .dbline 88
+ 01CE           ;                       ms_w(0x50);
+ 01CE 00E5              ldi R16,80
+ 01D0 17DF              xcall _ms_w
+ 01D2                   .dbline 89
+ 01D2           ;                       W1 = ms_r();
+ 01D2 78DF              xcall _ms_r
+ 01D4 10930100          sts L21+1,R17
+ 01D8 00930000          sts L21,R16
+ 01DC                   .dbline 91
+ 01DC           ;       
+ 01DC           ;                       ms_w(0x1d);
+ 01DC 0DE1              ldi R16,29
+ 01DE 10DF              xcall _ms_w
+ 01E0                   .dbline 92
+ 01E0           ;                       ms_w(0x60);
+ 01E0 00E6              ldi R16,96
+ 01E2 0EDF              xcall _ms_w
+ 01E4                   .dbline 93
+ 01E4           ;                       W2 = ms_r();
+ 01E4 6FDF              xcall _ms_r
+ 01E6 10930300          sts L22+1,R17
+ 01EA 00930200          sts L22,R16
+ 01EE                   .dbline 95
+ 01EE           ;               
+ 01EE           ;                       ms_w(0x1d);
+ 01EE 0DE1              ldi R16,29
+ 01F0 07DF              xcall _ms_w
+ 01F2                   .dbline 96
+ 01F2           ;                       ms_w(0x90);
+ 01F2 00E9              ldi R16,144
+ 01F4 05DF              xcall _ms_w
+ 01F6                   .dbline 97
+ 01F6           ;                       W3 = ms_r();
+ 01F6 66DF              xcall _ms_r
+ 01F8 5801              movw R10,R16
+ 01FA B0920500          sts L23+1,R11
+ 01FE A0920400          sts L23,R10
+ 0202                   .dbline 99
+ 0202           ;               
+ 0202           ;                       ms_w(0x1d);
+ 0202 0DE1              ldi R16,29
+ 0204 FDDE              xcall _ms_w
+ 0206                   .dbline 100
+ 0206           ;                       ms_w(0xa0);
+ 0206 00EA              ldi R16,160
+ 0208 FBDE              xcall _ms_w
+ 020A                   .dbline 101
+ 020A           ;                       W4 = ms_r();
+ 020A 5CDF              xcall _ms_r
+ 020C 5801              movw R10,R16
+ 020E B0920700          sts L24+1,R11
+ 0212 A0920600          sts L24,R10
+ 0216                   .dbline 103
+ 0216           ;       
+ 0216           ;                       ms_w(0x0f);
+ 0216 0FE0              ldi R16,15
+ 0218 F3DE              xcall _ms_w
+ 021A                   .dbline 104
+ 021A           ;                       ms_w(0x40);
+ 021A 00E4              ldi R16,64
+ 021C F1DE              xcall _ms_w
+ 021E                   .dbline 105
+ 021E           ;                       break;
+ 021E 3CC1              xjmp L29
+ 0220           L32:
+ 0220                   .dbline 106
+ 0220           ;               case 4: d1 = ms_r();
+ 0220 51DF              xcall _ms_r
+ 0222 5801              movw R10,R16
+ 0224 B0920900          sts L25+1,R11
+ 0228 A0920800          sts L25,R10
+ 022C                   .dbline 108
+ 022C           ;               
+ 022C           ;                       ms_w(0x0f);
+ 022C 0FE0              ldi R16,15
+ 022E E8DE              xcall _ms_w
+ 0230                   .dbline 109
+ 0230           ;                       ms_w(0x20);
+ 0230 00E2              ldi R16,32
+ 0232 E6DE              xcall _ms_w
+ 0234                   .dbline 111
+ 0234           ;                      
+ 0234           ;                           break;
+ 0234 31C1              xjmp L29
+ 0236           L33:
+ 0236                   .dbline 113
+ 0236           ;           case 8:
+ 0236           ;               {
+ 0236                   .dbline 116
+ 0236           ;                               unsigned int c1,c2,c3,c4,c5,c6;
+ 0236           ;                   long dt,off,sens;
+ 0236           ;                   d2 = ms_r();
+ 0236 46DF              xcall _ms_r
+ 0238 5801              movw R10,R16
+ 023A B0920B00          sts L26+1,R11
+ 023E A0920A00          sts L26,R10
+ 0242                   .dbline 118
+ 0242           ;       
+ 0242           ;                       c1=(W1>>1) & 0x7FFF;
+ 0242 80910000          lds R24,L21
+ 0246 90910100          lds R25,L21+1
+ 024A 9695              lsr R25
+ 024C 8795              ror R24
+ 024E 9F77              andi R25,127
+ 0250 9D87              std y+13,R25
+ 0252 8C87              std y+12,R24
+ 0254                   .dbline 119
+ 0254           ;                       c2=((W3<<6) & 0x0FC0)|(W4 & 0x003F);    
+ 0254 26E0              ldi R18,6
+ 0256 30E0              ldi R19,0
+ 0258 00910400          lds R16,L23
+ 025C 10910500          lds R17,L23+1
+ 0260 0E940000          xcall lsl16
+ 0264 C801              movw R24,R16
+ 0266 807C              andi R24,192
+ 0268 9F70              andi R25,15
+ 026A E0910600          lds R30,L24
+ 026E F0910700          lds R31,L24+1
+ 0272 EF73              andi R30,63
+ 0274 F070              andi R31,0
+ 0276 8E2B              or R24,R30
+ 0278 9F2B              or R25,R31
+ 027A 9F87              std y+15,R25
+ 027C 8E87              std y+14,R24
+ 027E                   .dbline 120
+ 027E           ;                       c3=(W4>>6) & 0x03FF;     
+ 027E 26E0              ldi R18,6
+ 0280 30E0              ldi R19,0
+ 0282 00910600          lds R16,L24
+ 0286 10910700          lds R17,L24+1
+ 028A 0E940000          xcall lsr16
+ 028E C801              movw R24,R16
+ 0290 9370              andi R25,3
+ 0292 998B              std y+17,R25
+ 0294 888B              std y+16,R24
+ 0296                   .dbline 121
+ 0296           ;                       c4=(W3>>6) & 0x03FF; 
+ 0296 26E0              ldi R18,6
+ 0298 30E0              ldi R19,0
+ 029A 00910400          lds R16,L23
+ 029E 10910500          lds R17,L23+1
+ 02A2 0E940000          xcall lsr16
+ 02A6 C801              movw R24,R16
+ 02A8 9370              andi R25,3
+ 02AA 7C01              movw R14,R24
+ 02AC                   .dbline 122
+ 02AC           ;                       c5=((W1<<10) & 0x0400)|((W2>>6) & 0x03FF); 
+ 02AC 26E0              ldi R18,6
+ 02AE 30E0              ldi R19,0
+ 02B0 00910200          lds R16,L22
+ 02B4 10910300          lds R17,L22+1
+ 02B8 0E940000          xcall lsr16
+ 02BC C801              movw R24,R16
+ 02BE 9370              andi R25,3
+ 02C0 2AE0              ldi R18,10
+ 02C2 30E0              ldi R19,0
+ 02C4 00910000          lds R16,L21
+ 02C8 10910100          lds R17,L21+1
+ 02CC 0E940000          xcall lsl16
+ 02D0 F801              movw R30,R16
+ 02D2 E070              andi R30,0
+ 02D4 F470              andi R31,4
+ 02D6 5F01              movw R10,R30
+ 02D8 A82A              or R10,R24
+ 02DA B92A              or R11,R25
+ 02DC                   .dbline 123
+ 02DC           ;               c6= W2 & 0x003F;
+ 02DC 80910200          lds R24,L22
+ 02E0 90910300          lds R25,L22+1
+ 02E4 8F73              andi R24,63
+ 02E6 9070              andi R25,0
+ 02E8 6C01              movw R12,R24
+ 02EA                   .dbline 125
+ 02EA           ;                       //计算出绝压及温度。压力单位为mbar 即压力为pressure/10KPa。温度为temperature/10摄氏度。
+ 02EA           ;               dt = (long)d2 -((c5<<3) + 20224);
+ 02EA C501              movw R24,R10
+ 02EC 880F              lsl R24
+ 02EE 991F              rol R25
+ 02F0 880F              lsl R24
+ 02F2 991F              rol R25
+ 02F4 880F              lsl R24
+ 02F6 991F              rol R25
+ 02F8 8050              subi R24,0  ; offset = 20224
+ 02FA 914B              sbci R25,177
+ 02FC 1C01              movw R2,R24
+ 02FE 4424              clr R4
+ 0300 5524              clr R5
+ 0302 60900A00          lds R6,L26
+ 0306 70900B00          lds R7,L26+1
+ 030A 8824              clr R8
+ 030C 9924              clr R9
+ 030E 6218              sub R6,R2
+ 0310 7308              sbc R7,R3
+ 0312 8408              sbc R8,R4
+ 0314 9508              sbc R9,R5
+ 0316 6882              std y+0,R6
+ 0318 7982              std y+1,R7
+ 031A 8A82              std y+2,R8
+ 031C 9B82              std y+3,R9
+ 031E                   .dbline 126
+ 031E           ;               off = (c2<<2) + (((c4-512) * dt)/4096);
+ 031E 2880              ldd R2,y+0
+ 0320 3980              ldd R3,y+1
+ 0322 4A80              ldd R4,y+2
+ 0324 5B80              ldd R5,y+3
+ 0326 8701              movw R16,R14
+ 0328 0050              subi R16,0
+ 032A 1240              sbci R17,2
+ 032C 2227              clr R18
+ 032E 3327              clr R19
+ 0330 5A92              st -y,R5
+ 0332 4A92              st -y,R4
+ 0334 3A92              st -y,R3
+ 0336 2A92              st -y,R2
+ 0338 0E940000          xcall empy32s
+ 033C 40E0              ldi R20,0
+ 033E 50E1              ldi R21,16
+ 0340 60E0              ldi R22,0
+ 0342 70E0              ldi R23,0
+ 0344 7A93              st -y,R23
+ 0346 6A93              st -y,R22
+ 0348 5A93              st -y,R21
+ 034A 4A93              st -y,R20
+ 034C 0E940000          xcall div32s
+ 0350 2E84              ldd R2,y+14
+ 0352 3F84              ldd R3,y+15
+ 0354 220C              lsl R2
+ 0356 331C              rol R3
+ 0358 220C              lsl R2
+ 035A 331C              rol R3
+ 035C 4424              clr R4
+ 035E 5524              clr R5
+ 0360 200E              add R2,R16
+ 0362 311E              adc R3,R17
+ 0364 421E              adc R4,R18
+ 0366 531E              adc R5,R19
+ 0368 2886              std y+8,R2
+ 036A 3986              std y+9,R3
+ 036C 4A86              std y+10,R4
+ 036E 5B86              std y+11,R5
+ 0370                   .dbline 127
+ 0370           ;               sens = 24576 +  c1 + ((c3* dt)/1024);
+ 0370 2880              ldd R2,y+0
+ 0372 3980              ldd R3,y+1
+ 0374 4A80              ldd R4,y+2
+ 0376 5B80              ldd R5,y+3
+ 0378 0889              ldd R16,y+16
+ 037A 1989              ldd R17,y+17
+ 037C 2227              clr R18
+ 037E 3327              clr R19
+ 0380 5A92              st -y,R5
+ 0382 4A92              st -y,R4
+ 0384 3A92              st -y,R3
+ 0386 2A92              st -y,R2
+ 0388 0E940000          xcall empy32s
+ 038C 40E0              ldi R20,0
+ 038E 54E0              ldi R21,4
+ 0390 60E0              ldi R22,0
+ 0392 70E0              ldi R23,0
+ 0394 7A93              st -y,R23
+ 0396 6A93              st -y,R22
+ 0398 5A93              st -y,R21
+ 039A 4A93              st -y,R20
+ 039C 0E940000          xcall div32s
+ 03A0 8C85              ldd R24,y+12
+ 03A2 9D85              ldd R25,y+13
+ 03A4 8050              subi R24,0  ; offset = 24576
+ 03A6 904A              sbci R25,160
+ 03A8 1C01              movw R2,R24
+ 03AA 4424              clr R4
+ 03AC 5524              clr R5
+ 03AE 200E              add R2,R16
+ 03B0 311E              adc R3,R17
+ 03B2 421E              adc R4,R18
+ 03B4 531E              adc R5,R19
+ 03B6 2C82              std y+4,R2
+ 03B8 3D82              std y+5,R3
+ 03BA 4E82              std y+6,R4
+ 03BC 5F82              std y+7,R5
+ 03BE                   .dbline 128
+ 03BE           ;                       sens = ((sens * (d1-7168))/16384)-off;
+ 03BE 80910800          lds R24,L25
+ 03C2 90910900          lds R25,L25+1
+ 03C6 8050              subi R24,0
+ 03C8 9C41              sbci R25,28
+ 03CA 1C01              movw R2,R24
+ 03CC 4424              clr R4
+ 03CE 5524              clr R5
+ 03D0 0C81              ldd R16,y+4
+ 03D2 1D81              ldd R17,y+5
+ 03D4 2E81              ldd R18,y+6
+ 03D6 3F81              ldd R19,y+7
+ 03D8 5A92              st -y,R5
+ 03DA 4A92              st -y,R4
+ 03DC 3A92              st -y,R3
+ 03DE 2A92              st -y,R2
+ 03E0 0E940000          xcall empy32s
+ 03E4 40E0              ldi R20,0
+ 03E6 50E4              ldi R21,64
+ 03E8 60E0              ldi R22,0
+ 03EA 70E0              ldi R23,0
+ 03EC 7A93              st -y,R23
+ 03EE 6A93              st -y,R22
+ 03F0 5A93              st -y,R21
+ 03F2 4A93              st -y,R20
+ 03F4 0E940000          xcall div32s
+ 03F8 1801              movw R2,R16
+ 03FA 2901              movw R4,R18
+ 03FC 6884              ldd R6,y+8
+ 03FE 7984              ldd R7,y+9
+ 0400 8A84              ldd R8,y+10
+ 0402 9B84              ldd R9,y+11
+ 0404 2618              sub R2,R6
+ 0406 3708              sbc R3,R7
+ 0408 4808              sbc R4,R8
+ 040A 5908              sbc R5,R9
+ 040C 2C82              std y+4,R2
+ 040E 3D82              std y+5,R3
+ 0410 4E82              std y+6,R4
+ 0412 5F82              std y+7,R5
+ 0414                   .dbline 139
+ 0414           ;                  /* if(P_D)//允许压力检测yyl2002-02-04 升级为E1-2时添加
+ 0414           ;                   {
+ 0414           ;                   *pressure = 25 + sens/320;
+ 0414           ;                   *temperature = 200+((dt * (c6+50))/1024); 
+ 0414           ;                   }
+ 0414           ;                               else
+ 0414           ;                               {
+ 0414           ;                   *pressure = 0;
+ 0414           ;                   *temperature = 0; 
+ 0414           ;                               }       */
+ 0414           ;                               *pressure = 25 + sens/320;
+ 0414 40E4              ldi R20,64
+ 0416 51E0              ldi R21,1
+ 0418 60E0              ldi R22,0
+ 041A 70E0              ldi R23,0
+ 041C 0C81              ldd R16,y+4
+ 041E 1D81              ldd R17,y+5
+ 0420 2E81              ldd R18,y+6
+ 0422 3F81              ldd R19,y+7
+ 0424 7A93              st -y,R23
+ 0426 6A93              st -y,R22
+ 0428 5A93              st -y,R21
+ 042A 4A93              st -y,R20
+ 042C 0E940000          xcall div32s
+ 0430 1801              movw R2,R16
+ 0432 2901              movw R4,R18
+ 0434 49E1              ldi R20,25
+ 0436 50E0              ldi R21,0
+ 0438 60E0              ldi R22,0
+ 043A 70E0              ldi R23,0
+ 043C 240E              add R2,R20
+ 043E 351E              adc R3,R21
+ 0440 461E              adc R4,R22
+ 0442 571E              adc R5,R23
+ 0444 EC8D              ldd R30,y+28
+ 0446 FD8D              ldd R31,y+29
+ 0448 2082              std z+0,R2
+ 044A                   .dbline 140
+ 044A           ;               *temperature = 200+((dt * (c6+50))/1024);                       
+ 044A C601              movw R24,R12
+ 044C C296              adiw R24,50
+ 044E 1C01              movw R2,R24
+ 0450 4424              clr R4
+ 0452 5524              clr R5
+ 0454 0881              ldd R16,y+0
+ 0456 1981              ldd R17,y+1
+ 0458 2A81              ldd R18,y+2
+ 045A 3B81              ldd R19,y+3
+ 045C 5A92              st -y,R5
+ 045E 4A92              st -y,R4
+ 0460 3A92              st -y,R3
+ 0462 2A92              st -y,R2
+ 0464 0E940000          xcall empy32s
+ 0468 40E0              ldi R20,0
+ 046A 54E0              ldi R21,4
+ 046C 60E0              ldi R22,0
+ 046E 70E0              ldi R23,0
+ 0470 7A93              st -y,R23
+ 0472 6A93              st -y,R22
+ 0474 5A93              st -y,R21
+ 0476 4A93              st -y,R20
+ 0478 0E940000          xcall div32s
+ 047C 1801              movw R2,R16
+ 047E 2901              movw R4,R18
+ 0480 48EC              ldi R20,200
+ 0482 50E0              ldi R21,0
+ 0484 60E0              ldi R22,0
+ 0486 70E0              ldi R23,0
+ 0488 240E              add R2,R20
+ 048A 351E              adc R3,R21
+ 048C 461E              adc R4,R22
+ 048E 571E              adc R5,R23
+ 0490 EE8D              ldd R30,y+30
+ 0492 FF8D              ldd R31,y+31
+ 0494 3182              std z+1,R3
+ 0496 2082              std z+0,R2
+ 0498                   .dbline 141
+ 0498           ;               }           break;              
+ 0498                   .dbline 141
+ 0498                   .dbline 142
+ 0498           ;               default:break;
+ 0498           L29:
+ 0498                   .dbline 144
+ 0498           ;       }
+ 0498           ;       branch = (branch+1)%9;
+ 0498 19E0              ldi R17,9
+ 049A 00910000          lds R16,L27
+ 049E 0F5F              subi R16,255    ; addi 1
+ 04A0 0E940000          xcall mod8u
+ 04A4 00930000          sts L27,R16
+ 04A8                   .dbline -2
+ 04A8           L20:
+ 04A8                   .dbline 0 ; func end
+ 04A8 6296              adiw R28,18
+ 04AA 0E940000          xcall pop_xgsetF0FC
+ 04AE 2496              adiw R28,4
+ 04B0 0895              ret
+ 04B2                   .dbsym l off 8 L
+ 04B2                   .dbsym r c6 12 i
+ 04B2                   .dbsym r c5 10 i
+ 04B2                   .dbsym r c4 14 i
+ 04B2                   .dbsym l c3 16 i
+ 04B2                   .dbsym l c2 14 i
+ 04B2                   .dbsym l c1 12 i
+ 04B2                   .dbsym l sens 4 L
+ 04B2                   .dbsym l dt 0 L
+ 04B2                   .dbsym l temperature 30 pi
+ 04B2                   .dbsym l pressure 28 pc
+ 04B2                   .dbend
+ 04B2           ; }

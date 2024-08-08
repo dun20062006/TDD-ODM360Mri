@@ -1,0 +1,56 @@
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile App\main.c
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\main.c
+ 0000                   .dbfunc e main _main fV
+ 0000           ;              x -> R10,R11
+                        .even
+ 0000           _main::
+ 0000                   .dbline -1
+ 0000                   .dbline 5
+ 0000           ; 
+ 0000           ; #include "includes.h"
+ 0000           ; 
+ 0000           ; void main(void)
+ 0000           ; {
+ 0000                   .dbline 6
+ 0000           ;   unsigned x=0;
+ 0000 AA24              clr R10
+ 0002 BB24              clr R11
+ 0004                   .dbline 7
+ 0004           ;   init_system();
+ 0004 0E940000          xcall _init_system
+ 0008                   .dbline 8
+ 0008           ;   Sound_Count=20;
+ 0008 84E1              ldi R24,20
+ 000A 80930000          sts _Sound_Count,R24
+ 000E 04C0              xjmp L7
+ 0010           L6:
+ 0010                   .dbline 10
+ 0010           ;   while(1)
+ 0010           ;   {  
+ 0010                   .dbline 12
+ 0010           ;     //Dispartch_Task();
+ 0010           ;     DataSynchronization();
+ 0010 0E940000          xcall _DataSynchronization
+ 0014                   .dbline 13
+ 0014           ;     HandpieceKey();
+ 0014 0E940000          xcall _HandpieceKey
+ 0018                   .dbline 14
+ 0018           ;   }
+ 0018           L7:
+ 0018                   .dbline 9
+ 0018 FBCF              xjmp L6
+ 001A           X0:
+ 001A                   .dbline -2
+ 001A           L5:
+ 001A                   .dbline 0 ; func end
+ 001A 0895              ret
+ 001C                   .dbsym r x 10 i
+ 001C                   .dbend
+ 001C           ; }
+ 001C           ; 
+ 001C           ; 
+ 001C           ; 
+ 001C           ; 
+ 001C           ; 

@@ -1,0 +1,2273 @@
+                        .module card.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile App\card.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile App\card.c
+ 0000           _Card_User_Pass::
+ 0000                   .blkb 2
+                        .area idata
+ 0000 F8F8              .byte 248,248
+                        .area data(ram, con, rel)
+ 0002                   .dbfile App\card.c
+ 0002                   .blkb 1
+                        .area idata
+ 0002 F8                .byte 248
+                        .area data(ram, con, rel)
+ 0003                   .dbfile App\card.c
+ 0003                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 0003                   .dbsym e Card_User_Pass _Card_User_Pass A[3:3]c
+ 0003           _Card_Init_Pass::
+ 0003                   .blkb 2
+                        .area idata
+ 0003 FFFF              .byte 255,255
+                        .area data(ram, con, rel)
+ 0005                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 0005                   .blkb 1
+                        .area idata
+ 0005 FF                .byte 255
+                        .area data(ram, con, rel)
+ 0006                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 0006                   .dbsym e Card_Init_Pass _Card_Init_Pass A[3:3]c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 0000                   .dbfunc e delay _delay fV
+ 0000           ;              i -> R10
+ 0000           ;              j -> R20
+ 0000           ;              x -> R16
+                        .even
+ 0000           _delay::
+ 0000 AA92              st -y,R10
+ 0002 4A93              st -y,R20
+ 0004                   .dbline -1
+ 0004                   .dbline 8
+ 0004           ; #include "includes.h"
+ 0004           ; 
+ 0004           ; 
+ 0004           ; unsigned char Card_User_Pass[3]={0xF8,0xF8,0xF8};
+ 0004           ; unsigned char Card_Init_Pass[3]={0xFF,0xFF,0xFF};
+ 0004           ; /************************************/
+ 0004           ; void delay(unsigned char x)
+ 0004           ; {
+ 0004                   .dbline 10
+ 0004           ;   unsigned char i,j;
+ 0004           ;   for(i=0;i<x;i++)
+ 0004 AA24              clr R10
+ 0006 06C0              xjmp L9
+ 0008           L6:
+ 0008                   .dbline 11
+ 0008           ;   {
+ 0008                   .dbline 12
+ 0008           ;    for(j=0;j<20;j++);
+ 0008 4427              clr R20
+ 000A 01C0              xjmp L13
+ 000C           L10:
+ 000C                   .dbline 12
+ 000C           L11:
+ 000C                   .dbline 12
+ 000C 4395              inc R20
+ 000E           L13:
+ 000E                   .dbline 12
+ 000E 4431              cpi R20,20
+ 0010 E8F3              brlo L10
+ 0012           X0:
+ 0012                   .dbline 13
+ 0012           ;   }
+ 0012           L7:
+ 0012                   .dbline 10
+ 0012 A394              inc R10
+ 0014           L9:
+ 0014                   .dbline 10
+ 0014 A016              cp R10,R16
+ 0016 C0F3              brlo L6
+ 0018           X1:
+ 0018                   .dbline -2
+ 0018           L5:
+ 0018                   .dbline 0 ; func end
+ 0018 4991              ld R20,y+
+ 001A A990              ld R10,y+
+ 001C 0895              ret
+ 001E                   .dbsym r i 10 c
+ 001E                   .dbsym r j 20 c
+ 001E                   .dbsym r x 16 c
+ 001E                   .dbend
+ 001E                   .dbfunc e reset_card _reset_card fV
+ 001E           ;           temp -> y+0
+                        .even
+ 001E           _reset_card::
+ 001E AA92              st -y,R10
+ 0020 2497              sbiw R28,4
+ 0022                   .dbline -1
+ 0022                   .dbline 17
+ 0022           ; }
+ 0022           ; 
+ 0022           ; void reset_card(void)
+ 0022           ; {
+ 0022                   .dbline 19
+ 0022           ;   unsigned char temp[4];
+ 0022           ;   IO_OUT;
+ 0022 D49A              sbi 0x1a,4
+ 0024                   .dbline 20
+ 0024           ;   delay(5);                   
+ 0024 05E0              ldi R16,5
+ 0026 ECDF              xcall _delay
+ 0028                   .dbline 21
+ 0028           ;   RST_L;
+ 0028 DA98              cbi 0x1b,2
+ 002A                   .dbline 22
+ 002A           ;   CLK_L;
+ 002A DB98              cbi 0x1b,3
+ 002C                   .dbline 23
+ 002C           ;   IO_H;
+ 002C DC9A              sbi 0x1b,4
+ 002E                   .dbline 24
+ 002E           ;   delay(5);
+ 002E 05E0              ldi R16,5
+ 0030 E7DF              xcall _delay
+ 0032                   .dbline 25
+ 0032           ;   RST_H;
+ 0032 DA9A              sbi 0x1b,2
+ 0034                   .dbline 26
+ 0034           ;   delay(5);
+ 0034 05E0              ldi R16,5
+ 0036 E4DF              xcall _delay
+ 0038                   .dbline 27
+ 0038           ;   CLK_H;
+ 0038 DB9A              sbi 0x1b,3
+ 003A                   .dbline 28
+ 003A           ;   delay(40);
+ 003A 08E2              ldi R16,40
+ 003C E1DF              xcall _delay
+ 003E                   .dbline 29
+ 003E           ;   CLK_L;
+ 003E DB98              cbi 0x1b,3
+ 0040                   .dbline 30
+ 0040           ;   delay(5);
+ 0040 05E0              ldi R16,5
+ 0042 DEDF              xcall _delay
+ 0044                   .dbline 31
+ 0044           ;   RST_L;
+ 0044 DA98              cbi 0x1b,2
+ 0046                   .dbline 32
+ 0046           ;   delay(10);
+ 0046 0AE0              ldi R16,10
+ 0048 DBDF              xcall _delay
+ 004A                   .dbline 33
+ 004A           ;   temp[0]=read_byte();
+ 004A 15D0              xcall _read_byte
+ 004C 0883              std y+0,R16
+ 004E                   .dbline 34
+ 004E           ;   temp[1]=read_byte();
+ 004E 13D0              xcall _read_byte
+ 0050 0983              std y+1,R16
+ 0052                   .dbline 35
+ 0052           ;   temp[2]=read_byte();
+ 0052 11D0              xcall _read_byte
+ 0054 A02E              mov R10,R16
+ 0056 AA82              std y+2,R10
+ 0058                   .dbline 36
+ 0058           ;   temp[3]=read_byte();                        
+ 0058 0ED0              xcall _read_byte
+ 005A A02E              mov R10,R16
+ 005C AB82              std y+3,R10
+ 005E                   .dbline 37
+ 005E           ;   CLK_L;
+ 005E DB98              cbi 0x1b,3
+ 0060                   .dbline 38
+ 0060           ;   delay(5);
+ 0060 05E0              ldi R16,5
+ 0062 CEDF              xcall _delay
+ 0064                   .dbline 39
+ 0064           ;   IO_H;
+ 0064 DC9A              sbi 0x1b,4
+ 0066                   .dbline 40
+ 0066           ;   delay(5);
+ 0066 05E0              ldi R16,5
+ 0068 CBDF              xcall _delay
+ 006A                   .dbline 41
+ 006A           ;   CLK_L;
+ 006A DB98              cbi 0x1b,3
+ 006C                   .dbline 42
+ 006C           ;   delay(5);
+ 006C 05E0              ldi R16,5
+ 006E C8DF              xcall _delay
+ 0070                   .dbline -2
+ 0070           L14:
+ 0070                   .dbline 0 ; func end
+ 0070 2496              adiw R28,4
+ 0072 A990              ld R10,y+
+ 0074 0895              ret
+ 0076                   .dbsym l temp 0 A[4:4]c
+ 0076                   .dbend
+ 0076                   .dbfunc e read_byte _read_byte fc
+ 0076           ;              i -> R22
+ 0076           ;             ch -> R20
+                        .even
+ 0076           _read_byte::
+ 0076 4A93              st -y,R20
+ 0078 6A93              st -y,R22
+ 007A                   .dbline -1
+ 007A                   .dbline 46
+ 007A           ; }
+ 007A           ; /*******************************************************************************************/
+ 007A           ; unsigned char read_byte(void)
+ 007A           ; {
+ 007A                   .dbline 48
+ 007A           ;   unsigned char i,ch;
+ 007A           ;   ch=0;
+ 007A 4427              clr R20
+ 007C                   .dbline 49
+ 007C           ;   IO_IN;
+ 007C D498              cbi 0x1a,4
+ 007E                   .dbline 50
+ 007E           ;   for(i=8;i>0;i--)
+ 007E 68E0              ldi R22,8
+ 0080 0EC0              xjmp L22
+ 0082           L19:
+ 0082                   .dbline 51
+ 0082           ;    {
+ 0082                   .dbline 52
+ 0082           ;      CLK_L;
+ 0082 DB98              cbi 0x1b,3
+ 0084                   .dbline 53
+ 0084           ;        ch=ch>>1;
+ 0084 4695              lsr R20
+ 0086                   .dbline 54
+ 0086           ;        delay(5);
+ 0086 05E0              ldi R16,5
+ 0088 BBDF              xcall _delay
+ 008A                   .dbline 55
+ 008A           ;      if(IO_R)
+ 008A 80E0              ldi R24,0
+ 008C 99B3              in R25,0x19
+ 008E 9071              andi R25,16
+ 0090 8917              cp R24,R25
+ 0092 08F4              brsh L23
+ 0094           X2:
+ 0094                   .dbline 56
+ 0094           ;        ch|=0x80;
+ 0094 4068              ori R20,128
+ 0096           L23:
+ 0096                   .dbline 57
+ 0096           ;        CLK_H;
+ 0096 DB9A              sbi 0x1b,3
+ 0098                   .dbline 58
+ 0098           ;        delay(5);
+ 0098 05E0              ldi R16,5
+ 009A B2DF              xcall _delay
+ 009C                   .dbline 59
+ 009C           ;    }  
+ 009C           L20:
+ 009C                   .dbline 50
+ 009C 6A95              dec R22
+ 009E           L22:
+ 009E                   .dbline 50
+ 009E 80E0              ldi R24,0
+ 00A0 8617              cp R24,R22
+ 00A2 78F3              brlo L19
+ 00A4           X3:
+ 00A4                   .dbline 60
+ 00A4           ;   IO_OUT;
+ 00A4 D49A              sbi 0x1a,4
+ 00A6                   .dbline 61
+ 00A6           ;   return ch;
+ 00A6 042F              mov R16,R20
+ 00A8                   .dbline -2
+ 00A8           L18:
+ 00A8                   .dbline 0 ; func end
+ 00A8 6991              ld R22,y+
+ 00AA 4991              ld R20,y+
+ 00AC 0895              ret
+ 00AE                   .dbsym r i 22 c
+ 00AE                   .dbsym r ch 20 c
+ 00AE                   .dbend
+ 00AE                   .dbfunc e write_byte _write_byte fV
+ 00AE           ;              i -> R20
+ 00AE           ;             ch -> R22
+                        .even
+ 00AE           _write_byte::
+ 00AE 4A93              st -y,R20
+ 00B0 6A93              st -y,R22
+ 00B2 602F              mov R22,R16
+ 00B4                   .dbline -1
+ 00B4                   .dbline 65
+ 00B4           ; }
+ 00B4           ; /*******************************************************************************************/
+ 00B4           ; void write_byte(unsigned char ch)
+ 00B4           ; {
+ 00B4                   .dbline 67
+ 00B4           ;   unsigned char i;
+ 00B4           ;   IO_OUT;
+ 00B4 D49A              sbi 0x1a,4
+ 00B6                   .dbline 68
+ 00B6           ;   for(i=8;i>0;i--)
+ 00B6 48E0              ldi R20,8
+ 00B8 12C0              xjmp L29
+ 00BA           L26:
+ 00BA                   .dbline 69
+ 00BA           ;    {
+ 00BA                   .dbline 70
+ 00BA           ;      CLK_L;
+ 00BA DB98              cbi 0x1b,3
+ 00BC                   .dbline 71
+ 00BC           ;      delay(5);
+ 00BC 05E0              ldi R16,5
+ 00BE A0DF              xcall _delay
+ 00C0                   .dbline 72
+ 00C0           ;      if((ch&0x01)>0) IO_H;
+ 00C0 80E0              ldi R24,0
+ 00C2 962F              mov R25,R22
+ 00C4 9170              andi R25,1
+ 00C6 8917              cp R24,R25
+ 00C8 10F4              brsh L30
+ 00CA           X4:
+ 00CA                   .dbline 72
+ 00CA DC9A              sbi 0x1b,4
+ 00CC 01C0              xjmp L31
+ 00CE           L30:
+ 00CE                   .dbline 73
+ 00CE           ;        else IO_L;
+ 00CE DC98              cbi 0x1b,4
+ 00D0           L31:
+ 00D0                   .dbline 74
+ 00D0           ;      delay(5);
+ 00D0 05E0              ldi R16,5
+ 00D2 96DF              xcall _delay
+ 00D4                   .dbline 75
+ 00D4           ;      CLK_H;
+ 00D4 DB9A              sbi 0x1b,3
+ 00D6                   .dbline 76
+ 00D6           ;      delay(10);
+ 00D6 0AE0              ldi R16,10
+ 00D8 93DF              xcall _delay
+ 00DA                   .dbline 77
+ 00DA           ;      ch=ch>>1;
+ 00DA 6695              lsr R22
+ 00DC                   .dbline 78
+ 00DC           ;    }                  
+ 00DC           L27:
+ 00DC                   .dbline 68
+ 00DC 4A95              dec R20
+ 00DE           L29:
+ 00DE                   .dbline 68
+ 00DE 80E0              ldi R24,0
+ 00E0 8417              cp R24,R20
+ 00E2 58F3              brlo L26
+ 00E4           X5:
+ 00E4                   .dbline -2
+ 00E4           L25:
+ 00E4                   .dbline 0 ; func end
+ 00E4 6991              ld R22,y+
+ 00E6 4991              ld R20,y+
+ 00E8 0895              ret
+ 00EA                   .dbsym r i 20 c
+ 00EA                   .dbsym r ch 22 c
+ 00EA                   .dbend
+ 00EA                   .dbfunc e send_command _send_command fV
+ 00EA           ;              c -> R10
+ 00EA           ;              b -> R12
+ 00EA           ;              a -> R14
+                        .even
+ 00EA           _send_command::
+ 00EA 0E940000          xcall push_xgset00FC
+ 00EE C22E              mov R12,R18
+ 00F0 E02E              mov R14,R16
+ 00F2 AE80              ldd R10,y+6
+ 00F4                   .dbline -1
+ 00F4                   .dbline 82
+ 00F4           ; }
+ 00F4           ; /*******************************************************************************************/
+ 00F4           ; void send_command(unsigned char a,unsigned char b,unsigned char c)
+ 00F4           ; {
+ 00F4                   .dbline 83
+ 00F4           ;    start_command();
+ 00F4 09D0              xcall _start_command
+ 00F6                   .dbline 84
+ 00F6           ;    write_byte(a);
+ 00F6 0E2D              mov R16,R14
+ 00F8 DADF              xcall _write_byte
+ 00FA                   .dbline 85
+ 00FA           ;    write_byte(b);
+ 00FA 0C2D              mov R16,R12
+ 00FC D8DF              xcall _write_byte
+ 00FE                   .dbline 86
+ 00FE           ;    write_byte(c);
+ 00FE 0A2D              mov R16,R10
+ 0100 D6DF              xcall _write_byte
+ 0102                   .dbline 87
+ 0102           ;    stop_command();
+ 0102 0DD0              xcall _stop_command
+ 0104                   .dbline -2
+ 0104           L32:
+ 0104                   .dbline 0 ; func end
+ 0104 0C940000          xjmp pop_xgset00FC
+ 0108                   .dbsym r c 10 c
+ 0108                   .dbsym r b 12 c
+ 0108                   .dbsym r a 14 c
+ 0108                   .dbend
+ 0108                   .dbfunc e start_command _start_command fV
+                        .even
+ 0108           _start_command::
+ 0108                   .dbline -1
+ 0108                   .dbline 90
+ 0108           ; }
+ 0108           ; void start_command(void)
+ 0108           ; {
+ 0108                   .dbline 91
+ 0108           ;   IO_OUT;
+ 0108 D49A              sbi 0x1a,4
+ 010A                   .dbline 92
+ 010A           ;   CLK_L;
+ 010A DB98              cbi 0x1b,3
+ 010C                   .dbline 93
+ 010C           ;   IO_H;
+ 010C DC9A              sbi 0x1b,4
+ 010E                   .dbline 94
+ 010E           ;   delay(5);
+ 010E 05E0              ldi R16,5
+ 0110 77DF              xcall _delay
+ 0112                   .dbline 95
+ 0112           ;   CLK_H;
+ 0112 DB9A              sbi 0x1b,3
+ 0114                   .dbline 96
+ 0114           ;   delay(5);
+ 0114 05E0              ldi R16,5
+ 0116 74DF              xcall _delay
+ 0118                   .dbline 97
+ 0118           ;   IO_L;
+ 0118 DC98              cbi 0x1b,4
+ 011A                   .dbline 98
+ 011A           ;   delay(5);
+ 011A 05E0              ldi R16,5
+ 011C                   .dbline -2
+ 011C           L33:
+ 011C                   .dbline 0 ; func end
+ 011C 71CF              xjmp _delay
+ 011E                   .dbend
+ 011E                   .dbfunc e stop_command _stop_command fV
+                        .even
+ 011E           _stop_command::
+ 011E                   .dbline -1
+ 011E                   .dbline 101
+ 011E           ; }
+ 011E           ; void stop_command(void)
+ 011E           ; {
+ 011E                   .dbline 102
+ 011E           ;   IO_OUT;
+ 011E D49A              sbi 0x1a,4
+ 0120                   .dbline 103
+ 0120           ;   CLK_L;
+ 0120 DB98              cbi 0x1b,3
+ 0122                   .dbline 104
+ 0122           ;   IO_L;
+ 0122 DC98              cbi 0x1b,4
+ 0124                   .dbline 105
+ 0124           ;   delay(5);
+ 0124 05E0              ldi R16,5
+ 0126 6CDF              xcall _delay
+ 0128                   .dbline 106
+ 0128           ;   CLK_H;
+ 0128 DB9A              sbi 0x1b,3
+ 012A                   .dbline 107
+ 012A           ;   delay(5);
+ 012A 05E0              ldi R16,5
+ 012C 69DF              xcall _delay
+ 012E                   .dbline 108
+ 012E           ;   IO_H;
+ 012E DC9A              sbi 0x1b,4
+ 0130                   .dbline 109
+ 0130           ;   delay(10);
+ 0130 0AE0              ldi R16,10
+ 0132                   .dbline -2
+ 0132           L34:
+ 0132                   .dbline 0 ; func end
+ 0132 66CF              xjmp _delay
+ 0134                   .dbend
+ 0134                   .dbfunc e reset_level _reset_level fV
+                        .even
+ 0134           _reset_level::
+ 0134                   .dbline -1
+ 0134                   .dbline 112
+ 0134           ; }
+ 0134           ; void reset_level(void)
+ 0134           ; {
+ 0134                   .dbline 113
+ 0134           ;  VCC_OFF;
+ 0134 D99A              sbi 0x1b,1
+ 0136                   .dbline 114
+ 0136           ;  IO_OUT;
+ 0136 D49A              sbi 0x1a,4
+ 0138                   .dbline 115
+ 0138           ;  IO_H;
+ 0138 DC9A              sbi 0x1b,4
+ 013A                   .dbline 116
+ 013A           ;  RST_H;
+ 013A DA9A              sbi 0x1b,2
+ 013C                   .dbline 117
+ 013C           ;  CLK_H;
+ 013C DB9A              sbi 0x1b,3
+ 013E                   .dbline -2
+ 013E           L35:
+ 013E                   .dbline 0 ; func end
+ 013E 0895              ret
+ 0140                   .dbend
+ 0140                   .dbfunc e read_mode _read_mode fV
+ 0140           ;          count -> R22
+ 0140           ;             pt -> R20,R21
+                        .even
+ 0140           _read_mode::
+ 0140 0E940000          xcall push_xgsetF000
+ 0144 622F              mov R22,R18
+ 0146 A801              movw R20,R16
+ 0148                   .dbline -1
+ 0148                   .dbline 120
+ 0148           ; }
+ 0148           ; void read_mode(unsigned char *pt,unsigned char count)
+ 0148           ; {
+ 0148                   .dbline 121
+ 0148           ;     IO_IN;
+ 0148 D498              cbi 0x1a,4
+ 014A                   .dbline 122
+ 014A           ;     CLK_L;
+ 014A DB98              cbi 0x1b,3
+ 014C                   .dbline 123
+ 014C           ;     delay(5);
+ 014C 05E0              ldi R16,5
+ 014E 58DF              xcall _delay
+ 0150           L37:
+ 0150                   .dbline 125
+ 0150           ;     do
+ 0150           ;         {
+ 0150                   .dbline 126
+ 0150           ;          *pt=read_byte();
+ 0150 92DF              xcall _read_byte
+ 0152 FA01              movw R30,R20
+ 0154 0083              std z+0,R16
+ 0156                   .dbline 127
+ 0156           ;          pt++;
+ 0156 4F5F              subi R20,255  ; offset = 1
+ 0158 5F4F              sbci R21,255
+ 015A                   .dbline 128
+ 015A           ;         }
+ 015A           L38:
+ 015A                   .dbline 129
+ 015A           ;     while(--count);
+ 015A 862F              mov R24,R22
+ 015C 8150              subi R24,1
+ 015E 682F              mov R22,R24
+ 0160 8823              tst R24
+ 0162 B1F7              brne L37
+ 0164           X6:
+ 0164                   .dbline 130
+ 0164           ;       IO_OUT;
+ 0164 D49A              sbi 0x1a,4
+ 0166                   .dbline -2
+ 0166           L36:
+ 0166                   .dbline 0 ; func end
+ 0166 0C940000          xjmp pop_xgsetF000
+ 016A                   .dbsym r count 22 c
+ 016A                   .dbsym r pt 20 pc
+ 016A                   .dbend
+ 016A                   .dbfunc e process_mode _process_mode fV
+ 016A           ;              i -> R20,R21
+                        .even
+ 016A           _process_mode::
+ 016A 4A93              st -y,R20
+ 016C 5A93              st -y,R21
+ 016E                   .dbline -1
+ 016E                   .dbline 133
+ 016E           ; }
+ 016E           ; void process_mode(void)
+ 016E           ; {
+ 016E                   .dbline 135
+ 016E           ;    unsigned int i;   
+ 016E           ;    CLK_L;
+ 016E DB98              cbi 0x1b,3
+ 0170                   .dbline 136
+ 0170           ;    delay(5);
+ 0170 05E0              ldi R16,5
+ 0172 46DF              xcall _delay
+ 0174                   .dbline 137
+ 0174           ;    IO_L;
+ 0174 DC98              cbi 0x1b,4
+ 0176                   .dbline 138
+ 0176           ;    for(i=255;i>0;i--)
+ 0176 4FEF              ldi R20,255
+ 0178 50E0              ldi R21,0
+ 017A 08C0              xjmp L44
+ 017C           L41:
+ 017C                   .dbline 139
+ 017C           ;       {
+ 017C                   .dbline 140
+ 017C           ;        CLK_H;
+ 017C DB9A              sbi 0x1b,3
+ 017E                   .dbline 141
+ 017E           ;      delay(5);
+ 017E 05E0              ldi R16,5
+ 0180 3FDF              xcall _delay
+ 0182                   .dbline 142
+ 0182           ;      CLK_L;
+ 0182 DB98              cbi 0x1b,3
+ 0184                   .dbline 143
+ 0184           ;      delay(5);
+ 0184 05E0              ldi R16,5
+ 0186 3CDF              xcall _delay
+ 0188                   .dbline 144
+ 0188           ;       }
+ 0188           L42:
+ 0188                   .dbline 138
+ 0188 4150              subi R20,1
+ 018A 5040              sbci R21,0
+ 018C           L44:
+ 018C                   .dbline 138
+ 018C 4030              cpi R20,0
+ 018E 4507              cpc R20,R21
+ 0190 A9F7              brne L41
+ 0192           X7:
+ 0192                   .dbline 145
+ 0192           ;     IO_H;
+ 0192 DC9A              sbi 0x1b,4
+ 0194                   .dbline -2
+ 0194           L40:
+ 0194                   .dbline 0 ; func end
+ 0194 5991              ld R21,y+
+ 0196 4991              ld R20,y+
+ 0198 0895              ret
+ 019A                   .dbsym r i 20 i
+ 019A                   .dbend
+ 019A                   .dbfunc e break_operate _break_operate fV
+                        .even
+ 019A           _break_operate::
+ 019A                   .dbline -1
+ 019A                   .dbline 148
+ 019A           ; }
+ 019A           ; void break_operate(void)// 中断操作
+ 019A           ; {
+ 019A                   .dbline 149
+ 019A           ;   CLK_L;
+ 019A DB98              cbi 0x1b,3
+ 019C                   .dbline 150
+ 019C           ;   RST_L;
+ 019C DA98              cbi 0x1b,2
+ 019E                   .dbline 151
+ 019E           ;   IO_L;
+ 019E DC98              cbi 0x1b,4
+ 01A0                   .dbline 152
+ 01A0           ;   delay(5);
+ 01A0 05E0              ldi R16,5
+ 01A2 2EDF              xcall _delay
+ 01A4                   .dbline 153
+ 01A4           ;   RST_H;
+ 01A4 DA9A              sbi 0x1b,2
+ 01A6                   .dbline 154
+ 01A6           ;   IO_H;
+ 01A6 DC9A              sbi 0x1b,4
+ 01A8                   .dbline 155
+ 01A8           ;   delay(5);
+ 01A8 05E0              ldi R16,5
+ 01AA 2ADF              xcall _delay
+ 01AC                   .dbline 156
+ 01AC           ;   RST_L;
+ 01AC DA98              cbi 0x1b,2
+ 01AE                   .dbline 157
+ 01AE           ;   delay(5);
+ 01AE 05E0              ldi R16,5
+ 01B0                   .dbline -2
+ 01B0           L45:
+ 01B0                   .dbline 0 ; func end
+ 01B0 27CF              xjmp _delay
+ 01B2                   .dbend
+ 01B2                   .dbfunc e read_main_mem _read_main_mem fV
+ 01B2           ;            len -> R12
+ 01B2           ;             pt -> R10,R11
+ 01B2           ;          adder -> R14
+                        .even
+ 01B2           _read_main_mem::
+ 01B2 0E940000          xcall push_xgset00FC
+ 01B6 5901              movw R10,R18
+ 01B8 E02E              mov R14,R16
+ 01BA 2197              sbiw R28,1
+ 01BC CF80              ldd R12,y+7
+ 01BE                   .dbline -1
+ 01BE                   .dbline 160
+ 01BE           ; }
+ 01BE           ; void read_main_mem(unsigned char adder,unsigned char *pt,unsigned char len)
+ 01BE           ; {
+ 01BE                   .dbline 161
+ 01BE           ;   send_command( RMM_COMM,adder,0xff);
+ 01BE 8FEF              ldi R24,255
+ 01C0 8883              std y+0,R24
+ 01C2 2E2D              mov R18,R14
+ 01C4 00E3              ldi R16,48
+ 01C6 91DF              xcall _send_command
+ 01C8                   .dbline 162
+ 01C8           ;   read_mode(pt, len);
+ 01C8 2C2D              mov R18,R12
+ 01CA 8501              movw R16,R10
+ 01CC B9DF              xcall _read_mode
+ 01CE                   .dbline 163
+ 01CE           ;   break_operate();
+ 01CE E5DF              xcall _break_operate
+ 01D0                   .dbline -2
+ 01D0           L46:
+ 01D0                   .dbline 0 ; func end
+ 01D0 2196              adiw R28,1
+ 01D2 0C940000          xjmp pop_xgset00FC
+ 01D6                   .dbsym r len 12 c
+ 01D6                   .dbsym r pt 10 pc
+ 01D6                   .dbsym r adder 14 c
+ 01D6                   .dbend
+ 01D6                   .dbfunc e write_main_mem _write_main_mem fV
+ 01D6           ;              x -> R10
+ 01D6           ;            len -> R14
+ 01D6           ;             pt -> R20,R21
+ 01D6           ;          adder -> R12
+                        .even
+ 01D6           _write_main_mem::
+ 01D6 0E940000          xcall push_xgset30FC
+ 01DA A901              movw R20,R18
+ 01DC C02E              mov R12,R16
+ 01DE 2197              sbiw R28,1
+ 01E0 E984              ldd R14,y+9
+ 01E2                   .dbline -1
+ 01E2                   .dbline 166
+ 01E2           ; }
+ 01E2           ; void write_main_mem(unsigned char adder,unsigned char *pt, unsigned char len)//写IC卡主存
+ 01E2           ; {
+ 01E2                   .dbline 168
+ 01E2           ;   unsigned char x;
+ 01E2           ;   reset_card();
+ 01E2 1DDF              xcall _reset_card
+ 01E4                   .dbline 169
+ 01E4           ;   for(x=0;x<len;x++)
+ 01E4 AA24              clr R10
+ 01E6 0BC0              xjmp L51
+ 01E8           L48:
+ 01E8                   .dbline 170
+ 01E8           ;   {
+ 01E8                   .dbline 171
+ 01E8           ;     send_command(WMM_COMM,adder,*pt);
+ 01E8 FA01              movw R30,R20
+ 01EA 2080              ldd R2,z+0
+ 01EC 2882              std y+0,R2
+ 01EE 2C2D              mov R18,R12
+ 01F0 08E3              ldi R16,56
+ 01F2 7BDF              xcall _send_command
+ 01F4                   .dbline 172
+ 01F4           ;     process_mode();
+ 01F4 BADF              xcall _process_mode
+ 01F6                   .dbline 173
+ 01F6           ;       adder++;
+ 01F6 C394              inc R12
+ 01F8                   .dbline 174
+ 01F8           ;       pt++;
+ 01F8 4F5F              subi R20,255  ; offset = 1
+ 01FA 5F4F              sbci R21,255
+ 01FC                   .dbline 175
+ 01FC           ;   }
+ 01FC           L49:
+ 01FC                   .dbline 169
+ 01FC A394              inc R10
+ 01FE           L51:
+ 01FE                   .dbline 169
+ 01FE AE14              cp R10,R14
+ 0200 98F3              brlo L48
+ 0202           X8:
+ 0202                   .dbline 176
+ 0202           ;     break_operate();
+ 0202 CBDF              xcall _break_operate
+ 0204                   .dbline -2
+ 0204           L47:
+ 0204                   .dbline 0 ; func end
+ 0204 2196              adiw R28,1
+ 0206 0C940000          xjmp pop_xgset30FC
+ 020A                   .dbsym r x 10 c
+ 020A                   .dbsym r len 14 c
+ 020A                   .dbsym r pt 20 pc
+ 020A                   .dbsym r adder 12 c
+ 020A                   .dbend
+ 020A                   .dbfunc e write_password_mem _write_password_mem fV
+ 020A           ;         pt_one -> R12
+ 020A           ;        address -> R10
+                        .even
+ 020A           _write_password_mem::
+ 020A AA92              st -y,R10
+ 020C CA92              st -y,R12
+ 020E C22E              mov R12,R18
+ 0210 A02E              mov R10,R16
+ 0212 2197              sbiw R28,1
+ 0214                   .dbline -1
+ 0214                   .dbline 179
+ 0214           ; }
+ 0214           ; void write_password_mem(unsigned char address,unsigned char  pt_one)
+ 0214           ; {
+ 0214                   .dbline 181
+ 0214           ;    // reset_card();
+ 0214           ;     send_command(WSM_COMM,address,pt_one);
+ 0214 C882              std y+0,R12
+ 0216 2A2D              mov R18,R10
+ 0218 09E3              ldi R16,57
+ 021A 67DF              xcall _send_command
+ 021C                   .dbline 182
+ 021C           ;     process_mode();
+ 021C A6DF              xcall _process_mode
+ 021E                   .dbline 183
+ 021E           ;     break_operate();
+ 021E BDDF              xcall _break_operate
+ 0220                   .dbline -2
+ 0220           L52:
+ 0220                   .dbline 0 ; func end
+ 0220 2196              adiw R28,1
+ 0222 C990              ld R12,y+
+ 0224 A990              ld R10,y+
+ 0226 0895              ret
+ 0228                   .dbsym r pt_one 12 c
+ 0228                   .dbsym r address 10 c
+ 0228                   .dbend
+ 0228                   .dbfunc e write_new_pass_word _write_new_pass_word fV
+                        .even
+ 0228           _write_new_pass_word::
+ 0228                   .dbline -1
+ 0228                   .dbline 187
+ 0228           ; 
+ 0228           ; }
+ 0228           ; void write_new_pass_word(void)
+ 0228           ; {
+ 0228                   .dbline 189
+ 0228           ;  
+ 0228           ;    write_password_mem(1,Card_User_Pass[0]);
+ 0228 20910000          lds R18,_Card_User_Pass
+ 022C 01E0              ldi R16,1
+ 022E EDDF              xcall _write_password_mem
+ 0230                   .dbline 190
+ 0230           ;    write_password_mem(2,Card_User_Pass[1]);
+ 0230 20910100          lds R18,_Card_User_Pass+1
+ 0234 02E0              ldi R16,2
+ 0236 E9DF              xcall _write_password_mem
+ 0238                   .dbline 191
+ 0238           ;    write_password_mem(3,Card_User_Pass[2]);
+ 0238 20910200          lds R18,_Card_User_Pass+2
+ 023C 03E0              ldi R16,3
+ 023E                   .dbline -2
+ 023E           L53:
+ 023E                   .dbline 0 ; func end
+ 023E E5CF              xjmp _write_password_mem
+ 0240                   .dbend
+ 0240                   .dbfunc e card_type_judge _card_type_judge fc
+ 0240           ; NEW_USER_VALUE_TEMP -> y+3
+ 0240           ; USER_TYPE_VALUE_TEMP -> y+2
+ 0240           ; CARD_TYPE_VALUE_TEMP -> y+1
+                        .even
+ 0240           _card_type_judge::
+ 0240 2497              sbiw R28,4
+ 0242                   .dbline -1
+ 0242                   .dbline 198
+ 0242           ; 
+ 0242           ; }
+ 0242           ; /****************************************************************************
+ 0242           ; add by wind for judge card is not sle4442
+ 0242           ; ***************************************************************************/
+ 0242           ; unsigned char card_type_judge(void)
+ 0242           ; {
+ 0242                   .dbline 202
+ 0242           ; unsigned   char  CARD_TYPE_VALUE_TEMP[1];
+ 0242           ; unsigned   char  USER_TYPE_VALUE_TEMP[1];
+ 0242           ; unsigned   char  NEW_USER_VALUE_TEMP[1];
+ 0242           ; read_main_mem( CARD_TYPE_ADDRESS ,CARD_TYPE_VALUE_TEMP,1);
+ 0242 81E0              ldi R24,1
+ 0244 8883              std y+0,R24
+ 0246 9E01              movw R18,R28
+ 0248 2F5F              subi R18,255  ; offset = 1
+ 024A 3F4F              sbci R19,255
+ 024C 07E0              ldi R16,7
+ 024E B1DF              xcall _read_main_mem
+ 0250                   .dbline 203
+ 0250           ; read_main_mem( USER_TYPE_ADDRESS ,USER_TYPE_VALUE_TEMP,1);
+ 0250 81E0              ldi R24,1
+ 0252 8883              std y+0,R24
+ 0254 9E01              movw R18,R28
+ 0256 2E5F              subi R18,254  ; offset = 2
+ 0258 3F4F              sbci R19,255
+ 025A 05E1              ldi R16,21
+ 025C AADF              xcall _read_main_mem
+ 025E                   .dbline 206
+ 025E           ; //read_main_mem( QLD_USER_ADDRESS ,QLD_USER_VALUE_TEMP,1);
+ 025E           ; 
+ 025E           ; if(CARD_TYPE_VALUE_TEMP[0]!=CARD_TYPE_VALUE )//
+ 025E 8981              ldd R24,y+1
+ 0260 8531              cpi R24,21
+ 0262 19F0              breq L57
+ 0264           X9:
+ 0264                   .dbline 207
+ 0264           ;       {
+ 0264                   .dbline 208
+ 0264           ;         reset_level();
+ 0264 67DF              xcall _reset_level
+ 0266                   .dbline 209
+ 0266           ;         return 0;
+ 0266 0027              clr R16
+ 0268 07C0              xjmp L56
+ 026A           L57:
+ 026A                   .dbline 211
+ 026A           ;          }
+ 026A           ; if(USER_TYPE_VALUE_TEMP[0]!=USER_TYPE_VALUE )//
+ 026A 8A81              ldd R24,y+2
+ 026C 823D              cpi R24,210
+ 026E 19F0              breq L59
+ 0270           X10:
+ 0270                   .dbline 212
+ 0270           ;        {
+ 0270                   .dbline 213
+ 0270           ;         reset_level();
+ 0270 61DF              xcall _reset_level
+ 0272                   .dbline 214
+ 0272           ;         return 0;
+ 0272 0027              clr R16
+ 0274 01C0              xjmp L56
+ 0276           L59:
+ 0276                   .dbline 221
+ 0276           ;          }
+ 0276           ; /*if(QLD_USER_VALUE_TEMP[0]!=QLD_USER_VALUE )//
+ 0276           ;          {
+ 0276           ;         reset_level();
+ 0276           ;         return 0;
+ 0276           ;          }   */
+ 0276           ; return 1;
+ 0276 01E0              ldi R16,1
+ 0278                   .dbline -2
+ 0278           L56:
+ 0278                   .dbline 0 ; func end
+ 0278 2496              adiw R28,4
+ 027A 0895              ret
+ 027C                   .dbsym l NEW_USER_VALUE_TEMP 3 A[1:1]c
+ 027C                   .dbsym l USER_TYPE_VALUE_TEMP 2 A[1:1]c
+ 027C                   .dbsym l CARD_TYPE_VALUE_TEMP 1 A[1:1]c
+ 027C                   .dbend
+ 027C                   .dbfunc e verify_code _verify_code fc
+ 027C           ;              i -> R20
+ 027C           ;           temp -> y+1
+ 027C           ;            pt3 -> R10
+ 027C           ;            pt2 -> R12
+ 027C           ;            pt1 -> R14
+                        .even
+ 027C           _verify_code::
+ 027C 0E940000          xcall push_xgset30FC
+ 0280 C22E              mov R12,R18
+ 0282 E02E              mov R14,R16
+ 0284 2597              sbiw R28,5
+ 0286 AD84              ldd R10,y+13
+ 0288                   .dbline -1
+ 0288                   .dbline 225
+ 0288           ; }
+ 0288           ; /******************************************************************************/
+ 0288           ; unsigned char verify_code(unsigned char pt1,unsigned char pt2,unsigned char pt3)
+ 0288           ; {
+ 0288                   .dbline 228
+ 0288           ;    unsigned char temp[4];
+ 0288           ;    unsigned char i;
+ 0288           ;    send_command(RSM_COMM, 0xff, 0xff);
+ 0288 8FEF              ldi R24,255
+ 028A 8883              std y+0,R24
+ 028C 2FEF              ldi R18,255
+ 028E 01E3              ldi R16,49
+ 0290 2CDF              xcall _send_command
+ 0292                   .dbline 229
+ 0292           ;    read_mode(temp, 4);
+ 0292 24E0              ldi R18,4
+ 0294 8E01              movw R16,R28
+ 0296 0F5F              subi R16,255  ; offset = 1
+ 0298 1F4F              sbci R17,255
+ 029A 52DF              xcall _read_mode
+ 029C                   .dbline 231
+ 029C           ;    //card_temp_word[4]=temp[4];
+ 029C           ;     if((temp[0] & 0x07) != 0)            //第一字节是错误计数器,如果错误计数器为0,直接退出
+ 029C 8981              ldd R24,y+1
+ 029E 8770              andi R24,7
+ 02A0 09F4              brne X16
+ 02A2 3BC0              xjmp L62
+ 02A4           X16:
+ 02A4           X11:
+ 02A4                   .dbline 232
+ 02A4           ;      {
+ 02A4                   .dbline 233
+ 02A4           ;          if((temp[0] & 0x07)==0x07)     // 00000111
+ 02A4 8981              ldd R24,y+1
+ 02A6 8770              andi R24,7
+ 02A8 8730              cpi R24,7
+ 02AA 11F4              brne L64
+ 02AC           X12:
+ 02AC                   .dbline 234
+ 02AC           ;                 i = 0x06;
+ 02AC 46E0              ldi R20,6
+ 02AE 0BC0              xjmp L65
+ 02B0           L64:
+ 02B0                   .dbline 235
+ 02B0           ;          else if((temp[0] & 0x07)==0x06)// 00000110
+ 02B0 8981              ldd R24,y+1
+ 02B2 8770              andi R24,7
+ 02B4 8630              cpi R24,6
+ 02B6 11F4              brne L66
+ 02B8           X13:
+ 02B8                   .dbline 236
+ 02B8           ;                 i = 0x04;
+ 02B8 44E0              ldi R20,4
+ 02BA 05C0              xjmp L67
+ 02BC           L66:
+ 02BC                   .dbline 237
+ 02BC           ;          else if((temp[0] & 0x07)==0x04)// 00000100
+ 02BC 8981              ldd R24,y+1
+ 02BE 8770              andi R24,7
+ 02C0 8430              cpi R24,4
+ 02C2 09F4              brne L68
+ 02C4           X14:
+ 02C4                   .dbline 238
+ 02C4           ;                 i = 0x00;
+ 02C4 4427              clr R20
+ 02C6           L68:
+ 02C6           L67:
+ 02C6           L65:
+ 02C6                   .dbline 239
+ 02C6           ;          send_command(WSM_COMM, 0, i);
+ 02C6 4883              std y+0,R20
+ 02C8 2227              clr R18
+ 02CA 09E3              ldi R16,57
+ 02CC 0EDF              xcall _send_command
+ 02CE                   .dbline 240
+ 02CE           ;          process_mode();
+ 02CE 4DDF              xcall _process_mode
+ 02D0                   .dbline 241
+ 02D0           ;          send_command(VER_COMM, 1, pt1);
+ 02D0 E882              std y+0,R14
+ 02D2 21E0              ldi R18,1
+ 02D4 03E3              ldi R16,51
+ 02D6 09DF              xcall _send_command
+ 02D8                   .dbline 242
+ 02D8           ;          process_mode();
+ 02D8 48DF              xcall _process_mode
+ 02DA                   .dbline 243
+ 02DA           ;          send_command(VER_COMM, 2, pt2);
+ 02DA C882              std y+0,R12
+ 02DC 22E0              ldi R18,2
+ 02DE 03E3              ldi R16,51
+ 02E0 04DF              xcall _send_command
+ 02E2                   .dbline 244
+ 02E2           ;          process_mode();
+ 02E2 43DF              xcall _process_mode
+ 02E4                   .dbline 245
+ 02E4           ;          send_command(VER_COMM, 3, pt3);
+ 02E4 A882              std y+0,R10
+ 02E6 23E0              ldi R18,3
+ 02E8 03E3              ldi R16,51
+ 02EA FFDE              xcall _send_command
+ 02EC                   .dbline 246
+ 02EC           ;          process_mode();
+ 02EC 3EDF              xcall _process_mode
+ 02EE                   .dbline 248
+ 02EE           ; 
+ 02EE           ;          send_command(WSM_COMM, 0, 0xff);
+ 02EE 8FEF              ldi R24,255
+ 02F0 8883              std y+0,R24
+ 02F2 2227              clr R18
+ 02F4 09E3              ldi R16,57
+ 02F6 F9DE              xcall _send_command
+ 02F8                   .dbline 249
+ 02F8           ;          process_mode();
+ 02F8 38DF              xcall _process_mode
+ 02FA                   .dbline 250
+ 02FA           ;          send_command(RSM_COMM, 0xff, 0xff);
+ 02FA 8FEF              ldi R24,255
+ 02FC 8883              std y+0,R24
+ 02FE 2FEF              ldi R18,255
+ 0300 01E3              ldi R16,49
+ 0302 F3DE              xcall _send_command
+ 0304                   .dbline 251
+ 0304           ;          read_mode(temp, 4);
+ 0304 24E0              ldi R18,4
+ 0306 8E01              movw R16,R28
+ 0308 0F5F              subi R16,255  ; offset = 1
+ 030A 1F4F              sbci R17,255
+ 030C 19DF              xcall _read_mode
+ 030E                   .dbline 252
+ 030E           ;             if((temp[0] & 0x07)==0x07)      //如果没有被成功擦除,表明校对失败
+ 030E 8981              ldd R24,y+1
+ 0310 8770              andi R24,7
+ 0312 8730              cpi R24,7
+ 0314 11F4              brne L70
+ 0316           X15:
+ 0316                   .dbline 253
+ 0316           ;              return 1 ;
+ 0316 01E0              ldi R16,1
+ 0318 01C0              xjmp L61
+ 031A           L70:
+ 031A                   .dbline 254
+ 031A           ;      }
+ 031A           L62:
+ 031A                   .dbline 255
+ 031A           ;      return 0;
+ 031A 0027              clr R16
+ 031C                   .dbline -2
+ 031C           L61:
+ 031C                   .dbline 0 ; func end
+ 031C 2596              adiw R28,5
+ 031E 0C940000          xjmp pop_xgset30FC
+ 0322                   .dbsym r i 20 c
+ 0322                   .dbsym l temp 1 A[4:4]c
+ 0322                   .dbsym r pt3 10 c
+ 0322                   .dbsym r pt2 12 c
+ 0322                   .dbsym r pt1 14 c
+ 0322                   .dbend
+ 0322                   .dbfunc e card_value_dsp _card_value_dsp fc
+                        .even
+ 0322           _card_value_dsp::
+ 0322 4A93              st -y,R20
+ 0324 5A93              st -y,R21
+ 0326 2197              sbiw R28,1
+ 0328                   .dbline -1
+ 0328                   .dbline 262
+ 0328           ; 
+ 0328           ; }
+ 0328           ; /*********************************************************************************/
+ 0328           ; /*******************************IC Card Password**********************************/
+ 0328           ; /*********************************************************************************/
+ 0328           ; unsigned char card_value_dsp(void)
+ 0328           ; {
+ 0328                   .dbline 263
+ 0328           ;    if(1==CARD_SW)
+ 0328 80E0              ldi R24,0
+ 032A 99B3              in R25,0x19
+ 032C 9072              andi R25,32
+ 032E 8917              cp R24,R25
+ 0330 18F4              brsh L75
+ 0332           X17:
+ 0332 41E0              ldi R20,1
+ 0334 50E0              ldi R21,0
+ 0336 02C0              xjmp L76
+ 0338           L75:
+ 0338 4427              clr R20
+ 033A 5527              clr R21
+ 033C           L76:
+ 033C 4130              cpi R20,1
+ 033E E0E0              ldi R30,0
+ 0340 5E07              cpc R21,R30
+ 0342 19F4              brne L73
+ 0344           X18:
+ 0344                   .dbline 264
+ 0344           ;    {
+ 0344                   .dbline 265
+ 0344           ;    reset_level(); 
+ 0344 F7DE              xcall _reset_level
+ 0346                   .dbline 266
+ 0346           ;    return 0;
+ 0346 0027              clr R16
+ 0348 2AC0              xjmp L72
+ 034A           L73:
+ 034A                   .dbline 268
+ 034A           ;    } 
+ 034A           ;    VCC_ON;
+ 034A D998              cbi 0x1b,1
+ 034C                   .dbline 269
+ 034C           ;    delay(100);
+ 034C 04E6              ldi R16,100
+ 034E 58DE              xcall _delay
+ 0350                   .dbline 270
+ 0350           ;    reset_card();
+ 0350 66DE              xcall _reset_card
+ 0352                   .dbline 271
+ 0352           ;    if(1!=card_type_judge())
+ 0352 76DF              xcall _card_type_judge
+ 0354 0130              cpi R16,1
+ 0356 19F0              breq L77
+ 0358           X19:
+ 0358                   .dbline 272
+ 0358           ;       {
+ 0358                   .dbline 273
+ 0358           ;         reset_level(); 
+ 0358 EDDE              xcall _reset_level
+ 035A                   .dbline 274
+ 035A           ;         return 0;
+ 035A 0027              clr R16
+ 035C 20C0              xjmp L72
+ 035E           L77:
+ 035E                   .dbline 276
+ 035E           ;       }
+ 035E           ;    if(1==verify_code(Card_Init_Pass[0],Card_Init_Pass[1],Card_Init_Pass[2])) //初始卡密码校验位
+ 035E 20900500          lds R2,_Card_Init_Pass+2
+ 0362 2882              std y+0,R2
+ 0364 20910400          lds R18,_Card_Init_Pass+1
+ 0368 00910300          lds R16,_Card_Init_Pass
+ 036C 87DF              xcall _verify_code
+ 036E 0130              cpi R16,1
+ 0370 29F4              brne L79
+ 0372           X20:
+ 0372                   .dbline 277
+ 0372           ;       {
+ 0372                   .dbline 278
+ 0372           ;           break_operate();
+ 0372 13DF              xcall _break_operate
+ 0374                   .dbline 279
+ 0374           ;               write_new_pass_word();
+ 0374 59DF              xcall _write_new_pass_word
+ 0376                   .dbline 280
+ 0376           ;               reset_level(); 
+ 0376 DEDE              xcall _reset_level
+ 0378                   .dbline 281
+ 0378           ;           return 1;
+ 0378 01E0              ldi R16,1
+ 037A 11C0              xjmp L72
+ 037C           L79:
+ 037C                   .dbline 283
+ 037C           ;       }       
+ 037C           ;    if(1==verify_code(Card_User_Pass[0],Card_User_Pass[1],Card_User_Pass[2])) //用户卡密码校验位
+ 037C 20900200          lds R2,_Card_User_Pass+2
+ 0380 2882              std y+0,R2
+ 0382 20910100          lds R18,_Card_User_Pass+1
+ 0386 00910000          lds R16,_Card_User_Pass
+ 038A 78DF              xcall _verify_code
+ 038C 402F              mov R20,R16
+ 038E 0130              cpi R16,1
+ 0390 21F4              brne L83
+ 0392           X21:
+ 0392                   .dbline 284
+ 0392           ;       {
+ 0392                   .dbline 285
+ 0392           ;           break_operate();
+ 0392 03DF              xcall _break_operate
+ 0394                   .dbline 286
+ 0394           ;               reset_level(); 
+ 0394 CFDE              xcall _reset_level
+ 0396                   .dbline 287
+ 0396           ;               return 1;
+ 0396 01E0              ldi R16,1
+ 0398 02C0              xjmp L72
+ 039A           L83:
+ 039A                   .dbline 289
+ 039A           ;       }
+ 039A           ;         reset_level(); 
+ 039A CCDE              xcall _reset_level
+ 039C                   .dbline 290
+ 039C           ;         return 0; 
+ 039C 0027              clr R16
+ 039E                   .dbline -2
+ 039E           L72:
+ 039E                   .dbline 0 ; func end
+ 039E 2196              adiw R28,1
+ 03A0 5991              ld R21,y+
+ 03A2 4991              ld R20,y+
+ 03A4 0895              ret
+ 03A6                   .dbend
+ 03A6                   .dbfunc e Read_Card _Read_Card fc
+ 03A6           ;            len -> R14
+ 03A6           ;              P -> R12,R13
+ 03A6           ;          adder -> R10
+                        .even
+ 03A6           _Read_Card::
+ 03A6 0E940000          xcall push_xgset30FC
+ 03AA 6901              movw R12,R18
+ 03AC A02E              mov R10,R16
+ 03AE 2197              sbiw R28,1
+ 03B0 E984              ldd R14,y+9
+ 03B2                   .dbline -1
+ 03B2                   .dbline 299
+ 03B2           ; }
+ 03B2           ; 
+ 03B2           ; 
+ 03B2           ; 
+ 03B2           ; /************************************************************************************************/
+ 03B2           ; /***rw_bit=0 is read mode,re_bit=1 is write mode,ic_adder is card adder,*pt is system adder.*****/
+ 03B2           ; /************************************************************************************************/
+ 03B2           ; unsigned char Read_Card(unsigned char adder,unsigned char *P,unsigned char len)
+ 03B2           ; {
+ 03B2                   .dbline 300
+ 03B2           ;  if(1==CARD_SW)
+ 03B2 80E0              ldi R24,0
+ 03B4 99B3              in R25,0x19
+ 03B6 9072              andi R25,32
+ 03B8 8917              cp R24,R25
+ 03BA 18F4              brsh L90
+ 03BC           X22:
+ 03BC 41E0              ldi R20,1
+ 03BE 50E0              ldi R21,0
+ 03C0 02C0              xjmp L91
+ 03C2           L90:
+ 03C2 4427              clr R20
+ 03C4 5527              clr R21
+ 03C6           L91:
+ 03C6 4130              cpi R20,1
+ 03C8 E0E0              ldi R30,0
+ 03CA 5E07              cpc R21,R30
+ 03CC 19F4              brne L88
+ 03CE           X23:
+ 03CE                   .dbline 301
+ 03CE           ;  {
+ 03CE                   .dbline 302
+ 03CE           ;    reset_level(); 
+ 03CE B2DE              xcall _reset_level
+ 03D0                   .dbline 303
+ 03D0           ;    return 0;
+ 03D0 0027              clr R16
+ 03D2 1EC0              xjmp L87
+ 03D4           L88:
+ 03D4                   .dbline 305
+ 03D4           ;  } 
+ 03D4           ;  VCC_ON;
+ 03D4 D998              cbi 0x1b,1
+ 03D6                   .dbline 306
+ 03D6           ;  delay(100);
+ 03D6 04E6              ldi R16,100
+ 03D8 13DE              xcall _delay
+ 03DA                   .dbline 307
+ 03DA           ;  reset_card();
+ 03DA 21DE              xcall _reset_card
+ 03DC                   .dbline 308
+ 03DC           ;  if(0==card_type_judge())
+ 03DC 31DF              xcall _card_type_judge
+ 03DE 0023              tst R16
+ 03E0 19F4              brne L92
+ 03E2           X24:
+ 03E2                   .dbline 309
+ 03E2           ;  {
+ 03E2                   .dbline 310
+ 03E2           ;    reset_level(); 
+ 03E2 A8DE              xcall _reset_level
+ 03E4                   .dbline 311
+ 03E4           ;    return 0;
+ 03E4 0027              clr R16
+ 03E6 14C0              xjmp L87
+ 03E8           L92:
+ 03E8                   .dbline 313
+ 03E8           ;  }
+ 03E8           ;  if(1!=verify_code(Card_User_Pass[0],Card_User_Pass[1],Card_User_Pass[2])) //用户卡密码校验位
+ 03E8 20900200          lds R2,_Card_User_Pass+2
+ 03EC 2882              std y+0,R2
+ 03EE 20910100          lds R18,_Card_User_Pass+1
+ 03F2 00910000          lds R16,_Card_User_Pass
+ 03F6 42DF              xcall _verify_code
+ 03F8 0130              cpi R16,1
+ 03FA 19F0              breq L94
+ 03FC           X25:
+ 03FC                   .dbline 314
+ 03FC           ;  {
+ 03FC                   .dbline 315
+ 03FC           ;       reset_level(); 
+ 03FC 9BDE              xcall _reset_level
+ 03FE                   .dbline 316
+ 03FE           ;       return 0;
+ 03FE 0027              clr R16
+ 0400 07C0              xjmp L87
+ 0402           L94:
+ 0402                   .dbline 318
+ 0402           ;  }
+ 0402           ;    break_operate();
+ 0402 CBDE              xcall _break_operate
+ 0404                   .dbline 319
+ 0404           ;    read_main_mem(adder,P,len);
+ 0404 E882              std y+0,R14
+ 0406 9601              movw R18,R12
+ 0408 0A2D              mov R16,R10
+ 040A D3DE              xcall _read_main_mem
+ 040C                   .dbline 320
+ 040C           ;    reset_level(); 
+ 040C 93DE              xcall _reset_level
+ 040E                   .dbline 321
+ 040E           ;    return 1;
+ 040E 01E0              ldi R16,1
+ 0410                   .dbline -2
+ 0410           L87:
+ 0410                   .dbline 0 ; func end
+ 0410 2196              adiw R28,1
+ 0412 0C940000          xjmp pop_xgset30FC
+ 0416                   .dbsym r len 14 c
+ 0416                   .dbsym r P 12 pc
+ 0416                   .dbsym r adder 10 c
+ 0416                   .dbend
+ 0416                   .dbfunc e Write_Card _Write_Card fc
+ 0416           ;            len -> R14
+ 0416           ;              P -> R12,R13
+ 0416           ;          adder -> R10
+                        .even
+ 0416           _Write_Card::
+ 0416 0E940000          xcall push_xgset30FC
+ 041A 6901              movw R12,R18
+ 041C A02E              mov R10,R16
+ 041E 2197              sbiw R28,1
+ 0420 E984              ldd R14,y+9
+ 0422                   .dbline -1
+ 0422                   .dbline 324
+ 0422           ; }   
+ 0422           ; unsigned char Write_Card(unsigned char adder,unsigned char *P,unsigned char len)   
+ 0422           ; {
+ 0422                   .dbline 325
+ 0422           ;  if(1==CARD_SW)
+ 0422 80E0              ldi R24,0
+ 0424 99B3              in R25,0x19
+ 0426 9072              andi R25,32
+ 0428 8917              cp R24,R25
+ 042A 18F4              brsh L101
+ 042C           X26:
+ 042C 41E0              ldi R20,1
+ 042E 50E0              ldi R21,0
+ 0430 02C0              xjmp L102
+ 0432           L101:
+ 0432 4427              clr R20
+ 0434 5527              clr R21
+ 0436           L102:
+ 0436 4130              cpi R20,1
+ 0438 E0E0              ldi R30,0
+ 043A 5E07              cpc R21,R30
+ 043C 19F4              brne L99
+ 043E           X27:
+ 043E                   .dbline 326
+ 043E           ;  {
+ 043E                   .dbline 327
+ 043E           ;    reset_level(); 
+ 043E 7ADE              xcall _reset_level
+ 0440                   .dbline 328
+ 0440           ;    return 0;
+ 0440 0027              clr R16
+ 0442 1EC0              xjmp L98
+ 0444           L99:
+ 0444                   .dbline 330
+ 0444           ;  } 
+ 0444           ;  VCC_ON;
+ 0444 D998              cbi 0x1b,1
+ 0446                   .dbline 331
+ 0446           ;  delay(100);
+ 0446 04E6              ldi R16,100
+ 0448 DBDD              xcall _delay
+ 044A                   .dbline 332
+ 044A           ;  reset_card();
+ 044A E9DD              xcall _reset_card
+ 044C                   .dbline 333
+ 044C           ;  if(1!=card_type_judge())
+ 044C F9DE              xcall _card_type_judge
+ 044E 0130              cpi R16,1
+ 0450 19F0              breq L103
+ 0452           X28:
+ 0452                   .dbline 334
+ 0452           ;  {
+ 0452                   .dbline 335
+ 0452           ;    reset_level(); 
+ 0452 70DE              xcall _reset_level
+ 0454                   .dbline 336
+ 0454           ;    return 0;
+ 0454 0027              clr R16
+ 0456 14C0              xjmp L98
+ 0458           L103:
+ 0458                   .dbline 338
+ 0458           ;  }
+ 0458           ;  if(1!=verify_code(Card_User_Pass[0],Card_User_Pass[1],Card_User_Pass[2])) //用户卡密码校验位
+ 0458 20900200          lds R2,_Card_User_Pass+2
+ 045C 2882              std y+0,R2
+ 045E 20910100          lds R18,_Card_User_Pass+1
+ 0462 00910000          lds R16,_Card_User_Pass
+ 0466 0ADF              xcall _verify_code
+ 0468 0130              cpi R16,1
+ 046A 19F0              breq L105
+ 046C           X29:
+ 046C                   .dbline 339
+ 046C           ;  {
+ 046C                   .dbline 340
+ 046C           ;       reset_level(); 
+ 046C 63DE              xcall _reset_level
+ 046E                   .dbline 341
+ 046E           ;       return 0;
+ 046E 0027              clr R16
+ 0470 07C0              xjmp L98
+ 0472           L105:
+ 0472                   .dbline 343
+ 0472           ;  }
+ 0472           ;    break_operate();
+ 0472 93DE              xcall _break_operate
+ 0474                   .dbline 344
+ 0474           ;    write_main_mem(adder,P,len);
+ 0474 E882              std y+0,R14
+ 0476 9601              movw R18,R12
+ 0478 0A2D              mov R16,R10
+ 047A ADDE              xcall _write_main_mem
+ 047C                   .dbline 345
+ 047C           ;    reset_level(); 
+ 047C 5BDE              xcall _reset_level
+ 047E                   .dbline 346
+ 047E           ;    return 1;
+ 047E 01E0              ldi R16,1
+ 0480                   .dbline -2
+ 0480           L98:
+ 0480                   .dbline 0 ; func end
+ 0480 2196              adiw R28,1
+ 0482 0C940000          xjmp pop_xgset30FC
+ 0486                   .dbsym r len 14 c
+ 0486                   .dbsym r P 12 pc
+ 0486                   .dbsym r adder 10 c
+ 0486                   .dbend
+ 0486                   .dbfunc e Write_NEW_Card _Write_NEW_Card fc
+ 0486           ;              i -> R20
+ 0486           ;            len -> R14
+ 0486           ;              P -> R12,R13
+ 0486           ;          adder -> R10
+                        .even
+ 0486           _Write_NEW_Card::
+ 0486 0E940000          xcall push_xgset30FC
+ 048A 6901              movw R12,R18
+ 048C A02E              mov R10,R16
+ 048E 2197              sbiw R28,1
+ 0490 E984              ldd R14,y+9
+ 0492                   .dbline -1
+ 0492                   .dbline 349
+ 0492           ; }  
+ 0492           ; unsigned char Write_NEW_Card(unsigned char adder,unsigned char *P,unsigned char len)   
+ 0492           ; {
+ 0492                   .dbline 351
+ 0492           ;  unsigned char i;
+ 0492           ;  i=card_value_dsp();
+ 0492 47DF              xcall _card_value_dsp
+ 0494 402F              mov R20,R16
+ 0496                   .dbline 352
+ 0496           ;  if(i==1)
+ 0496 0130              cpi R16,1
+ 0498 29F4              brne L110
+ 049A           X30:
+ 049A                   .dbline 353
+ 049A           ;  {
+ 049A                   .dbline 354
+ 049A           ;   i=Write_Card(adder,P,len);
+ 049A E882              std y+0,R14
+ 049C 9601              movw R18,R12
+ 049E 0A2D              mov R16,R10
+ 04A0 BADF              xcall _Write_Card
+ 04A2 402F              mov R20,R16
+ 04A4                   .dbline 355
+ 04A4           ;  }
+ 04A4           L110:
+ 04A4                   .dbline 356
+ 04A4           ;  return i;
+ 04A4 042F              mov R16,R20
+ 04A6                   .dbline -2
+ 04A6           L109:
+ 04A6                   .dbline 0 ; func end
+ 04A6 2196              adiw R28,1
+ 04A8 0C940000          xjmp pop_xgset30FC
+ 04AC                   .dbsym r i 20 c
+ 04AC                   .dbsym r len 14 c
+ 04AC                   .dbsym r P 12 pc
+ 04AC                   .dbsym r adder 10 c
+ 04AC                   .dbend
+                        .area lit(rom, con, rel)
+ 0000           L113:
+ 0000 0000              .byte 0,0
+                        .area text(rom, con, rel)
+ 04AC                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 04AC                   .dbfunc e Read_Type _Read_Type fc
+ 04AC           ;              i -> R10
+ 04AC           ;              x -> y+1
+                        .even
+ 04AC           _Read_Type::
+ 04AC AA92              st -y,R10
+ 04AE 2397              sbiw R28,3
+ 04B0                   .dbline -1
+ 04B0                   .dbline 360
+ 04B0           ; }  
+ 04B0           ; /***********************************************************************************************/
+ 04B0           ; unsigned char Read_Type(void)
+ 04B0           ;  {
+ 04B0                   .dbline 362
+ 04B0           ;    unsigned char i;
+ 04B0           ;    unsigned char x[2]={0,0};
+ 04B0 80E0              ldi R24,<L113
+ 04B2 90E0              ldi R25,>L113
+ 04B4 FE01              movw R30,R28
+ 04B6 3196              adiw R30,1
+ 04B8 02E0              ldi R16,2
+ 04BA 10E0              ldi R17,0
+ 04BC FA93              st -y,R31
+ 04BE EA93              st -y,R30
+ 04C0 9A93              st -y,R25
+ 04C2 8A93              st -y,R24
+ 04C4 0E940000          xcall asgncblkx
+ 04C8                   .dbline 363
+ 04C8           ;    i= Read_Card(CARD_TYPE_ADDER,x,1); 
+ 04C8 81E0              ldi R24,1
+ 04CA 8883              std y+0,R24
+ 04CC 9E01              movw R18,R28
+ 04CE 2F5F              subi R18,255  ; offset = 1
+ 04D0 3F4F              sbci R19,255
+ 04D2 00E5              ldi R16,80
+ 04D4 68DF              xcall _Read_Card
+ 04D6 A02E              mov R10,R16
+ 04D8                   .dbline 364
+ 04D8           ;    Card_Type=x[0];
+ 04D8 2980              ldd R2,y+1
+ 04DA 20920000          sts _Card_Type,R2
+ 04DE                   .dbline 365
+ 04DE           ;    return i;
+ 04DE                   .dbline -2
+ 04DE           L112:
+ 04DE                   .dbline 0 ; func end
+ 04DE 2396              adiw R28,3
+ 04E0 A990              ld R10,y+
+ 04E2 0895              ret
+ 04E4                   .dbsym r i 10 c
+ 04E4                   .dbsym l x 1 A[2:2]c
+ 04E4                   .dbend
+                        .area lit(rom, con, rel)
+ 0002           L115:
+ 0002 0000              .byte 0,0
+                        .area text(rom, con, rel)
+ 04E4                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 04E4                   .dbfunc e Write_Type _Write_Type fc
+ 04E4           ;              i -> R10
+ 04E4           ;              x -> y+1
+                        .even
+ 04E4           _Write_Type::
+ 04E4 AA92              st -y,R10
+ 04E6 2397              sbiw R28,3
+ 04E8                   .dbline -1
+ 04E8                   .dbline 368
+ 04E8           ;  }
+ 04E8           ; unsigned char Write_Type(void)
+ 04E8           ;  {
+ 04E8                   .dbline 370
+ 04E8           ;    unsigned char i;
+ 04E8           ;    unsigned char x[2]={0,0};
+ 04E8 80E0              ldi R24,<L115
+ 04EA 90E0              ldi R25,>L115
+ 04EC FE01              movw R30,R28
+ 04EE 3196              adiw R30,1
+ 04F0 02E0              ldi R16,2
+ 04F2 10E0              ldi R17,0
+ 04F4 FA93              st -y,R31
+ 04F6 EA93              st -y,R30
+ 04F8 9A93              st -y,R25
+ 04FA 8A93              st -y,R24
+ 04FC 0E940000          xcall asgncblkx
+ 0500                   .dbline 371
+ 0500           ;    x[0]=Card_Type;
+ 0500 20900000          lds R2,_Card_Type
+ 0504 2982              std y+1,R2
+ 0506                   .dbline 372
+ 0506           ;    i= Write_Card(CARD_TYPE_ADDER,x,1); 
+ 0506 81E0              ldi R24,1
+ 0508 8883              std y+0,R24
+ 050A 9E01              movw R18,R28
+ 050C 2F5F              subi R18,255  ; offset = 1
+ 050E 3F4F              sbci R19,255
+ 0510 00E5              ldi R16,80
+ 0512 81DF              xcall _Write_Card
+ 0514 A02E              mov R10,R16
+ 0516                   .dbline 373
+ 0516           ;    return i;
+ 0516                   .dbline -2
+ 0516           L114:
+ 0516                   .dbline 0 ; func end
+ 0516 2396              adiw R28,3
+ 0518 A990              ld R10,y+
+ 051A 0895              ret
+ 051C                   .dbsym r i 10 c
+ 051C                   .dbsym l x 1 A[2:2]c
+ 051C                   .dbend
+                        .area lit(rom, con, rel)
+ 0004           L117:
+ 0004 0000              .byte 0,0
+                        .area text(rom, con, rel)
+ 051C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 051C                   .dbfunc e Read_ID _Read_ID fc
+ 051C           ;              i -> R10
+ 051C           ;              x -> y+1
+                        .even
+ 051C           _Read_ID::
+ 051C AA92              st -y,R10
+ 051E 2397              sbiw R28,3
+ 0520                   .dbline -1
+ 0520                   .dbline 376
+ 0520           ; }
+ 0520           ; unsigned char Read_ID(void)
+ 0520           ;  {
+ 0520                   .dbline 378
+ 0520           ;    unsigned char i;
+ 0520           ;    unsigned char x[2]={0,0};
+ 0520 80E0              ldi R24,<L117
+ 0522 90E0              ldi R25,>L117
+ 0524 FE01              movw R30,R28
+ 0526 3196              adiw R30,1
+ 0528 02E0              ldi R16,2
+ 052A 10E0              ldi R17,0
+ 052C FA93              st -y,R31
+ 052E EA93              st -y,R30
+ 0530 9A93              st -y,R25
+ 0532 8A93              st -y,R24
+ 0534 0E940000          xcall asgncblkx
+ 0538                   .dbline 379
+ 0538           ;    i= Read_Card(CARD_ID_ADDER,x,1); 
+ 0538 81E0              ldi R24,1
+ 053A 8883              std y+0,R24
+ 053C 9E01              movw R18,R28
+ 053E 2F5F              subi R18,255  ; offset = 1
+ 0540 3F4F              sbci R19,255
+ 0542 01E5              ldi R16,81
+ 0544 30DF              xcall _Read_Card
+ 0546 A02E              mov R10,R16
+ 0548                   .dbline 380
+ 0548           ;    Card_ID=x[0];
+ 0548 2980              ldd R2,y+1
+ 054A 20920000          sts _Card_ID,R2
+ 054E                   .dbline 381
+ 054E           ;    return i;
+ 054E                   .dbline -2
+ 054E           L116:
+ 054E                   .dbline 0 ; func end
+ 054E 2396              adiw R28,3
+ 0550 A990              ld R10,y+
+ 0552 0895              ret
+ 0554                   .dbsym r i 10 c
+ 0554                   .dbsym l x 1 A[2:2]c
+ 0554                   .dbend
+                        .area lit(rom, con, rel)
+ 0006           L119:
+ 0006 0000              .byte 0,0
+                        .area text(rom, con, rel)
+ 0554                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 0554                   .dbfunc e Write_ID _Write_ID fc
+ 0554           ;              i -> R10
+ 0554           ;              x -> y+1
+                        .even
+ 0554           _Write_ID::
+ 0554 AA92              st -y,R10
+ 0556 2397              sbiw R28,3
+ 0558                   .dbline -1
+ 0558                   .dbline 384
+ 0558           ;  }
+ 0558           ; unsigned char Write_ID(void)
+ 0558           ;  {
+ 0558                   .dbline 386
+ 0558           ;    unsigned char i;
+ 0558           ;    unsigned char x[2]={0,0};
+ 0558 80E0              ldi R24,<L119
+ 055A 90E0              ldi R25,>L119
+ 055C FE01              movw R30,R28
+ 055E 3196              adiw R30,1
+ 0560 02E0              ldi R16,2
+ 0562 10E0              ldi R17,0
+ 0564 FA93              st -y,R31
+ 0566 EA93              st -y,R30
+ 0568 9A93              st -y,R25
+ 056A 8A93              st -y,R24
+ 056C 0E940000          xcall asgncblkx
+ 0570                   .dbline 387
+ 0570           ;    x[0]=Card_ID;
+ 0570 20900000          lds R2,_Card_ID
+ 0574 2982              std y+1,R2
+ 0576                   .dbline 388
+ 0576           ;    i= Write_Card(CARD_ID_ADDER,x,1); 
+ 0576 81E0              ldi R24,1
+ 0578 8883              std y+0,R24
+ 057A 9E01              movw R18,R28
+ 057C 2F5F              subi R18,255  ; offset = 1
+ 057E 3F4F              sbci R19,255
+ 0580 01E5              ldi R16,81
+ 0582 49DF              xcall _Write_Card
+ 0584 A02E              mov R10,R16
+ 0586                   .dbline 389
+ 0586           ;    return i;
+ 0586                   .dbline -2
+ 0586           L118:
+ 0586                   .dbline 0 ; func end
+ 0586 2396              adiw R28,3
+ 0588 A990              ld R10,y+
+ 058A 0895              ret
+ 058C                   .dbsym r i 10 c
+ 058C                   .dbsym l x 1 A[2:2]c
+ 058C                   .dbend
+                        .area lit(rom, con, rel)
+ 0008           L121:
+ 0008 0000              .byte 0,0
+                        .area text(rom, con, rel)
+ 058C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 058C                   .dbfunc e Read_counter _Read_counter fc
+ 058C           ;              i -> R10
+ 058C           ;              x -> y+1
+                        .even
+ 058C           _Read_counter::
+ 058C AA92              st -y,R10
+ 058E 2397              sbiw R28,3
+ 0590                   .dbline -1
+ 0590                   .dbline 392
+ 0590           ; }
+ 0590           ; unsigned char Read_counter(void)
+ 0590           ;  {
+ 0590                   .dbline 394
+ 0590           ;    unsigned char i;
+ 0590           ;    unsigned char x[2]={0,0};
+ 0590 80E0              ldi R24,<L121
+ 0592 90E0              ldi R25,>L121
+ 0594 FE01              movw R30,R28
+ 0596 3196              adiw R30,1
+ 0598 02E0              ldi R16,2
+ 059A 10E0              ldi R17,0
+ 059C FA93              st -y,R31
+ 059E EA93              st -y,R30
+ 05A0 9A93              st -y,R25
+ 05A2 8A93              st -y,R24
+ 05A4 0E940000          xcall asgncblkx
+ 05A8                   .dbline 395
+ 05A8           ;    i= Read_Card(CARD_COUNT_ADDER,x,2); 
+ 05A8 82E0              ldi R24,2
+ 05AA 8883              std y+0,R24
+ 05AC 9E01              movw R18,R28
+ 05AE 2F5F              subi R18,255  ; offset = 1
+ 05B0 3F4F              sbci R19,255
+ 05B2 02E5              ldi R16,82
+ 05B4 F8DE              xcall _Read_Card
+ 05B6 A02E              mov R10,R16
+ 05B8                   .dbline 396
+ 05B8           ;    Card_Counter=x[1];
+ 05B8 2A80              ldd R2,y+2
+ 05BA 3324              clr R3
+ 05BC 30920100          sts _Card_Counter+1,R3
+ 05C0 20920000          sts _Card_Counter,R2
+ 05C4                   .dbline 397
+ 05C4           ;    Card_Counter<<=8;
+ 05C4 322C              mov R3,R2
+ 05C6 2224              clr R2
+ 05C8 30920100          sts _Card_Counter+1,R3
+ 05CC 20920000          sts _Card_Counter,R2
+ 05D0                   .dbline 398
+ 05D0           ;    Card_Counter+=x[0];
+ 05D0 2980              ldd R2,y+1
+ 05D2 3324              clr R3
+ 05D4 40900000          lds R4,_Card_Counter
+ 05D8 50900100          lds R5,_Card_Counter+1
+ 05DC 420C              add R4,R2
+ 05DE 531C              adc R5,R3
+ 05E0 50920100          sts _Card_Counter+1,R5
+ 05E4 40920000          sts _Card_Counter,R4
+ 05E8                   .dbline 399
+ 05E8           ;    return i;
+ 05E8                   .dbline -2
+ 05E8           L120:
+ 05E8                   .dbline 0 ; func end
+ 05E8 2396              adiw R28,3
+ 05EA A990              ld R10,y+
+ 05EC 0895              ret
+ 05EE                   .dbsym r i 10 c
+ 05EE                   .dbsym l x 1 A[2:2]c
+ 05EE                   .dbend
+                        .area lit(rom, con, rel)
+ 000A           L124:
+ 000A 0000              .byte 0,0
+                        .area text(rom, con, rel)
+ 05EE                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 05EE                   .dbfunc e Write_counter _Write_counter fc
+ 05EE           ;              x -> y+1
+ 05EE           ;              i -> R10
+                        .even
+ 05EE           _Write_counter::
+ 05EE AA92              st -y,R10
+ 05F0 2397              sbiw R28,3
+ 05F2                   .dbline -1
+ 05F2                   .dbline 402
+ 05F2           ;  }
+ 05F2           ; unsigned char Write_counter(void)
+ 05F2           ;  {
+ 05F2                   .dbline 404
+ 05F2           ;    unsigned char i;
+ 05F2           ;    unsigned char x[2]={0,0};
+ 05F2 80E0              ldi R24,<L124
+ 05F4 90E0              ldi R25,>L124
+ 05F6 FE01              movw R30,R28
+ 05F8 3196              adiw R30,1
+ 05FA 02E0              ldi R16,2
+ 05FC 10E0              ldi R17,0
+ 05FE FA93              st -y,R31
+ 0600 EA93              st -y,R30
+ 0602 9A93              st -y,R25
+ 0604 8A93              st -y,R24
+ 0606 0E940000          xcall asgncblkx
+ 060A                   .dbline 408
+ 060A           ;    //x[0]=(char)(Card_Counter);
+ 060A           ;    //x[1]=(char)(Card_Counter>>8);
+ 060A           ;    //i= Write_Card(CARD_COUNT_ADDER,x,2); 
+ 060A           ;    Card_Data[2]=Card_Counter;
+ 060A 20900000          lds R2,_Card_Counter
+ 060E 30900100          lds R3,_Card_Counter+1
+ 0612 20920200          sts _Card_Data+2,R2
+ 0616                   .dbline 409
+ 0616           ;    Card_Data[3]=Card_Counter>>8;
+ 0616 232C              mov R2,R3
+ 0618 3324              clr R3
+ 061A 20920300          sts _Card_Data+3,R2
+ 061E                   .dbline 410
+ 061E           ;    i= Write_NEW_Card(CARD_TYPE_ADDER,Card_Data,4); 
+ 061E 84E0              ldi R24,4
+ 0620 8883              std y+0,R24
+ 0622 20E0              ldi R18,<_Card_Data
+ 0624 30E0              ldi R19,>_Card_Data
+ 0626 00E5              ldi R16,80
+ 0628 2EDF              xcall _Write_NEW_Card
+ 062A A02E              mov R10,R16
+ 062C                   .dbline 411
+ 062C           ;    return i;
+ 062C                   .dbline -2
+ 062C           L123:
+ 062C                   .dbline 0 ; func end
+ 062C 2396              adiw R28,3
+ 062E A990              ld R10,y+
+ 0630 0895              ret
+ 0632                   .dbsym l x 1 A[2:2]c
+ 0632                   .dbsym r i 10 c
+ 0632                   .dbend
+ 0632                   .dbfunc e Read_Card_Data _Read_Card_Data fc
+ 0632           ;              i -> R10
+                        .even
+ 0632           _Read_Card_Data::
+ 0632 AA92              st -y,R10
+ 0634 2197              sbiw R28,1
+ 0636                   .dbline -1
+ 0636                   .dbline 414
+ 0636           ;  }
+ 0636           ; unsigned char Read_Card_Data(void)
+ 0636           ;  {
+ 0636                   .dbline 416
+ 0636           ;    unsigned char i;
+ 0636           ;    i= Read_Card(CARD_TYPE_ADDER,Card_Data,4); 
+ 0636 84E0              ldi R24,4
+ 0638 8883              std y+0,R24
+ 063A 20E0              ldi R18,<_Card_Data
+ 063C 30E0              ldi R19,>_Card_Data
+ 063E 00E5              ldi R16,80
+ 0640 B2DE              xcall _Read_Card
+ 0642 A02E              mov R10,R16
+ 0644                   .dbline 417
+ 0644           ;    Card_Type=Card_Data[0];
+ 0644 20900000          lds R2,_Card_Data
+ 0648 20920000          sts _Card_Type,R2
+ 064C                   .dbline 418
+ 064C           ;    Card_ID=Card_Data[1];
+ 064C 20900100          lds R2,_Card_Data+1
+ 0650 20920000          sts _Card_ID,R2
+ 0654                   .dbline 419
+ 0654           ;    Card_Counter=Card_Data[3];
+ 0654 20900300          lds R2,_Card_Data+3
+ 0658 3324              clr R3
+ 065A 30920100          sts _Card_Counter+1,R3
+ 065E 20920000          sts _Card_Counter,R2
+ 0662                   .dbline 420
+ 0662           ;    Card_Counter<<=8;
+ 0662 20900000          lds R2,_Card_Counter
+ 0666 30900100          lds R3,_Card_Counter+1
+ 066A 322C              mov R3,R2
+ 066C 2224              clr R2
+ 066E 30920100          sts _Card_Counter+1,R3
+ 0672 20920000          sts _Card_Counter,R2
+ 0676                   .dbline 421
+ 0676           ;    Card_Counter+=Card_Data[2];
+ 0676 20900200          lds R2,_Card_Data+2
+ 067A 3324              clr R3
+ 067C 40900000          lds R4,_Card_Counter
+ 0680 50900100          lds R5,_Card_Counter+1
+ 0684 420C              add R4,R2
+ 0686 531C              adc R5,R3
+ 0688 50920100          sts _Card_Counter+1,R5
+ 068C 40920000          sts _Card_Counter,R4
+ 0690                   .dbline 422
+ 0690           ;    return i;
+ 0690                   .dbline -2
+ 0690           L127:
+ 0690                   .dbline 0 ; func end
+ 0690 2196              adiw R28,1
+ 0692 A990              ld R10,y+
+ 0694 0895              ret
+ 0696                   .dbsym r i 10 c
+ 0696                   .dbend
+ 0696                   .dbfunc e Write_Card_Data _Write_Card_Data fc
+ 0696           ;              i -> R10
+                        .even
+ 0696           _Write_Card_Data::
+ 0696 AA92              st -y,R10
+ 0698 2197              sbiw R28,1
+ 069A                   .dbline -1
+ 069A                   .dbline 425
+ 069A           ;  }
+ 069A           ; unsigned char Write_Card_Data(void)
+ 069A           ;  {
+ 069A                   .dbline 427
+ 069A           ;    unsigned char i;
+ 069A           ;    i= Write_NEW_Card(CARD_TYPE_ADDER,Card_Data,4); 
+ 069A 84E0              ldi R24,4
+ 069C 8883              std y+0,R24
+ 069E 20E0              ldi R18,<_Card_Data
+ 06A0 30E0              ldi R19,>_Card_Data
+ 06A2 00E5              ldi R16,80
+ 06A4 F0DE              xcall _Write_NEW_Card
+ 06A6 A02E              mov R10,R16
+ 06A8                   .dbline 428
+ 06A8           ;    return i;
+ 06A8                   .dbline -2
+ 06A8           L131:
+ 06A8                   .dbline 0 ; func end
+ 06A8 2196              adiw R28,1
+ 06AA A990              ld R10,y+
+ 06AC 0895              ret
+ 06AE                   .dbsym r i 10 c
+ 06AE                   .dbend
+                        .area data(ram, con, rel)
+ 0006                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 0006           L133:
+ 0006                   .blkb 1
+                        .area idata
+ 0006 00                .byte 0
+                        .area data(ram, con, rel)
+ 0007                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+                        .area text(rom, con, rel)
+ 06AE                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\card.c
+ 06AE                   .dbfunc e DisCardInfo _DisCardInfo fV
+ 06AE                   .dbsym s i L133 c
+                        .even
+ 06AE           _DisCardInfo::
+ 06AE                   .dbline -1
+ 06AE                   .dbline 431
+ 06AE           ;  }
+ 06AE           ; void DisCardInfo(void)
+ 06AE           ; {
+ 06AE                   .dbline 433
+ 06AE           ;   static unsigned char i=0;
+ 06AE           ;   if((Card_Counter==0)||((User_ID!=Card_ID)&&(Card_Type<3)))
+ 06AE 20900000          lds R2,_Card_Counter
+ 06B2 30900100          lds R3,_Card_Counter+1
+ 06B6 2220              tst R2
+ 06B8 11F4              brne X31
+ 06BA 3320              tst R3
+ 06BC 51F0              breq L136
+ 06BE           X31:
+ 06BE 20900000          lds R2,_Card_ID
+ 06C2 30900000          lds R3,_User_ID
+ 06C6 3214              cp R3,R2
+ 06C8 81F0              breq L134
+ 06CA           X32:
+ 06CA 80910000          lds R24,_Card_Type
+ 06CE 8330              cpi R24,3
+ 06D0 60F4              brsh L134
+ 06D2           X33:
+ 06D2           L136:
+ 06D2                   .dbline 434
+ 06D2           ;   {
+ 06D2                   .dbline 435
+ 06D2           ;       Sound_Count=SoundSet*i;
+ 06D2 10910600          lds R17,L133
+ 06D6 00910000          lds R16,_SoundSet
+ 06DA 0103              mulsu R16,R17
+ 06DC 00920000          sts _Sound_Count,R0
+ 06E0                   .dbline 436
+ 06E0           ;       i=1-i;
+ 06E0 81E0              ldi R24,1
+ 06E2 811B              sub R24,R17
+ 06E4 80930600          sts L133,R24
+ 06E8                   .dbline 438
+ 06E8           ; 
+ 06E8           ;   }
+ 06E8 03C0              xjmp L135
+ 06EA           L134:
+ 06EA                   .dbline 439
+ 06EA           ;   else i=1;
+ 06EA 81E0              ldi R24,1
+ 06EC 80930600          sts L133,R24
+ 06F0           L135:
+ 06F0                   .dbline -2
+ 06F0           L132:
+ 06F0                   .dbline 0 ; func end
+ 06F0 0895              ret
+ 06F2                   .dbend
+ 06F2                   .dbfunc e Check_Card _Check_Card fV
+                        .even
+ 06F2           _Check_Card::
+ 06F2 4A93              st -y,R20
+ 06F4 5A93              st -y,R21
+ 06F6                   .dbline -1
+ 06F6                   .dbline 442
+ 06F6           ; }
+ 06F6           ; void Check_Card(void)
+ 06F6           ; {
+ 06F6                   .dbline 443
+ 06F6           ;   if(Card_Event==CARD_NULL)
+ 06F6 20900000          lds R2,_Card_Event
+ 06FA 2220              tst R2
+ 06FC 91F4              brne L138
+ 06FE           X34:
+ 06FE                   .dbline 444
+ 06FE           ;   {
+ 06FE                   .dbline 445
+ 06FE           ;     if(0==CARD_SW) Card_Event=CARD_IN;
+ 06FE 80E0              ldi R24,0
+ 0700 99B3              in R25,0x19
+ 0702 9072              andi R25,32
+ 0704 8917              cp R24,R25
+ 0706 18F4              brsh L142
+ 0708           X35:
+ 0708 41E0              ldi R20,1
+ 070A 50E0              ldi R21,0
+ 070C 02C0              xjmp L143
+ 070E           L142:
+ 070E 4427              clr R20
+ 0710 5527              clr R21
+ 0712           L143:
+ 0712 4030              cpi R20,0
+ 0714 4507              cpc R20,R21
+ 0716 09F0              breq X44
+ 0718 4DC0              xjmp L139
+ 071A           X44:
+ 071A           X36:
+ 071A                   .dbline 445
+ 071A 81E0              ldi R24,1
+ 071C 80930000          sts _Card_Event,R24
+ 0720                   .dbline 446
+ 0720           ;   }
+ 0720 49C0              xjmp L139
+ 0722           L138:
+ 0722                   .dbline 447
+ 0722           ;   else if(Card_Event==CARD_IN)
+ 0722 80910000          lds R24,_Card_Event
+ 0726 8130              cpi R24,1
+ 0728 29F4              brne L144
+ 072A           X37:
+ 072A                   .dbline 448
+ 072A           ;   {
+ 072A                   .dbline 449
+ 072A           ;     Card_Event=CARD_OK;
+ 072A 82E0              ldi R24,2
+ 072C 80930000          sts _Card_Event,R24
+ 0730                   .dbline 450
+ 0730           ;     Read_Card_Data();
+ 0730 80DF              xcall _Read_Card_Data
+ 0732                   .dbline 451
+ 0732           ;   }
+ 0732 40C0              xjmp L145
+ 0734           L144:
+ 0734                   .dbline 452
+ 0734           ;   else if(Card_Event==CARD_OK)
+ 0734 80910000          lds R24,_Card_Event
+ 0738 8230              cpi R24,2
+ 073A 11F5              brne L146
+ 073C           X38:
+ 073C                   .dbline 453
+ 073C           ;   {
+ 073C                   .dbline 454
+ 073C           ;     if(0==CARD_SW)
+ 073C 80E0              ldi R24,0
+ 073E 99B3              in R25,0x19
+ 0740 9072              andi R25,32
+ 0742 8917              cp R24,R25
+ 0744 18F4              brsh L150
+ 0746           X39:
+ 0746 41E0              ldi R20,1
+ 0748 50E0              ldi R21,0
+ 074A 02C0              xjmp L151
+ 074C           L150:
+ 074C 4427              clr R20
+ 074E 5527              clr R21
+ 0750           L151:
+ 0750 4030              cpi R20,0
+ 0752 4507              cpc R20,R21
+ 0754 89F4              brne L148
+ 0756           X40:
+ 0756                   .dbline 455
+ 0756           ;       {
+ 0756                   .dbline 456
+ 0756           ;       if(Card_Command==1)
+ 0756 80910000          lds R24,_Card_Command
+ 075A 8130              cpi R24,1
+ 075C 21F4              brne L152
+ 075E           X41:
+ 075E                   .dbline 457
+ 075E           ;         {
+ 075E                   .dbline 458
+ 075E           ;           Card_Info=Write_counter();
+ 075E 47DF              xcall _Write_counter
+ 0760 00930000          sts _Card_Info,R16
+ 0764                   .dbline 459
+ 0764           ;         }
+ 0764 05C0              xjmp L153
+ 0766           L152:
+ 0766                   .dbline 460
+ 0766           ;         else if(Card_Command==2)
+ 0766 80910000          lds R24,_Card_Command
+ 076A 8230              cpi R24,2
+ 076C 09F4              brne L154
+ 076E           X42:
+ 076E                   .dbline 461
+ 076E           ;         {
+ 076E                   .dbline 462
+ 076E           ;           Write_Card_Data();
+ 076E 93DF              xcall _Write_Card_Data
+ 0770                   .dbline 463
+ 0770           ;         }
+ 0770           L154:
+ 0770           L153:
+ 0770                   .dbline 464
+ 0770           ;         Card_Command=0;
+ 0770 2224              clr R2
+ 0772 20920000          sts _Card_Command,R2
+ 0776                   .dbline 465
+ 0776           ;       }
+ 0776 1EC0              xjmp L147
+ 0778           L148:
+ 0778                   .dbline 466
+ 0778           ;       else Card_Event=CARD_OUT;
+ 0778 83E0              ldi R24,3
+ 077A 80930000          sts _Card_Event,R24
+ 077E                   .dbline 467
+ 077E           ;   }
+ 077E 1AC0              xjmp L147
+ 0780           L146:
+ 0780                   .dbline 468
+ 0780           ;   else if(Card_Event==CARD_OUT)
+ 0780 80910000          lds R24,_Card_Event
+ 0784 8330              cpi R24,3
+ 0786 B1F4              brne L156
+ 0788           X43:
+ 0788                   .dbline 469
+ 0788           ;   {
+ 0788                   .dbline 470
+ 0788           ;     Card_Event=CARD_NULL;
+ 0788 2224              clr R2
+ 078A 20920000          sts _Card_Event,R2
+ 078E                   .dbline 471
+ 078E           ;     Card_Info=0;
+ 078E 20920000          sts _Card_Info,R2
+ 0792                   .dbline 472
+ 0792           ;       Card_Type=0;
+ 0792 20920000          sts _Card_Type,R2
+ 0796                   .dbline 473
+ 0796           ;       Card_ID=0;
+ 0796 20920000          sts _Card_ID,R2
+ 079A                   .dbline 474
+ 079A           ;       Card_Counter=0;
+ 079A 3324              clr R3
+ 079C 30920100          sts _Card_Counter+1,R3
+ 07A0 20920000          sts _Card_Counter,R2
+ 07A4                   .dbline 475
+ 07A4           ;       Card_Data[0]=0;
+ 07A4 20920000          sts _Card_Data,R2
+ 07A8                   .dbline 476
+ 07A8           ;     Card_Data[1]=0;
+ 07A8 20920100          sts _Card_Data+1,R2
+ 07AC                   .dbline 477
+ 07AC           ;     Card_Data[2]=0;
+ 07AC 20920200          sts _Card_Data+2,R2
+ 07B0                   .dbline 478
+ 07B0           ;     Card_Data[3]=0;
+ 07B0 20920300          sts _Card_Data+3,R2
+ 07B4                   .dbline 479
+ 07B4           ;   }
+ 07B4           L156:
+ 07B4           L147:
+ 07B4           L145:
+ 07B4           L139:
+ 07B4                   .dbline 480
+ 07B4           ;   DisCardInfo();
+ 07B4 7CDF              xcall _DisCardInfo
+ 07B6                   .dbline -2
+ 07B6           L137:
+ 07B6                   .dbline 0 ; func end
+ 07B6 5991              ld R21,y+
+ 07B8 4991              ld R20,y+
+ 07BA 0895              ret
+ 07BC                   .dbend
+ 07BC           ; }
+ 07BC           ; 

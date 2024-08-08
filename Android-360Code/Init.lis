@@ -1,0 +1,1095 @@
+                        .module Init.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile App\Init.c
+                        .area lit(rom, con, rel)
+ 0000           _Ver::
+ 0000 444957454E20312E3000      .byte 'D,'I,'W,'E,'N,32,49,46,48,0
+ 000A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\Init.c
+ 000A                   .dbsym e Ver _Ver A[10:10]kc
+ 000A           _HARDVer::
+ 000A 46555941204D414E2D3100    .byte 'F,'U,'Y,'A,32,'M,'A,'N,45,49,0
+ 0015                   .dbsym e HARDVer _HARDVer A[11:11]kc
+ 0015           _HEXVer::
+ 0015 4D45443336302E322E3100    .byte 'M,'E,'D,51,54,48,46,50,46,49,0
+ 0020                   .dbsym e HEXVer _HEXVer A[11:11]kc
+                        .area data(ram, con, rel)
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\Init.c
+ 0000           _lcd_ver::
+ 0000                   .blkb 1
+                        .area idata
+ 0000 00                .byte 0
+                        .area data(ram, con, rel)
+ 0001                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\Init.c
+ 0001                   .blkb 3
+                        .area idata
+ 0001 000000            .byte 0,0,0
+                        .area data(ram, con, rel)
+ 0004                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\Init.c
+ 0004                   .dbsym e lcd_ver _lcd_ver A[4:4]c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\Init.c
+ 0000                   .dbfunc e uart0_init _uart0_init fV
+                        .even
+ 0000           _uart0_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 21
+ 0000           ; 
+ 0000           ; #include "includes.h"
+ 0000           ; //const unsigned char Ver[]={"MCU Ver:MED360.1.6.150616\0"};
+ 0000           ; //const unsigned char Ver[]={"MCU Ver:MED360.1.8.180329\0"};
+ 0000           ; //const unsigned char Ver[]={"MCU Ver:MED360.1.9.180510\0"};//增加后台射频百分比调节
+ 0000           ;   const unsigned char Ver[]={"DIWEN 1.0"};//迪文软件版本
+ 0000           ;   const unsigned char HARDVer[]={"FUYA MAN-1"};//硬件版本
+ 0000           ;   const unsigned char HEXVer[]={"MED360.2.1"};//软件版本
+ 0000           ; 
+ 0000           ; //1.后台增加工作累计时间清零功能
+ 0000           ; //2.后台增加取消所有工作模式，延时自动进入界面功能
+ 0000           ; //3.后台增加paras display功能，开启关闭压力、时间和累计工作时间显示
+ 0000           ; //4.后台增加version显示功能
+ 0000           ; //5.后台增加出厂复位功能
+ 0000           ; // by hanjingyang 20170920
+ 0000           ; //const unsigned char Ver[]={"System version v2.2.10.111001_beta\0"};
+ 0000           ; 
+ 0000           ; char lcd_ver[4]={0};
+ 0000           ; 
+ 0000           ; void uart0_init(void)
+ 0000           ; {
+ 0000                   .dbline 22
+ 0000           ;  UCSR0B = 0x00;                                                                                       //disable while setting baud rate
+ 0000 2224              clr R2
+ 0002 2AB8              out 0xa,R2
+ 0004                   .dbline 23
+ 0004           ;  UCSR0A = 0x00;
+ 0004 2BB8              out 0xb,R2
+ 0006                   .dbline 24
+ 0006           ;  UCSR0C = 0x06;
+ 0006 86E0              ldi R24,6
+ 0008 80939500          sts 149,R24
+ 000C                   .dbline 25
+ 000C           ;  UBRR0L = 0x19;  //0x19; //set baud rate lo 38400 (0.2%)
+ 000C 89E1              ldi R24,25
+ 000E 89B9              out 0x9,R24
+ 0010                   .dbline 26
+ 0010           ;  UBRR0H = 0x00; //set baud rate hi
+ 0010 20929000          sts 144,R2
+ 0014                   .dbline 27
+ 0014           ;  UCSR0B = 0xD8;
+ 0014 88ED              ldi R24,216
+ 0016 8AB9              out 0xa,R24
+ 0018                   .dbline -2
+ 0018           L5:
+ 0018                   .dbline 0 ; func end
+ 0018 0895              ret
+ 001A                   .dbend
+ 001A                   .dbfunc e uart1_init _uart1_init fV
+                        .even
+ 001A           _uart1_init::
+ 001A                   .dbline -1
+ 001A                   .dbline 39
+ 001A           ;  //UBRR0L = 0x10; //set baud rate lo 57600(2.1%)
+ 001A           ;  //UBRR0H = 0x00; //set baud rate hi
+ 001A           ;  //UCSR0B = 0xD8;
+ 001A           ;  //UBRR0L = 0x0C; //set baud rate lo 76800 (0.2%)
+ 001A           ;  //UBRR0H = 0x00; //set baud rate hi
+ 001A           ;  //UCSR0B = 0x18;
+ 001A           ;  //UBRR0L = 0x8;  //0x19; //set baud rate lo  115200(3.7%)
+ 001A           ;  //UBRR0H = 0x00;                             //set baud rate hi
+ 001A           ;  //UCSR0B = 0xD8;
+ 001A           ; }
+ 001A           ; void uart1_init(void)
+ 001A           ; {
+ 001A                   .dbline 40
+ 001A           ;  UCSR1B = 0x00; //disable while setting baud rate
+ 001A 2224              clr R2
+ 001C 20929A00          sts 154,R2
+ 0020                   .dbline 41
+ 0020           ;  UCSR1A = 0x00;
+ 0020 20929B00          sts 155,R2
+ 0024                   .dbline 42
+ 0024           ;  UCSR1C = 0x06;
+ 0024 86E0              ldi R24,6
+ 0026 80939D00          sts 157,R24
+ 002A                   .dbline 43
+ 002A           ;  UBRR1L = 0x67; //set baud rate lo 9600
+ 002A 87E6              ldi R24,103
+ 002C 80939900          sts 153,R24
+ 0030                   .dbline 44
+ 0030           ;  UBRR1H = 0x00; //set baud rate hi
+ 0030 20929800          sts 152,R2
+ 0034                   .dbline 45
+ 0034           ;  UCSR1B = 0xD8;
+ 0034 88ED              ldi R24,216
+ 0036 80939A00          sts 154,R24
+ 003A                   .dbline -2
+ 003A           L6:
+ 003A                   .dbline 0 ; func end
+ 003A 0895              ret
+ 003C                   .dbend
+ 003C                   .dbfunc e timer0_init _timer0_init fV
+                        .even
+ 003C           _timer0_init::
+ 003C                   .dbline -1
+ 003C                   .dbline 60
+ 003C           ;  //UBRR1L = 0x19;  //0x19; //set baud rate lo  38400 (0.2%)
+ 003C           ;  //UBRR1H = 0x00; //set baud rate hi
+ 003C           ;  //UCSR1B = 0xD8;
+ 003C           ;  //UBRR1L = 0x10; //set baud rate lo 57600(2.1%)
+ 003C           ;  //UBRR1H = 0x00; //set baud rate hi
+ 003C           ;  //UCSR1B = 0xD8;
+ 003C           ;  //UBRR1L = 0x0C; //set baud rate lo 76800(0.2%)
+ 003C           ;  //UBRR1H = 0x00; //set baud rate hi
+ 003C           ;  //UCSR1B = 0x18;
+ 003C           ;  //UBRR1L = 0x08; //set baud rate lo 115200(3.7%)
+ 003C           ;  //UBRR1H = 0x00; //set baud rate hi
+ 003C           ;  //UCSR1B = 0xD8;
+ 003C           ; }
+ 003C           ; void timer0_init(void)
+ 003C           ; {
+ 003C                   .dbline 61
+ 003C           ;   TCCR0 = 0x00; //stop
+ 003C 2224              clr R2
+ 003E 23BE              out 0x33,R2
+ 0040                   .dbline 62
+ 0040           ;   ASSR  = 0x00; //set async mode
+ 0040 20BE              out 0x30,R2
+ 0042                   .dbline 63
+ 0042           ;   TCNT0 = 0x00; //set count
+ 0042 22BE              out 0x32,R2
+ 0044                   .dbline 64
+ 0044           ;   OCR0  = 0x9C;
+ 0044 8CE9              ldi R24,156
+ 0046 81BF              out 0x31,R24
+ 0048                   .dbline 65
+ 0048           ;   TCCR0 = 0x07; //start timer
+ 0048 87E0              ldi R24,7
+ 004A 83BF              out 0x33,R24
+ 004C                   .dbline -2
+ 004C           L7:
+ 004C                   .dbline 0 ; func end
+ 004C 0895              ret
+ 004E                   .dbend
+ 004E                   .dbfunc e timer1_init _timer1_init fV
+                        .even
+ 004E           _timer1_init::
+ 004E                   .dbline -1
+ 004E                   .dbline 68
+ 004E           ; }
+ 004E           ; void timer1_init(void)
+ 004E           ; {
+ 004E                   .dbline 69
+ 004E           ;   TCCR1B = 0x00; //stop
+ 004E 2224              clr R2
+ 0050 2EBC              out 0x2e,R2
+ 0052                   .dbline 70
+ 0052           ;   TCNT1H = 0xFB; //setup
+ 0052 8BEF              ldi R24,251
+ 0054 8DBD              out 0x2d,R24
+ 0056                   .dbline 71
+ 0056           ;   TCNT1L = 0x1E;
+ 0056 8EE1              ldi R24,30
+ 0058 8CBD              out 0x2c,R24
+ 005A                   .dbline 72
+ 005A           ;   OCR1AH = 0x04;
+ 005A 84E0              ldi R24,4
+ 005C 8BBD              out 0x2b,R24
+ 005E                   .dbline 73
+ 005E           ;   OCR1AL = 0xE2;
+ 005E 82EE              ldi R24,226
+ 0060 8ABD              out 0x2a,R24
+ 0062                   .dbline 74
+ 0062           ;   OCR1BH = 0x04;
+ 0062 84E0              ldi R24,4
+ 0064 89BD              out 0x29,R24
+ 0066                   .dbline 75
+ 0066           ;   OCR1BL = 0xE2;
+ 0066 82EE              ldi R24,226
+ 0068 88BD              out 0x28,R24
+ 006A                   .dbline 76
+ 006A           ;   OCR1CH = 0x04;
+ 006A 84E0              ldi R24,4
+ 006C 80937900          sts 121,R24
+ 0070                   .dbline 77
+ 0070           ;   OCR1CL = 0xE2;
+ 0070 82EE              ldi R24,226
+ 0072 80937800          sts 120,R24
+ 0076                   .dbline 78
+ 0076           ;   ICR1H  = 0x04;
+ 0076 84E0              ldi R24,4
+ 0078 87BD              out 0x27,R24
+ 007A                   .dbline 79
+ 007A           ;   ICR1L  = 0xE2;
+ 007A 82EE              ldi R24,226
+ 007C 86BD              out 0x26,R24
+ 007E                   .dbline 80
+ 007E           ;   TCCR1A = 0x00;
+ 007E 2FBC              out 0x2f,R2
+ 0080                   .dbline 81
+ 0080           ;   TCCR1B = 0x03; //start Timer
+ 0080 83E0              ldi R24,3
+ 0082 8EBD              out 0x2e,R24
+ 0084                   .dbline -2
+ 0084           L8:
+ 0084                   .dbline 0 ; func end
+ 0084 0895              ret
+ 0086                   .dbend
+ 0086                   .dbfunc e adc_init _adc_init fV
+                        .even
+ 0086           _adc_init::
+ 0086                   .dbline -1
+ 0086                   .dbline 84
+ 0086           ; }
+ 0086           ; void adc_init(void)
+ 0086           ; {
+ 0086                   .dbline 85
+ 0086           ;  ADCSRA = 0x00;   //disable adc
+ 0086 2224              clr R2
+ 0088 26B8              out 0x6,R2
+ 008A                   .dbline 86
+ 008A           ;  ADMUX=0xe0;
+ 008A 80EE              ldi R24,224
+ 008C 87B9              out 0x7,R24
+ 008E                   .dbline 87
+ 008E           ;  ACSR   = 0x80;
+ 008E 80E8              ldi R24,128
+ 0090 88B9              out 0x8,R24
+ 0092                   .dbline 88
+ 0092           ;  ADCSRA = 0x87;
+ 0092 87E8              ldi R24,135
+ 0094 86B9              out 0x6,R24
+ 0096                   .dbline -2
+ 0096           L9:
+ 0096                   .dbline 0 ; func end
+ 0096 0895              ret
+ 0098                   .dbend
+ 0098                   .dbfunc e timer2_init _timer2_init fV
+                        .even
+ 0098           _timer2_init::
+ 0098                   .dbline -1
+ 0098                   .dbline 95
+ 0098           ; }
+ 0098           ; //TIMER2 initialize - prescale:64
+ 0098           ; // WGM: PWM Fast
+ 0098           ; // desired value: 500Hz
+ 0098           ; // actual value: 488.281Hz (2.4%)
+ 0098           ; void timer2_init(void)
+ 0098           ; {
+ 0098                   .dbline 96
+ 0098           ;  TCCR2 = 0x00;     //stop
+ 0098 2224              clr R2
+ 009A 25BC              out 0x25,R2
+ 009C                   .dbline 97
+ 009C           ;  TCNT2 = 0x01;       //setup01
+ 009C 81E0              ldi R24,1
+ 009E 84BD              out 0x24,R24
+ 00A0                   .dbline 98
+ 00A0           ;  OCR2  = 0xFF;
+ 00A0 8FEF              ldi R24,255
+ 00A2 83BD              out 0x23,R24
+ 00A4                   .dbline -2
+ 00A4           L10:
+ 00A4                   .dbline 0 ; func end
+ 00A4 0895              ret
+ 00A6                   .dbend
+ 00A6                   .dbfunc e timer3_init _timer3_init fV
+                        .even
+ 00A6           _timer3_init::
+ 00A6                   .dbline -1
+ 00A6                   .dbline 107
+ 00A6           ; 
+ 00A6           ;  //TCCR2 = 0x79; 
+ 00A6           ; }
+ 00A6           ; //TIMER3 initialize - prescale:64
+ 00A6           ; // WGM: 1) PWM 8bit Phz correct, TOP=0x00FF
+ 00A6           ; // desired value: 245Hz
+ 00A6           ; // actual value: 245.098Hz (0.0%)
+ 00A6           ; void timer3_init(void)
+ 00A6           ; {
+ 00A6                   .dbline 108
+ 00A6           ;  TCCR3B = 0x00; //stop
+ 00A6 2224              clr R2
+ 00A8 20928A00          sts 138,R2
+ 00AC                   .dbline 109
+ 00AC           ;  TCNT3H = 0xFF; //setup
+ 00AC 8FEF              ldi R24,255
+ 00AE 80938900          sts 137,R24
+ 00B2                   .dbline 110
+ 00B2           ;  TCNT3L = 0x01;
+ 00B2 81E0              ldi R24,1
+ 00B4 80938800          sts 136,R24
+ 00B8                   .dbline 111
+ 00B8           ;  OCR3AH = 0x00;
+ 00B8 20928700          sts 135,R2
+ 00BC                   .dbline 112
+ 00BC           ;  OCR3AL = 0xFF;
+ 00BC 8FEF              ldi R24,255
+ 00BE 80938600          sts 134,R24
+ 00C2                   .dbline 113
+ 00C2           ;  OCR3BH = 0x00;
+ 00C2 20928500          sts 133,R2
+ 00C6                   .dbline 114
+ 00C6           ;  OCR3BL = 0xFF;
+ 00C6 80938400          sts 132,R24
+ 00CA                   .dbline 115
+ 00CA           ;  OCR3CH = 0x00;
+ 00CA 20928300          sts 131,R2
+ 00CE                   .dbline 116
+ 00CE           ;  OCR3CL = 0xFF;
+ 00CE 80938200          sts 130,R24
+ 00D2                   .dbline 117
+ 00D2           ;  ICR3H  = 0x00;
+ 00D2 20928100          sts 129,R2
+ 00D6                   .dbline 118
+ 00D6           ;  ICR3L  = 0xFF;
+ 00D6 80938000          sts 128,R24
+ 00DA                   .dbline 119
+ 00DA           ;  TCCR3A = 0x01;
+ 00DA 81E0              ldi R24,1
+ 00DC 80938B00          sts 139,R24
+ 00E0                   .dbline 120
+ 00E0           ;  TCCR3B = 0x0D; //start Timer
+ 00E0 8DE0              ldi R24,13
+ 00E2 80938A00          sts 138,R24
+ 00E6                   .dbline -2
+ 00E6           L11:
+ 00E6                   .dbline 0 ; func end
+ 00E6 0895              ret
+ 00E8                   .dbend
+ 00E8                   .dbfunc e port_init _port_init fV
+                        .even
+ 00E8           _port_init::
+ 00E8                   .dbline -1
+ 00E8                   .dbline 123
+ 00E8           ; }
+ 00E8           ; void port_init(void)
+ 00E8           ; {
+ 00E8                   .dbline 124
+ 00E8           ;  PORTA = 0xFF;
+ 00E8 8FEF              ldi R24,255
+ 00EA 8BBB              out 0x1b,R24
+ 00EC                   .dbline 125
+ 00EC           ;  DDRA  = 0xFF;
+ 00EC 8ABB              out 0x1a,R24
+ 00EE                   .dbline 126
+ 00EE           ;  PORTB = 0xFF;
+ 00EE 88BB              out 0x18,R24
+ 00F0                   .dbline 127
+ 00F0           ;  DDRB  = 0xFF;
+ 00F0 87BB              out 0x17,R24
+ 00F2                   .dbline 128
+ 00F2           ;  PORTC = 0xFF;   
+ 00F2 85BB              out 0x15,R24
+ 00F4                   .dbline 129
+ 00F4           ;  DDRC  = 0xFF;
+ 00F4 84BB              out 0x14,R24
+ 00F6                   .dbline 130
+ 00F6           ;  PORTD = 0xFF;
+ 00F6 82BB              out 0x12,R24
+ 00F8                   .dbline 131
+ 00F8           ;  DDRD  = 0x0F;
+ 00F8 8FE0              ldi R24,15
+ 00FA 81BB              out 0x11,R24
+ 00FC                   .dbline 132
+ 00FC           ;  PORTE = 0xFF;
+ 00FC 8FEF              ldi R24,255
+ 00FE 83B9              out 0x3,R24
+ 0100                   .dbline 133
+ 0100           ;  DDRE  = 0xFF;
+ 0100 82B9              out 0x2,R24
+ 0102                   .dbline 134
+ 0102           ;  PORTF = 0xFF;
+ 0102 80936200          sts 98,R24
+ 0106                   .dbline 135
+ 0106           ;  DDRF  = 0xF0;
+ 0106 80EF              ldi R24,240
+ 0108 80936100          sts 97,R24
+ 010C                   .dbline 136
+ 010C           ;  PORTG = 0xFF;
+ 010C 8FEF              ldi R24,255
+ 010E 80936500          sts 101,R24
+ 0112                   .dbline 137
+ 0112           ;  DDRG  = 0xFE;
+ 0112 8EEF              ldi R24,254
+ 0114 80936400          sts 100,R24
+ 0118                   .dbline 138
+ 0118           ;  RXD;
+ 0118 9198              cbi 0x12,1
+ 011A                   .dbline -2
+ 011A           L12:
+ 011A                   .dbline 0 ; func end
+ 011A 0895              ret
+ 011C                   .dbend
+ 011C                   .dbfunc e init_devices _init_devices fV
+                        .even
+ 011C           _init_devices::
+ 011C                   .dbline -1
+ 011C                   .dbline 142
+ 011C           ; }
+ 011C           ; //call this routine to initialize all peripherals
+ 011C           ; void init_devices(void)
+ 011C           ; {   
+ 011C                   .dbline 143
+ 011C           ;  CLI(); 
+ 011C F894              cli
+ 011E                   .dbline 144
+ 011E           ;  XDIV  = 0x00;                                          //xtal divider
+ 011E 2224              clr R2
+ 0120 2CBE              out 0x3c,R2
+ 0122                   .dbline 145
+ 0122           ;  XMCRA = 0x00;                                          //external memory
+ 0122 20926D00          sts 109,R2
+ 0126                   .dbline 146
+ 0126           ;  XMCRB = 0x00;
+ 0126 20926C00          sts 108,R2
+ 012A                   .dbline 147
+ 012A           ;  port_init();       
+ 012A DEDF              xcall _port_init
+ 012C                   .dbline 148
+ 012C           ;  adc_init();                                                    //uart0_init();
+ 012C ACDF              xcall _adc_init
+ 012E                   .dbline 149
+ 012E           ;  uart0_init();
+ 012E 68DF              xcall _uart0_init
+ 0130                   .dbline 150
+ 0130           ;  uart1_init();
+ 0130 74DF              xcall _uart1_init
+ 0132                   .dbline 151
+ 0132           ;  timer0_init();
+ 0132 84DF              xcall _timer0_init
+ 0134                   .dbline 152
+ 0134           ;  timer1_init();
+ 0134 8CDF              xcall _timer1_init
+ 0136                   .dbline 153
+ 0136           ;  timer2_init();
+ 0136 B0DF              xcall _timer2_init
+ 0138                   .dbline 154
+ 0138           ;  timer3_init();
+ 0138 B6DF              xcall _timer3_init
+ 013A                   .dbline 155
+ 013A           ;  MCUCR = 0x00;
+ 013A 2224              clr R2
+ 013C 25BE              out 0x35,R2
+ 013E                   .dbline 156
+ 013E           ;  EICRA = 0x00;                                          //extended ext ints
+ 013E 20926A00          sts 106,R2
+ 0142                   .dbline 157
+ 0142           ;  EICRB = 0x00;                                          //extended ext ints
+ 0142 2ABE              out 0x3a,R2
+ 0144                   .dbline 158
+ 0144           ;  EIMSK = 0x00;
+ 0144 29BE              out 0x39,R2
+ 0146                   .dbline 159
+ 0146           ;  TIMSK = 0xc2;                                        //timer interrupt sources
+ 0146 82EC              ldi R24,194
+ 0148 87BF              out 0x37,R24
+ 014A                   .dbline 161
+ 014A           ; // cool_time =25;
+ 014A           ;  ETIMSK = 0x06;   
+ 014A 86E0              ldi R24,6
+ 014C 80937D00          sts 125,R24
+ 0150                   .dbline 162
+ 0150           ;  start_pwm();                                    //extended timer interrupt sources       
+ 0150 0E940000          xcall _start_pwm
+ 0154                   .dbline 163
+ 0154           ;  SEI();                                                                                 //re-enable interrupts
+ 0154 7894              sei
+ 0156                   .dbline -2
+ 0156           L13:
+ 0156                   .dbline 0 ; func end
+ 0156 0895              ret
+ 0158                   .dbend
+                        .area data(ram, con, rel)
+ 0004                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\Init.c
+ 0004           L15:
+ 0004                   .blkb 1
+                        .area idata
+ 0004 00                .byte 0
+                        .area data(ram, con, rel)
+ 0005                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\Init.c
+                        .area text(rom, con, rel)
+ 0158                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\Init.c
+ 0158                   .dbfunc e cartoon _cartoon fV
+ 0158                   .dbsym s x L15 c
+                        .even
+ 0158           _cartoon::
+ 0158                   .dbline -1
+ 0158                   .dbline 166
+ 0158           ; }
+ 0158           ; void cartoon(void)
+ 0158           ; {
+ 0158                   .dbline 168
+ 0158           ;   static unsigned char x=0;
+ 0158           ;   x=(x+1)%32;
+ 0158 10E2              ldi R17,32
+ 015A 00910400          lds R16,L15
+ 015E 0F5F              subi R16,255    ; addi 1
+ 0160 0E940000          xcall mod8u
+ 0164 00930400          sts L15,R16
+ 0168                   .dbline 170
+ 0168           ;   //cut_pic(0,x,300,170,500,530,300,170);
+ 0168           ;   dis_pic(x);
+ 0168 0E940000          xcall _dis_pic
+ 016C                   .dbline 171
+ 016C           ;   Sound_Count=5;
+ 016C 85E0              ldi R24,5
+ 016E 80930000          sts _Sound_Count,R24
+ 0172                   .dbline -2
+ 0172           L14:
+ 0172                   .dbline 0 ; func end
+ 0172 0895              ret
+ 0174                   .dbend
+ 0174                   .dbfunc e DisVer _DisVer fV
+                        .even
+ 0174           _DisVer::
+ 0174 2C97              sbiw R28,12
+ 0176                   .dbline -1
+ 0176                   .dbline 174
+ 0176           ; }
+ 0176           ; void DisVer(void)
+ 0176           ; {
+ 0176                   .dbline 175
+ 0176           ;       Text[0]='L';
+ 0176 8CE4              ldi R24,76
+ 0178 80930000          sts _Text,R24
+ 017C                   .dbline 176
+ 017C           ;       Text[1]='C';
+ 017C 83E4              ldi R24,67
+ 017E 80930100          sts _Text+1,R24
+ 0182                   .dbline 177
+ 0182           ;       Text[2]='D';
+ 0182 84E4              ldi R24,68
+ 0184 80930200          sts _Text+2,R24
+ 0188                   .dbline 178
+ 0188           ;       Text[3]=' ';
+ 0188 80E2              ldi R24,32
+ 018A 80930300          sts _Text+3,R24
+ 018E                   .dbline 179
+ 018E           ;       Text[4]='V';
+ 018E 86E5              ldi R24,86
+ 0190 80930400          sts _Text+4,R24
+ 0194                   .dbline 180
+ 0194           ;       Text[5]='e';
+ 0194 85E6              ldi R24,101
+ 0196 80930500          sts _Text+5,R24
+ 019A                   .dbline 181
+ 019A           ;       Text[6]='r';
+ 019A 82E7              ldi R24,114
+ 019C 80930600          sts _Text+6,R24
+ 01A0                   .dbline 182
+ 01A0           ;       Text[7]=':';
+ 01A0 8AE3              ldi R24,58
+ 01A2 80930700          sts _Text+7,R24
+ 01A6                   .dbline 183
+ 01A6           ;       Text[8]=lcd_ver[0];
+ 01A6 20900000          lds R2,_lcd_ver
+ 01AA 20920800          sts _Text+8,R2
+ 01AE                   .dbline 184
+ 01AE           ;   Text[9]=lcd_ver[1];
+ 01AE 20900100          lds R2,_lcd_ver+1
+ 01B2 20920900          sts _Text+9,R2
+ 01B6                   .dbline 185
+ 01B6           ;       Text[10]=lcd_ver[2];
+ 01B6 20900200          lds R2,_lcd_ver+2
+ 01BA 20920A00          sts _Text+10,R2
+ 01BE                   .dbline 186
+ 01BE           ;       Text[11]=lcd_ver[3];
+ 01BE 20900300          lds R2,_lcd_ver+3
+ 01C2 20920B00          sts _Text+11,R2
+ 01C6                   .dbline 187
+ 01C6           ;       Text[12]='\0';
+ 01C6 2224              clr R2
+ 01C8 20920C00          sts _Text+12,R2
+ 01CC                   .dbline 188
+ 01CC           ;   print_texts(0,550,0,0x81,2,0xf800,0xffff,Text);
+ 01CC 80E0              ldi R24,<_Text
+ 01CE 90E0              ldi R25,>_Text
+ 01D0 9B87              std y+11,R25
+ 01D2 8A87              std y+10,R24
+ 01D4 8FEF              ldi R24,65535
+ 01D6 9FEF              ldi R25,255
+ 01D8 9987              std y+9,R25
+ 01DA 8887              std y+8,R24
+ 01DC 80E0              ldi R24,63488
+ 01DE 98EF              ldi R25,248
+ 01E0 9F83              std y+7,R25
+ 01E2 8E83              std y+6,R24
+ 01E4 82E0              ldi R24,2
+ 01E6 8C83              std y+4,R24
+ 01E8 81E8              ldi R24,129
+ 01EA 8A83              std y+2,R24
+ 01EC 2882              std y+0,R2
+ 01EE 26E2              ldi R18,550
+ 01F0 32E0              ldi R19,2
+ 01F2 0027              clr R16
+ 01F4 1127              clr R17
+ 01F6 0E940000          xcall _print_texts
+ 01FA                   .dbline 189
+ 01FA           ;   print_consttexts(0,570,0,0x81,2,0xf800,0xffff,Ver); 
+ 01FA 80E0              ldi R24,<_Ver
+ 01FC 90E0              ldi R25,>_Ver
+ 01FE 9B87              std y+11,R25
+ 0200 8A87              std y+10,R24
+ 0202 8FEF              ldi R24,65535
+ 0204 9FEF              ldi R25,255
+ 0206 9987              std y+9,R25
+ 0208 8887              std y+8,R24
+ 020A 80E0              ldi R24,63488
+ 020C 98EF              ldi R25,248
+ 020E 9F83              std y+7,R25
+ 0210 8E83              std y+6,R24
+ 0212 82E0              ldi R24,2
+ 0214 8C83              std y+4,R24
+ 0216 81E8              ldi R24,129
+ 0218 8A83              std y+2,R24
+ 021A 2224              clr R2
+ 021C 2882              std y+0,R2
+ 021E 2AE3              ldi R18,570
+ 0220 32E0              ldi R19,2
+ 0222 0027              clr R16
+ 0224 1127              clr R17
+ 0226 0E940000          xcall _print_consttexts
+ 022A                   .dbline -2
+ 022A           L16:
+ 022A                   .dbline 0 ; func end
+ 022A 2C96              adiw R28,12
+ 022C 0895              ret
+ 022E                   .dbend
+ 022E                   .dbfunc e init_system _init_system fV
+ 022E           ;              t -> y+2
+ 022E           ;              i -> R20
+                        .even
+ 022E           _init_system::
+ 022E 4A93              st -y,R20
+ 0230 2697              sbiw R28,6
+ 0232                   .dbline -1
+ 0232                   .dbline 192
+ 0232           ; }
+ 0232           ; void init_system(void)
+ 0232           ; {
+ 0232                   .dbline 196
+ 0232           ;   unsigned long t;
+ 0232           ;   unsigned char i;
+ 0232           ; 
+ 0232           ;   CLI();//关闭中断？
+ 0232 F894              cli
+ 0234                   .dbline 197
+ 0234           ;   init_devices();//用到的外设初始化
+ 0234 73DF              xcall _init_devices
+ 0236                   .dbline 198
+ 0236           ;   SEI(); //使能中断
+ 0236 7894              sei
+ 0238                   .dbline 199
+ 0238           ;   DwinWriteWord(ADDR_BOOTINGBAR, 1);//迪文屏通信函数
+ 0238 21E0              ldi R18,1
+ 023A 30E0              ldi R19,0
+ 023C 00E0              ldi R16,4096
+ 023E 10E1              ldi R17,16
+ 0240 0E940000          xcall _DwinWriteWord
+ 0244                   .dbline 200
+ 0244           ;   POWER5_OFF;
+ 0244 DD9A              sbi 0x1b,5
+ 0246                   .dbline 201
+ 0246           ;   POWER1_OFF;POWER2_OFF;POWER3_OFF;POWER4_OFF;
+ 0246 D99A              sbi 0x1b,1
+ 0248                   .dbline 201
+ 0248 DA9A              sbi 0x1b,2
+ 024A                   .dbline 201
+ 024A DB9A              sbi 0x1b,3
+ 024C                   .dbline 201
+ 024C DC9A              sbi 0x1b,4
+ 024E                   .dbline 202
+ 024E           ;   EEPROMReadBytes(SoundSetAddr,&SoundSet,1);
+ 024E 81E0              ldi R24,1
+ 0250 90E0              ldi R25,0
+ 0252 9983              std y+1,R25
+ 0254 8883              std y+0,R24
+ 0256 20E0              ldi R18,<_SoundSet
+ 0258 30E0              ldi R19,>_SoundSet
+ 025A 09E0              ldi R16,9
+ 025C 10E0              ldi R17,0
+ 025E 0E940000          xcall _EEPROMReadBytes
+ 0262                   .dbline 203
+ 0262           ;   if(SoundSet>10) 
+ 0262 8AE0              ldi R24,10
+ 0264 20900000          lds R2,_SoundSet
+ 0268 8215              cp R24,R2
+ 026A 60F4              brsh L33
+ 026C           X0:
+ 026C                   .dbline 204
+ 026C           ;   {
+ 026C                   .dbline 205
+ 026C           ;     SoundSet=10;
+ 026C 80930000          sts _SoundSet,R24
+ 0270                   .dbline 206
+ 0270           ;       EEPROMWriteBytes(SoundSetAddr,&SoundSet,1);
+ 0270 81E0              ldi R24,1
+ 0272 90E0              ldi R25,0
+ 0274 9983              std y+1,R25
+ 0276 8883              std y+0,R24
+ 0278 20E0              ldi R18,<_SoundSet
+ 027A 30E0              ldi R19,>_SoundSet
+ 027C 09E0              ldi R16,9
+ 027E 10E0              ldi R17,0
+ 0280 0E940000          xcall _EEPROMWriteBytes
+ 0284                   .dbline 207
+ 0284           ;   }
+ 0284           L33:
+ 0284                   .dbline 208
+ 0284           ;   for (i = 0; i < sizeof(Ver); i++){SettingDdata.softwareVersion[i] = Ver[i];}
+ 0284 4427              clr R20
+ 0286 0FC0              xjmp L38
+ 0288           L35:
+ 0288                   .dbline 208
+ 0288                   .dbline 208
+ 0288 80E0              ldi R24,<_Ver
+ 028A 90E0              ldi R25,>_Ver
+ 028C E42F              mov R30,R20
+ 028E FF27              clr R31
+ 0290 E80F              add R30,R24
+ 0292 F91F              adc R31,R25
+ 0294 2690              elpm R2,Z
+ 0296 80E0              ldi R24,<_SettingDdata
+ 0298 90E0              ldi R25,>_SettingDdata
+ 029A E42F              mov R30,R20
+ 029C FF27              clr R31
+ 029E E80F              add R30,R24
+ 02A0 F91F              adc R31,R25
+ 02A2 2082              std z+0,R2
+ 02A4                   .dbline 208
+ 02A4           L36:
+ 02A4                   .dbline 208
+ 02A4 4395              inc R20
+ 02A6           L38:
+ 02A6                   .dbline 208
+ 02A6 4A30              cpi R20,10
+ 02A8 78F3              brlo L35
+ 02AA           X1:
+ 02AA                   .dbline 209
+ 02AA           ;   EEPROMWriteBytes(softwareVersionAddr,&SettingDdata.softwareVersion,16);//迪文软件版本
+ 02AA 80E1              ldi R24,16
+ 02AC 90E0              ldi R25,0
+ 02AE 9983              std y+1,R25
+ 02B0 8883              std y+0,R24
+ 02B2 20E0              ldi R18,<_SettingDdata
+ 02B4 30E0              ldi R19,>_SettingDdata
+ 02B6 02E8              ldi R16,130
+ 02B8 10E0              ldi R17,0
+ 02BA 0E940000          xcall _EEPROMWriteBytes
+ 02BE                   .dbline 210
+ 02BE           ;   for (i = 0; i < sizeof(HARDVer); i++){SettingDdata.hardwareVersion[i] = HARDVer[i];}
+ 02BE 4427              clr R20
+ 02C0 0FC0              xjmp L42
+ 02C2           L39:
+ 02C2                   .dbline 210
+ 02C2                   .dbline 210
+ 02C2 80E0              ldi R24,<_HARDVer
+ 02C4 90E0              ldi R25,>_HARDVer
+ 02C6 E42F              mov R30,R20
+ 02C8 FF27              clr R31
+ 02CA E80F              add R30,R24
+ 02CC F91F              adc R31,R25
+ 02CE 2690              elpm R2,Z
+ 02D0 80E0              ldi R24,<_SettingDdata+16
+ 02D2 90E0              ldi R25,>_SettingDdata+16
+ 02D4 E42F              mov R30,R20
+ 02D6 FF27              clr R31
+ 02D8 E80F              add R30,R24
+ 02DA F91F              adc R31,R25
+ 02DC 2082              std z+0,R2
+ 02DE                   .dbline 210
+ 02DE           L40:
+ 02DE                   .dbline 210
+ 02DE 4395              inc R20
+ 02E0           L42:
+ 02E0                   .dbline 210
+ 02E0 4B30              cpi R20,11
+ 02E2 78F3              brlo L39
+ 02E4           X2:
+ 02E4                   .dbline 211
+ 02E4           ;   EEPROMWriteBytes(hardwareVersionAddr,&SettingDdata.hardwareVersion,16);//主板硬件版本
+ 02E4 80E1              ldi R24,16
+ 02E6 90E0              ldi R25,0
+ 02E8 9983              std y+1,R25
+ 02EA 8883              std y+0,R24
+ 02EC 20E0              ldi R18,<_SettingDdata+16
+ 02EE 30E0              ldi R19,>_SettingDdata+16
+ 02F0 02E9              ldi R16,146
+ 02F2 10E0              ldi R17,0
+ 02F4 0E940000          xcall _EEPROMWriteBytes
+ 02F8                   .dbline 212
+ 02F8           ;   for (i = 0; i < sizeof(HEXVer); i++){SettingDdata.hexVersion[i] = HEXVer[i];}
+ 02F8 4427              clr R20
+ 02FA 0FC0              xjmp L48
+ 02FC           L45:
+ 02FC                   .dbline 212
+ 02FC                   .dbline 212
+ 02FC 80E0              ldi R24,<_HEXVer
+ 02FE 90E0              ldi R25,>_HEXVer
+ 0300 E42F              mov R30,R20
+ 0302 FF27              clr R31
+ 0304 E80F              add R30,R24
+ 0306 F91F              adc R31,R25
+ 0308 2690              elpm R2,Z
+ 030A 80E0              ldi R24,<_SettingDdata+32
+ 030C 90E0              ldi R25,>_SettingDdata+32
+ 030E E42F              mov R30,R20
+ 0310 FF27              clr R31
+ 0312 E80F              add R30,R24
+ 0314 F91F              adc R31,R25
+ 0316 2082              std z+0,R2
+ 0318                   .dbline 212
+ 0318           L46:
+ 0318                   .dbline 212
+ 0318 4395              inc R20
+ 031A           L48:
+ 031A                   .dbline 212
+ 031A 4B30              cpi R20,11
+ 031C 78F3              brlo L45
+ 031E           X3:
+ 031E                   .dbline 213
+ 031E           ;   EEPROMWriteBytes(hexVersionAddr,&SettingDdata.hexVersion,16);//主板软件版本
+ 031E 80E1              ldi R24,16
+ 0320 90E0              ldi R25,0
+ 0322 9983              std y+1,R25
+ 0324 8883              std y+0,R24
+ 0326 20E0              ldi R18,<_SettingDdata+32
+ 0328 30E0              ldi R19,>_SettingDdata+32
+ 032A 02EA              ldi R16,162
+ 032C 10E0              ldi R17,0
+ 032E 0E940000          xcall _EEPROMWriteBytes
+ 0332                   .dbline 215
+ 0332           ; 
+ 0332           ;   EEPROMReadBytes(snNumberAddr,&SettingDdata.snNumber,16);//SN号
+ 0332 80E1              ldi R24,16
+ 0334 90E0              ldi R25,0
+ 0336 9983              std y+1,R25
+ 0338 8883              std y+0,R24
+ 033A 20E0              ldi R18,<_SettingDdata+48
+ 033C 30E0              ldi R19,>_SettingDdata+48
+ 033E 02EB              ldi R16,178
+ 0340 10E0              ldi R17,0
+ 0342 0E940000          xcall _EEPROMReadBytes
+ 0346                   .dbline 217
+ 0346           ; 
+ 0346           ;   EEPROMReadBytes(SET_HANDLEFIVEAddr,&SettingDdata.SET_HANDLEFIVE,1);//5号爆脂手柄选择
+ 0346 81E0              ldi R24,1
+ 0348 90E0              ldi R25,0
+ 034A 9983              std y+1,R25
+ 034C 8883              std y+0,R24
+ 034E 20E0              ldi R18,<_SettingDdata+68
+ 0350 30E0              ldi R19,>_SettingDdata+68
+ 0352 07EC              ldi R16,199
+ 0354 10E0              ldi R17,0
+ 0356 0E940000          xcall _EEPROMReadBytes
+ 035A                   .dbline 218
+ 035A           ;   if(SettingDdata.SET_HANDLEFIVE>1||SettingDdata.SET_HANDLEFIVE<0)
+ 035A 81E0              ldi R24,1
+ 035C 20904400          lds R2,_SettingDdata+68
+ 0360 8215              cp R24,R2
+ 0362 18F0              brlo L57
+ 0364           X4:
+ 0364 822D              mov R24,R2
+ 0366 8030              cpi R24,0
+ 0368 68F4              brsh L53
+ 036A           X5:
+ 036A           L57:
+ 036A                   .dbline 219
+ 036A           ;   {SettingDdata.SET_HANDLEFIVE=0;EEPROMWriteBytes(SET_HANDLEFIVEAddr,&SettingDdata.SET_HANDLEFIVE,1);}
+ 036A                   .dbline 219
+ 036A 2224              clr R2
+ 036C 20924400          sts _SettingDdata+68,R2
+ 0370                   .dbline 219
+ 0370 81E0              ldi R24,1
+ 0372 90E0              ldi R25,0
+ 0374 9983              std y+1,R25
+ 0376 8883              std y+0,R24
+ 0378 20E0              ldi R18,<_SettingDdata+68
+ 037A 30E0              ldi R19,>_SettingDdata+68
+ 037C 07EC              ldi R16,199
+ 037E 10E0              ldi R17,0
+ 0380 0E940000          xcall _EEPROMWriteBytes
+ 0384                   .dbline 219
+ 0384           L53:
+ 0384                   .dbline 220
+ 0384           ;   EEPROMReadBytes(SET_WORKTIMEAddr,&SettingDdata.SET_WORKTIME,1);//治疗时间读取
+ 0384 81E0              ldi R24,1
+ 0386 90E0              ldi R25,0
+ 0388 9983              std y+1,R25
+ 038A 8883              std y+0,R24
+ 038C 20E0              ldi R18,<_SettingDdata+69
+ 038E 30E0              ldi R19,>_SettingDdata+69
+ 0390 08EC              ldi R16,200
+ 0392 10E0              ldi R17,0
+ 0394 0E940000          xcall _EEPROMReadBytes
+ 0398                   .dbline 221
+ 0398           ;   EEPROMReadBytes(SET_WORKPOWERAddr,&SettingDdata.SET_WORKPOWER,1);//治疗能量百分比读取
+ 0398 81E0              ldi R24,1
+ 039A 90E0              ldi R25,0
+ 039C 9983              std y+1,R25
+ 039E 8883              std y+0,R24
+ 03A0 20E0              ldi R18,<_SettingDdata+70
+ 03A2 30E0              ldi R19,>_SettingDdata+70
+ 03A4 09EC              ldi R16,201
+ 03A6 10E0              ldi R17,0
+ 03A8 0E940000          xcall _EEPROMReadBytes
+ 03AC                   .dbline 222
+ 03AC           ;   RfPer=SettingDdata.SET_WORKPOWER;
+ 03AC 20904600          lds R2,_SettingDdata+70
+ 03B0 20920000          sts _RfPer,R2
+ 03B4                   .dbline 223
+ 03B4           ;   if(RfPer>100){RfPer=100;EEPROMWriteBytes(SET_WORKPOWERAddr,&SettingDdata.SET_WORKPOWER,1);}
+ 03B4 84E6              ldi R24,100
+ 03B6 8215              cp R24,R2
+ 03B8 60F4              brsh L63
+ 03BA           X6:
+ 03BA                   .dbline 223
+ 03BA                   .dbline 223
+ 03BA 80930000          sts _RfPer,R24
+ 03BE                   .dbline 223
+ 03BE 81E0              ldi R24,1
+ 03C0 90E0              ldi R25,0
+ 03C2 9983              std y+1,R25
+ 03C4 8883              std y+0,R24
+ 03C6 20E0              ldi R18,<_SettingDdata+70
+ 03C8 30E0              ldi R19,>_SettingDdata+70
+ 03CA 09EC              ldi R16,201
+ 03CC 10E0              ldi R17,0
+ 03CE 0E940000          xcall _EEPROMWriteBytes
+ 03D2                   .dbline 223
+ 03D2           L63:
+ 03D2                   .dbline 224
+ 03D2           ;   if(RfPer<0){RfPer=100;EEPROMWriteBytes(SET_WORKPOWERAddr,&SettingDdata.SET_WORKPOWER,1);}
+ 03D2 80910000          lds R24,_RfPer
+ 03D6 8030              cpi R24,0
+ 03D8 68F4              brsh L66
+ 03DA           X7:
+ 03DA                   .dbline 224
+ 03DA                   .dbline 224
+ 03DA 84E6              ldi R24,100
+ 03DC 80930000          sts _RfPer,R24
+ 03E0                   .dbline 224
+ 03E0 81E0              ldi R24,1
+ 03E2 90E0              ldi R25,0
+ 03E4 9983              std y+1,R25
+ 03E6 8883              std y+0,R24
+ 03E8 20E0              ldi R18,<_SettingDdata+70
+ 03EA 30E0              ldi R19,>_SettingDdata+70
+ 03EC 09EC              ldi R16,201
+ 03EE 10E0              ldi R17,0
+ 03F0 0E940000          xcall _EEPROMWriteBytes
+ 03F4                   .dbline 224
+ 03F4           L66:
+ 03F4                   .dbline 226
+ 03F4           ;   
+ 03F4           ;   MACHINE_STATE.WORK_STATE=0;
+ 03F4 2224              clr R2
+ 03F6 20920100          sts _MACHINE_STATE+1,R2
+ 03FA                   .dbline 227
+ 03FA           ;   MACHINE_STATE.HANDLE_ID=0;
+ 03FA 20920000          sts _MACHINE_STATE,R2
+ 03FE                   .dbline 228
+ 03FE           ;   delay_ms(2200);
+ 03FE 08E9              ldi R16,2200
+ 0400 18E0              ldi R17,8
+ 0402 0E940000          xcall _delay_ms
+ 0406                   .dbline 229
+ 0406           ;   EEPROMReadBytes(SET_HANDLEONEAddr,&SettingDdata.SET_HANDLEONE,1);//1号手柄选择
+ 0406 81E0              ldi R24,1
+ 0408 90E0              ldi R25,0
+ 040A 9983              std y+1,R25
+ 040C 8883              std y+0,R24
+ 040E 20E0              ldi R18,<_SettingDdata+64
+ 0410 30E0              ldi R19,>_SettingDdata+64
+ 0412 03EC              ldi R16,195
+ 0414 10E0              ldi R17,0
+ 0416 0E940000          xcall _EEPROMReadBytes
+ 041A                   .dbline 230
+ 041A           ;   if(SettingDdata.SET_HANDLEONE>=1)
+ 041A 80914000          lds R24,_SettingDdata+64
+ 041E 8130              cpi R24,1
+ 0420 98F0              brlo L71
+ 0422           X8:
+ 0422                   .dbline 231
+ 0422           ;   {SettingDdata.SET_HANDLEONE=1;DwinToPage(PAGE_HANDLECHOOSE1); MACHINE_STATE.WORK_PAGE=PAGE_HANDLECHOOSE1;EEPROMWriteBytes(SET_HANDLEONEAddr,&SettingDdata.SET_HANDLEONE,1);}//有一号手柄跳转到0页
+ 0422                   .dbline 231
+ 0422 81E0              ldi R24,1
+ 0424 80934000          sts _SettingDdata+64,R24
+ 0428                   .dbline 231
+ 0428 0027              clr R16
+ 042A 0E940000          xcall _DwinToPage
+ 042E                   .dbline 231
+ 042E 2224              clr R2
+ 0430 20920400          sts _MACHINE_STATE+4,R2
+ 0434                   .dbline 231
+ 0434 81E0              ldi R24,1
+ 0436 90E0              ldi R25,0
+ 0438 9983              std y+1,R25
+ 043A 8883              std y+0,R24
+ 043C 20E0              ldi R18,<_SettingDdata+64
+ 043E 30E0              ldi R19,>_SettingDdata+64
+ 0440 03EC              ldi R16,195
+ 0442 10E0              ldi R17,0
+ 0444 0E940000          xcall _EEPROMWriteBytes
+ 0448                   .dbline 231
+ 0448           L71:
+ 0448                   .dbline 232
+ 0448           ;   if(SettingDdata.SET_HANDLEONE<0)
+ 0448 80914000          lds R24,_SettingDdata+64
+ 044C 8030              cpi R24,0
+ 044E 98F4              brsh L77
+ 0450           X9:
+ 0450                   .dbline 233
+ 0450           ;   {SettingDdata.SET_HANDLEONE=1;DwinToPage(PAGE_HANDLECHOOSE1); MACHINE_STATE.WORK_PAGE=PAGE_HANDLECHOOSE1;EEPROMWriteBytes(SET_HANDLEONEAddr,&SettingDdata.SET_HANDLEONE,1);}//有一号手柄跳转到0页
+ 0450                   .dbline 233
+ 0450 81E0              ldi R24,1
+ 0452 80934000          sts _SettingDdata+64,R24
+ 0456                   .dbline 233
+ 0456 0027              clr R16
+ 0458 0E940000          xcall _DwinToPage
+ 045C                   .dbline 233
+ 045C 2224              clr R2
+ 045E 20920400          sts _MACHINE_STATE+4,R2
+ 0462                   .dbline 233
+ 0462 81E0              ldi R24,1
+ 0464 90E0              ldi R25,0
+ 0466 9983              std y+1,R25
+ 0468 8883              std y+0,R24
+ 046A 20E0              ldi R18,<_SettingDdata+64
+ 046C 30E0              ldi R19,>_SettingDdata+64
+ 046E 03EC              ldi R16,195
+ 0470 10E0              ldi R17,0
+ 0472 0E940000          xcall _EEPROMWriteBytes
+ 0476                   .dbline 233
+ 0476           L77:
+ 0476                   .dbline 234
+ 0476           ;   if(SettingDdata.SET_HANDLEONE==0)
+ 0476 20904000          lds R2,_SettingDdata+64
+ 047A 2220              tst R2
+ 047C 31F4              brne L83
+ 047E           X10:
+ 047E                   .dbline 235
+ 047E           ;   {DwinToPage(PAGE_HANDLECHOOSE4); MACHINE_STATE.WORK_PAGE=PAGE_HANDLECHOOSE4;}//无一号手柄跳转到23页
+ 047E                   .dbline 235
+ 047E 07E1              ldi R16,23
+ 0480 0E940000          xcall _DwinToPage
+ 0484                   .dbline 235
+ 0484 87E1              ldi R24,23
+ 0486 80930400          sts _MACHINE_STATE+4,R24
+ 048A                   .dbline 235
+ 048A           L83:
+ 048A                   .dbline 237
+ 048A           ; 
+ 048A           ;   start_pwm(); 
+ 048A 0E940000          xcall _start_pwm
+ 048E                   .dbline -2
+ 048E           L32:
+ 048E                   .dbline 0 ; func end
+ 048E 2696              adiw R28,6
+ 0490 4991              ld R20,y+
+ 0492 0895              ret
+ 0494                   .dbsym l t 2 l
+ 0494                   .dbsym r i 20 c
+ 0494                   .dbend
+ 0494           ;   //Init_Task(); 
+ 0494           ;   //Add_Task(DataSynchronization,1,10,1);//迪文通讯数据同步 485数据同步
+ 0494           ;   //Add_Task(HandpieceKey,2,1,1); //手柄按键处理
+ 0494           ; }

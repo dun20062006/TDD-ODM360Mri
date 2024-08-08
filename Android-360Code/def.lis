@@ -1,0 +1,1681 @@
+                        .module def.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile App\def.c
+                        .area data(ram, con, rel)
+ 0000                   .dbfile App\def.c
+ 0000           _water::
+ 0000                   .blkb 1
+                        .area idata
+ 0000 00                .byte 0
+                        .area data(ram, con, rel)
+ 0001                   .dbfile App\def.c
+ 0001                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0001                   .dbsym e water _water c
+ 0001           _Menu::
+ 0001                   .blkb 1
+                        .area idata
+ 0001 00                .byte 0
+                        .area data(ram, con, rel)
+ 0002                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0002                   .dbsym e Menu _Menu c
+ 0002           _MC::
+ 0002                   .blkb 1
+                        .area idata
+ 0002 00                .byte 0
+                        .area data(ram, con, rel)
+ 0003                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0003                   .dbsym e MC _MC c
+ 0003           _MV::
+ 0003                   .blkb 1
+                        .area idata
+ 0003 00                .byte 0
+                        .area data(ram, con, rel)
+ 0004                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0004                   .dbsym e MV _MV c
+ 0004           _Clk::
+ 0004                   .blkb 1
+                        .area idata
+ 0004 00                .byte 0
+                        .area data(ram, con, rel)
+ 0005                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0005                   .dbsym e Clk _Clk c
+ 0005           _Work::
+ 0005                   .blkb 1
+                        .area idata
+ 0005 00                .byte 0
+                        .area data(ram, con, rel)
+ 0006                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0006                   .dbsym e Work _Work c
+ 0006           _HandID::
+ 0006                   .blkb 1
+                        .area idata
+ 0006 FF                .byte 255
+                        .area data(ram, con, rel)
+ 0007                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0007                   .dbsym e HandID _HandID c
+ 0007           _Hand_Event::
+ 0007                   .blkb 1
+                        .area idata
+ 0007 00                .byte 0
+                        .area data(ram, con, rel)
+ 0008                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0008                   .dbsym e Hand_Event _Hand_Event c
+ 0008           _Foot_Event::
+ 0008                   .blkb 1
+                        .area idata
+ 0008 00                .byte 0
+                        .area data(ram, con, rel)
+ 0009                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0009                   .dbsym e Foot_Event _Foot_Event c
+ 0009           _DisPage::
+ 0009                   .blkb 1
+                        .area idata
+ 0009 00                .byte 0
+                        .area data(ram, con, rel)
+ 000A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 000A                   .dbsym e DisPage _DisPage c
+ 000A           _KeyID::
+ 000A                   .blkb 1
+                        .area idata
+ 000A FF                .byte 255
+                        .area data(ram, con, rel)
+ 000B                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 000B                   .dbsym e KeyID _KeyID c
+ 000B           _BackSet::
+ 000B                   .blkb 1
+                        .area idata
+ 000B 00                .byte 0
+                        .area data(ram, con, rel)
+ 000C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 000C                   .dbsym e BackSet _BackSet c
+ 000C           _VerSet::
+ 000C                   .blkb 1
+                        .area idata
+ 000C 00                .byte 0
+                        .area data(ram, con, rel)
+ 000D                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 000D                   .dbsym e VerSet _VerSet c
+ 000D           _WorktimeSet::
+ 000D                   .blkb 1
+                        .area idata
+ 000D 00                .byte 0
+                        .area data(ram, con, rel)
+ 000E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 000E                   .dbsym e WorktimeSet _WorktimeSet c
+ 000E           _PressureSet::
+ 000E                   .blkb 1
+                        .area idata
+ 000E 00                .byte 0
+                        .area data(ram, con, rel)
+ 000F                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 000F                   .dbsym e PressureSet _PressureSet c
+ 000F           _Function_Count::
+ 000F                   .blkb 1
+                        .area idata
+ 000F 00                .byte 0
+                        .area data(ram, con, rel)
+ 0010                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0010                   .dbsym e Function_Count _Function_Count c
+ 0010           _Function_Ptr::
+ 0010                   .blkb 1
+                        .area idata
+ 0010 00                .byte 0
+                        .area data(ram, con, rel)
+ 0011                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0011                   .dbsym e Function_Ptr _Function_Ptr c
+ 0011           _DelayMs::
+ 0011                   .blkb 2
+                        .area idata
+ 0011 0000              .word 0
+                        .area data(ram, con, rel)
+ 0013                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0013                   .dbsym e DelayMs _DelayMs i
+ 0013           _Page_ptr::
+ 0013                   .blkb 1
+                        .area idata
+ 0013 00                .byte 0
+                        .area data(ram, con, rel)
+ 0014                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0014                   .dbsym e Page_ptr _Page_ptr c
+ 0014           _SoundSet::
+ 0014                   .blkb 1
+                        .area idata
+ 0014 00                .byte 0
+                        .area data(ram, con, rel)
+ 0015                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0015                   .dbsym e SoundSet _SoundSet c
+ 0015           _Sound_Count::
+ 0015                   .blkb 1
+                        .area idata
+ 0015 00                .byte 0
+                        .area data(ram, con, rel)
+ 0016                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0016                   .dbsym e Sound_Count _Sound_Count c
+ 0016           _ClockSet::
+ 0016                   .blkb 1
+                        .area idata
+ 0016 00                .byte 0
+                        .area data(ram, con, rel)
+ 0017                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0017                   .dbsym e ClockSet _ClockSet c
+ 0017           _Language::
+ 0017                   .blkb 1
+                        .area idata
+ 0017 00                .byte 0
+                        .area data(ram, con, rel)
+ 0018                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0018                   .dbsym e Language _Language c
+ 0018           _password::
+ 0018                   .blkb 2
+                        .area idata
+ 0018 3132              .byte 49,50
+                        .area data(ram, con, rel)
+ 001A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 001A                   .blkb 2
+                        .area idata
+ 001A 3133              .byte 49,51
+                        .area data(ram, con, rel)
+ 001C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 001C                   .blkb 2
+                        .area idata
+ 001C 3134              .byte 49,52
+                        .area data(ram, con, rel)
+ 001E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 001E                   .blkb 2
+                        .area idata
+ 001E 3139              .byte 49,57
+                        .area data(ram, con, rel)
+ 0020                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0020                   .dbsym e password _password A[8:8]c
+ 0020           _SNpassword::
+ 0020                   .blkb 2
+                        .area idata
+ 0020 3132              .byte 49,50
+                        .area data(ram, con, rel)
+ 0022                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0022                   .blkb 2
+                        .area idata
+ 0022 3133              .byte 49,51
+                        .area data(ram, con, rel)
+ 0024                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0024                   .blkb 2
+                        .area idata
+ 0024 3134              .byte 49,52
+                        .area data(ram, con, rel)
+ 0026                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0026                   .blkb 2
+                        .area idata
+ 0026 3139              .byte 49,57
+                        .area data(ram, con, rel)
+ 0028                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0028                   .dbsym e SNpassword _SNpassword A[8:8]c
+ 0028           _R_buf::
+ 0028                   .blkb 2
+                        .area idata
+ 0028 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 002A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 002A                   .blkb 2
+                        .area idata
+ 002A 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 002C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 002C                   .blkb 2
+                        .area idata
+ 002C 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 002E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 002E                   .blkb 2
+                        .area idata
+ 002E 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0030                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0030                   .blkb 2
+                        .area idata
+ 0030 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0032                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0032                   .blkb 2
+                        .area idata
+ 0032 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0034                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0034                   .blkb 2
+                        .area idata
+ 0034 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0036                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0036                   .blkb 2
+                        .area idata
+ 0036 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0038                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0038                   .blkb 2
+                        .area idata
+ 0038 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 003A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 003A                   .blkb 2
+                        .area idata
+ 003A 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 003C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 003C                   .blkb 230
+                        .area idata
+ 003C 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000  .word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ 0078 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000  .word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ 00B4 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000  .word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ 00F0 00000000000000000000      .word 0,0,0,0,0
+ 00FA 00000000000000000000      .word 0,0,0,0,0
+ 0104 00000000000000000000      .word 0,0,0,0,0
+ 010E 00000000000000000000      .word 0,0,0,0,0
+ 0118 00000000000000000000      .byte 0,0,0,0,0,0,0,0,0,0
+                        .area data(ram, con, rel)
+ 0122                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0122                   .dbsym e R_buf _R_buf A[250:250]c
+ 0122           _R_buf1::
+ 0122                   .blkb 2
+                        .area idata
+ 0122 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0124                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0124                   .blkb 2
+                        .area idata
+ 0124 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0126                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0126                   .blkb 2
+                        .area idata
+ 0126 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0128                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0128                   .blkb 2
+                        .area idata
+ 0128 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 012A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 012A                   .blkb 2
+                        .area idata
+ 012A 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 012C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 012C                   .blkb 2
+                        .area idata
+ 012C 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 012E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 012E                   .blkb 2
+                        .area idata
+ 012E 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0130                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0130                   .blkb 2
+                        .area idata
+ 0130 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0132                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0132                   .blkb 2
+                        .area idata
+ 0132 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0134                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0134                   .blkb 2
+                        .area idata
+ 0134 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0136                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0136                   .blkb 80
+                        .area idata
+ 0136 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000  .word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ 0172 00000000000000000000      .word 0,0,0,0,0
+ 017C 00000000000000000000      .byte 0,0,0,0,0,0,0,0,0,0
+                        .area data(ram, con, rel)
+ 0186                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0186                   .dbsym e R_buf1 _R_buf1 A[100:100]c
+ 0186           _T_buf::
+ 0186                   .blkb 2
+                        .area idata
+ 0186 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0188                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0188                   .blkb 2
+                        .area idata
+ 0188 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 018A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 018A                   .blkb 2
+                        .area idata
+ 018A 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 018C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 018C                   .blkb 2
+                        .area idata
+ 018C 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 018E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 018E                   .blkb 2
+                        .area idata
+ 018E 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0190                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0190                   .blkb 2
+                        .area idata
+ 0190 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0192                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0192                   .blkb 2
+                        .area idata
+ 0192 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0194                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0194                   .blkb 2
+                        .area idata
+ 0194 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0196                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0196                   .blkb 2
+                        .area idata
+ 0196 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0198                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0198                   .blkb 2
+                        .area idata
+ 0198 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 019A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 019A                   .blkb 230
+                        .area idata
+ 019A 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000  .word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ 01D6 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000  .word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ 0212 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000  .word 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ 024E 00000000000000000000      .word 0,0,0,0,0
+ 0258 00000000000000000000      .word 0,0,0,0,0
+ 0262 00000000000000000000      .word 0,0,0,0,0
+ 026C 00000000000000000000      .word 0,0,0,0,0
+ 0276 00000000000000000000      .byte 0,0,0,0,0,0,0,0,0,0
+                        .area data(ram, con, rel)
+ 0280                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0280                   .dbsym e T_buf _T_buf A[250:250]c
+ 0280           _R_count::
+ 0280                   .blkb 1
+                        .area idata
+ 0280 00                .byte 0
+                        .area data(ram, con, rel)
+ 0281                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0281                   .dbsym e R_count _R_count c
+ 0281           _R_count1::
+ 0281                   .blkb 1
+                        .area idata
+ 0281 00                .byte 0
+                        .area data(ram, con, rel)
+ 0282                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0282                   .dbsym e R_count1 _R_count1 c
+ 0282           _R_Check::
+ 0282                   .blkb 1
+                        .area idata
+ 0282 00                .byte 0
+                        .area data(ram, con, rel)
+ 0283                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0283                   .dbsym e R_Check _R_Check c
+ 0283           _R_full::
+ 0283                   .blkb 1
+                        .area idata
+ 0283 00                .byte 0
+                        .area data(ram, con, rel)
+ 0284                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0284                   .dbsym e R_full _R_full c
+ 0284           _R_full1::
+ 0284                   .blkb 1
+                        .area idata
+ 0284 00                .byte 0
+                        .area data(ram, con, rel)
+ 0285                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0285                   .dbsym e R_full1 _R_full1 c
+ 0285           _T_ptr::
+ 0285                   .blkb 1
+                        .area idata
+ 0285 00                .byte 0
+                        .area data(ram, con, rel)
+ 0286                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0286                   .dbsym e T_ptr _T_ptr c
+ 0286           _T_count::
+ 0286                   .blkb 1
+                        .area idata
+ 0286 00                .byte 0
+                        .area data(ram, con, rel)
+ 0287                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0287                   .dbsym e T_count _T_count c
+ 0287           _Event_count::
+ 0287                   .blkb 1
+                        .area idata
+ 0287 00                .byte 0
+                        .area data(ram, con, rel)
+ 0288                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0288                   .dbsym e Event_count _Event_count c
+ 0288           _CardSet::
+ 0288                   .blkb 1
+                        .area idata
+ 0288 00                .byte 0
+                        .area data(ram, con, rel)
+ 0289                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0289                   .dbsym e CardSet _CardSet c
+ 0289           _Card_Event::
+ 0289                   .blkb 1
+                        .area idata
+ 0289 00                .byte 0
+                        .area data(ram, con, rel)
+ 028A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 028A                   .dbsym e Card_Event _Card_Event c
+ 028A           _Card_Info::
+ 028A                   .blkb 1
+                        .area idata
+ 028A 00                .byte 0
+                        .area data(ram, con, rel)
+ 028B                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 028B                   .dbsym e Card_Info _Card_Info c
+ 028B           _Card_Command::
+ 028B                   .blkb 1
+                        .area idata
+ 028B 00                .byte 0
+                        .area data(ram, con, rel)
+ 028C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 028C                   .dbsym e Card_Command _Card_Command c
+ 028C           _Card_ID::
+ 028C                   .blkb 1
+                        .area idata
+ 028C 00                .byte 0
+                        .area data(ram, con, rel)
+ 028D                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 028D                   .dbsym e Card_ID _Card_ID c
+ 028D           _User_ID::
+ 028D                   .blkb 1
+                        .area idata
+ 028D 00                .byte 0
+                        .area data(ram, con, rel)
+ 028E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 028E                   .dbsym e User_ID _User_ID c
+ 028E           _Card_Type::
+ 028E                   .blkb 1
+                        .area idata
+ 028E 00                .byte 0
+                        .area data(ram, con, rel)
+ 028F                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 028F                   .dbsym e Card_Type _Card_Type c
+ 028F           _User_Type::
+ 028F                   .blkb 1
+                        .area idata
+ 028F 00                .byte 0
+                        .area data(ram, con, rel)
+ 0290                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0290                   .dbsym e User_Type _User_Type c
+ 0290           _Card_Counter::
+ 0290                   .blkb 2
+                        .area idata
+ 0290 0000              .word 0
+                        .area data(ram, con, rel)
+ 0292                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0292                   .dbsym e Card_Counter _Card_Counter i
+ 0292           _User_Counter::
+ 0292                   .blkb 2
+                        .area idata
+ 0292 0000              .word 0
+                        .area data(ram, con, rel)
+ 0294                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0294                   .dbsym e User_Counter _User_Counter i
+ 0294           _Card_Data::
+ 0294                   .blkb 2
+                        .area idata
+ 0294 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0296                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0296                   .blkb 2
+                        .area idata
+ 0296 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 0298                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0298                   .dbsym e Card_Data _Card_Data A[4:4]c
+ 0298           _Touch_Event::
+ 0298                   .blkb 1
+                        .area idata
+ 0298 00                .byte 0
+                        .area data(ram, con, rel)
+ 0299                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0299                   .dbsym e Touch_Event _Touch_Event c
+ 0299           _Touch_Buf::
+ 0299                   .blkb 1
+                        .area idata
+ 0299 00                .byte 0
+                        .area data(ram, con, rel)
+ 029A                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 029A                   .dbsym e Touch_Buf _Touch_Buf c
+ 029A           _Touch_ID::
+ 029A                   .blkb 2
+                        .area idata
+ 029A FFFF              .word 65535
+                        .area data(ram, con, rel)
+ 029C                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 029C                   .dbsym e Touch_ID _Touch_ID i
+ 029C           _w_buf::
+ 029C                   .blkb 2
+                        .area idata
+ 029C 0000              .word 0
+                        .area data(ram, con, rel)
+ 029E                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 029E                   .dbsym e w_buf _w_buf i
+ 029E           _SetID::
+ 029E                   .blkb 2
+                        .area idata
+ 029E FFFF              .word 65535
+                        .area data(ram, con, rel)
+ 02A0                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02A0                   .dbsym e SetID _SetID i
+ 02A0           _text_ptr::
+ 02A0                   .blkb 1
+                        .area idata
+ 02A0 00                .byte 0
+                        .area data(ram, con, rel)
+ 02A1                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02A1                   .dbsym e text_ptr _text_ptr c
+ 02A1           _datetime::
+ 02A1                   .blkb 2
+                        .area idata
+ 02A1 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 02A3                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02A3                   .blkb 2
+                        .area idata
+ 02A3 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 02A5                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02A5                   .blkb 2
+                        .area idata
+ 02A5 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 02A7                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02A7                   .blkb 1
+                        .area idata
+ 02A7 00                .byte 0
+                        .area data(ram, con, rel)
+ 02A8                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02A8                   .dbsym e datetime _datetime A[7:7]c
+ 02A8           _Intensity::
+ 02A8                   .blkb 2
+                        .area idata
+ 02A8 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 02AA                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02AA                   .blkb 2
+                        .area idata
+ 02AA 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 02AC                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02AC                   .blkb 2
+                        .area idata
+ 02AC 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 02AE                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02AE                   .blkb 2
+                        .area idata
+ 02AE 0000              .byte 0,0
+                        .area data(ram, con, rel)
+ 02B0                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02B0                   .blkb 1
+                        .area idata
+ 02B0 00                .byte 0
+                        .area data(ram, con, rel)
+ 02B1                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02B1                   .dbsym e Intensity _Intensity A[9:9]c
+ 02B1           _Handpiece::
+ 02B1                   .blkb 1
+                        .area idata
+ 02B1 00                .byte 0
+                        .area data(ram, con, rel)
+ 02B2                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02B2                   .dbsym e Handpiece _Handpiece c
+ 02B2           _Mode::
+ 02B2                   .blkb 1
+                        .area idata
+ 02B2 00                .byte 0
+                        .area data(ram, con, rel)
+ 02B3                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 02B3                   .dbsym e Mode _Mode c
+                        .area lit(rom, con, rel)
+ 0000           _Main_Key::
+ 0000 1E00              .word 30
+ 0002 4100              .word 65
+ 0004 8200              .word 130
+ 0006 B900              .word 185
+ 0008 1E00              .word 30
+ 000A F000              .word 240
+ 000C 8200              .word 130
+ 000E 6801              .word 360
+ 0010 1E00              .word 30
+ 0012 9F01              .word 415
+ 0014 8200              .word 130
+ 0016 1702              .word 535
+ 0018 AF00              .word 175
+ 001A 4100              .word 65
+ 001C 1301              .word 275
+ 001E B900              .word 185
+ 0020 0000              .word 0
+ 0022 0000              .word 0
+ 0024 3C00              .word 60
+ 0026 3200              .word 50
+ 0028 AF00              .word 175
+ 002A F000              .word 240
+ 002C 1301              .word 275
+ 002E 6801              .word 360
+ 0030                   .dbstruct 0 8 KEY
+ 0030                   .dbfield 0 XS i
+ 0030                   .dbfield 2 YS i
+ 0030                   .dbfield 4 XE i
+ 0030                   .dbfield 6 YE i
+ 0030                   .dbend
+ 0030                   .dbsym e Main_Key _Main_Key A[48:6]kS[KEY]
+ 0030           _Start_Key::
+ 0030 0000              .word 0
+ 0032 3200              .word 50
+ 0034 C800              .word 200
+ 0036 5A00              .word 90
+ 0038 0000              .word 0
+ 003A 5A00              .word 90
+ 003C C800              .word 200
+ 003E 8200              .word 130
+ 0040 0000              .word 0
+ 0042 8200              .word 130
+ 0044 C800              .word 200
+ 0046 AA00              .word 170
+ 0048 0000              .word 0
+ 004A AA00              .word 170
+ 004C C800              .word 200
+ 004E D200              .word 210
+ 0050 0000              .word 0
+ 0052 D200              .word 210
+ 0054 C800              .word 200
+ 0056 FA00              .word 250
+ 0058 0000              .word 0
+ 005A FA00              .word 250
+ 005C C800              .word 200
+ 005E 2201              .word 290
+ 0060 0000              .word 0
+ 0062 2201              .word 290
+ 0064 C800              .word 200
+ 0066 4A01              .word 330
+ 0068 0000              .word 0
+ 006A 4A01              .word 330
+ 006C C800              .word 200
+ 006E 7201              .word 370
+ 0070 0000              .word 0
+ 0072 0000              .word 0
+ 0074 3C00              .word 60
+ 0076 3200              .word 50
+ 0078                   .dbsym e Start_Key _Start_Key A[72:9]kS[KEY]
+ 0078           _Time_Key::
+ 0078 3F01              .word 319
+ 007A 5D01              .word 349
+ 007C 8A01              .word 394
+ 007E 8F01              .word 399
+ 0080 3F01              .word 319
+ 0082 C400              .word 196
+ 0084 8A01              .word 394
+ 0086 F600              .word 246
+ 0088 8B01              .word 395
+ 008A C400              .word 196
+ 008C D601              .word 470
+ 008E F600              .word 246
+ 0090 D701              .word 471
+ 0092 C400              .word 196
+ 0094 2202              .word 546
+ 0096 F600              .word 246
+ 0098 3F01              .word 319
+ 009A F700              .word 247
+ 009C 8901              .word 393
+ 009E 2901              .word 297
+ 00A0 8B01              .word 395
+ 00A2 F700              .word 247
+ 00A4 D601              .word 470
+ 00A6 2901              .word 297
+ 00A8 D701              .word 471
+ 00AA F700              .word 247
+ 00AC 2202              .word 546
+ 00AE 2901              .word 297
+ 00B0 3F01              .word 319
+ 00B2 2A01              .word 298
+ 00B4 8A01              .word 394
+ 00B6 5C01              .word 348
+ 00B8 8B01              .word 395
+ 00BA 2A01              .word 298
+ 00BC D601              .word 470
+ 00BE 5C01              .word 348
+ 00C0 D701              .word 471
+ 00C2 2A01              .word 298
+ 00C4 2202              .word 546
+ 00C6 5C01              .word 348
+ 00C8 8B01              .word 395
+ 00CA 5D01              .word 349
+ 00CC D601              .word 470
+ 00CE 8F01              .word 399
+ 00D0 D701              .word 471
+ 00D2 5D01              .word 349
+ 00D4 2202              .word 546
+ 00D6 8F01              .word 399
+ 00D8 1202              .word 530
+ 00DA 6400              .word 100
+ 00DC 3A02              .word 570
+ 00DE 8700              .word 135
+ 00E0                   .dbsym e Time_Key _Time_Key A[104:13]kS[KEY]
+ 00E0           _Sound_Key::
+ 00E0 B801              .word 440
+ 00E2 C800              .word 200
+ 00E4 DB01              .word 475
+ 00E6 EB00              .word 235
+ 00E8 9501              .word 405
+ 00EA 4A01              .word 330
+ 00EC CC01              .word 460
+ 00EE 8601              .word 390
+ 00F0 3101              .word 305
+ 00F2 F000              .word 240
+ 00F4 9501              .word 405
+ 00F6 8601              .word 390
+ 00F8                   .dbsym e Sound_Key _Sound_Key A[24:3]kS[KEY]
+ 00F8           _Language_Key::
+ 00F8 3201              .word 306
+ 00FA 8C00              .word 140
+ 00FC 8C01              .word 396
+ 00FE E200              .word 226
+ 0100 8C01              .word 396
+ 0102 8C00              .word 140
+ 0104 E601              .word 486
+ 0106 E200              .word 226
+ 0108 E601              .word 486
+ 010A 8C00              .word 140
+ 010C 4002              .word 576
+ 010E E200              .word 226
+ 0110 4002              .word 576
+ 0112 8C00              .word 140
+ 0114 9A02              .word 666
+ 0116 E200              .word 226
+ 0118 3201              .word 306
+ 011A E200              .word 226
+ 011C 8C01              .word 396
+ 011E 3801              .word 312
+ 0120 8C01              .word 396
+ 0122 E200              .word 226
+ 0124 E601              .word 486
+ 0126 3801              .word 312
+ 0128 E601              .word 486
+ 012A E200              .word 226
+ 012C 4002              .word 576
+ 012E 3801              .word 312
+ 0130 4002              .word 576
+ 0132 E200              .word 226
+ 0134 9A02              .word 666
+ 0136 3801              .word 312
+ 0138 3201              .word 306
+ 013A 3801              .word 312
+ 013C 8C01              .word 396
+ 013E 8E01              .word 398
+ 0140 8C01              .word 396
+ 0142 3801              .word 312
+ 0144 E601              .word 486
+ 0146 8E01              .word 398
+ 0148 E601              .word 486
+ 014A 3801              .word 312
+ 014C 4002              .word 576
+ 014E 8E01              .word 398
+ 0150 4002              .word 576
+ 0152 3801              .word 312
+ 0154 9A02              .word 666
+ 0156 8E01              .word 398
+ 0158 3201              .word 306
+ 015A 8E01              .word 398
+ 015C 8C01              .word 396
+ 015E E401              .word 484
+ 0160 8C01              .word 396
+ 0162 8E01              .word 398
+ 0164 E601              .word 486
+ 0166 E401              .word 484
+ 0168 E601              .word 486
+ 016A 8E01              .word 398
+ 016C 4002              .word 576
+ 016E E401              .word 484
+ 0170 4002              .word 576
+ 0172 8E01              .word 398
+ 0174 9A02              .word 666
+ 0176 E401              .word 484
+ 0178 7602              .word 630
+ 017A 6400              .word 100
+ 017C 9E02              .word 670
+ 017E 8700              .word 135
+ 0180                   .dbsym e Language_Key _Language_Key A[136:17]kS[KEY]
+ 0180           _Back_Key::
+ 0180 4001              .word 320
+ 0182 9801              .word 408
+ 0184 7701              .word 375
+ 0186 CC01              .word 460
+ 0188 8601              .word 390
+ 018A 9801              .word 408
+ 018C BD01              .word 445
+ 018E CC01              .word 460
+ 0190 CC01              .word 460
+ 0192 9801              .word 408
+ 0194 0302              .word 515
+ 0196 CC01              .word 460
+ 0198 F401              .word 500
+ 019A C800              .word 200
+ 019C 1C02              .word 540
+ 019E EB00              .word 235
+ 01A0                   .dbsym e Back_Key _Back_Key A[32:4]kS[KEY]
+ 01A0           _USB_Key::
+ 01A0 4501              .word 325
+ 01A2 FF00              .word 255
+ 01A4 B301              .word 435
+ 01A6 3B01              .word 315
+ 01A8 C701              .word 455
+ 01AA FF00              .word 255
+ 01AC 3502              .word 565
+ 01AE 3B01              .word 315
+ 01B0 0802              .word 520
+ 01B2 C800              .word 200
+ 01B4 3A02              .word 570
+ 01B6 EB00              .word 235
+ 01B8                   .dbsym e USB_Key _USB_Key A[24:3]kS[KEY]
+ 01B8           _Card_Key::
+ 01B8 4001              .word 320
+ 01BA 9001              .word 400
+ 01BC 8B01              .word 395
+ 01BE C201              .word 450
+ 01C0 4001              .word 320
+ 01C2 F700              .word 247
+ 01C4 8B01              .word 395
+ 01C6 2901              .word 297
+ 01C8 8C01              .word 396
+ 01CA F700              .word 247
+ 01CC D701              .word 471
+ 01CE 2901              .word 297
+ 01D0 D801              .word 472
+ 01D2 F700              .word 247
+ 01D4 2302              .word 547
+ 01D6 2901              .word 297
+ 01D8 4001              .word 320
+ 01DA 2A01              .word 298
+ 01DC 8B01              .word 395
+ 01DE 5C01              .word 348
+ 01E0 8C01              .word 396
+ 01E2 2A01              .word 298
+ 01E4 D701              .word 471
+ 01E6 5C01              .word 348
+ 01E8 D801              .word 472
+ 01EA 2A01              .word 298
+ 01EC 2302              .word 547
+ 01EE 5C01              .word 348
+ 01F0 4001              .word 320
+ 01F2 5D01              .word 349
+ 01F4 8B01              .word 395
+ 01F6 8F01              .word 399
+ 01F8 8C01              .word 396
+ 01FA 5D01              .word 349
+ 01FC D701              .word 471
+ 01FE 8F01              .word 399
+ 0200 D801              .word 472
+ 0202 5D01              .word 349
+ 0204 2302              .word 547
+ 0206 8F01              .word 399
+ 0208 8B01              .word 395
+ 020A 9001              .word 400
+ 020C D701              .word 471
+ 020E C201              .word 450
+ 0210 D801              .word 472
+ 0212 9001              .word 400
+ 0214 2302              .word 547
+ 0216 C201              .word 450
+ 0218 4001              .word 320
+ 021A BE00              .word 190
+ 021C 8B01              .word 395
+ 021E F000              .word 240
+ 0220 8C01              .word 396
+ 0222 BE00              .word 190
+ 0224 D701              .word 471
+ 0226 F000              .word 240
+ 0228 D801              .word 472
+ 022A BE00              .word 190
+ 022C 2302              .word 547
+ 022E F000              .word 240
+ 0230 1202              .word 530
+ 0232 6400              .word 100
+ 0234 3A02              .word 570
+ 0236 8700              .word 135
+ 0238                   .dbsym e Card_Key _Card_Key A[128:16]kS[KEY]
+ 0238           _System_Key::
+ 0238 0800              .word 8
+ 023A 3400              .word 52
+ 023C 8A00              .word 138
+ 023E 6200              .word 98
+ 0240 0800              .word 8
+ 0242 6200              .word 98
+ 0244 8A00              .word 138
+ 0246 9000              .word 144
+ 0248 0800              .word 8
+ 024A 9000              .word 144
+ 024C 8A00              .word 138
+ 024E BE00              .word 190
+ 0250 0800              .word 8
+ 0252 BE00              .word 190
+ 0254 8A00              .word 138
+ 0256 EC00              .word 236
+ 0258 0800              .word 8
+ 025A EC00              .word 236
+ 025C 8A00              .word 138
+ 025E 1A01              .word 282
+ 0260 0800              .word 8
+ 0262 1A01              .word 282
+ 0264 8A00              .word 138
+ 0266 4801              .word 328
+ 0268 0800              .word 8
+ 026A 4801              .word 328
+ 026C 8A00              .word 138
+ 026E 7601              .word 374
+ 0270 0800              .word 8
+ 0272 7601              .word 374
+ 0274 8A00              .word 138
+ 0276 A401              .word 420
+ 0278 0800              .word 8
+ 027A A401              .word 420
+ 027C 8A00              .word 138
+ 027E D201              .word 466
+ 0280 E402              .word 740
+ 0282 0000              .word 0
+ 0284 1F03              .word 799
+ 0286 2D00              .word 45
+ 0288                   .dbsym e System_Key _System_Key A[80:10]kS[KEY]
+ 0288           _Count_Key::
+ 0288 DB01              .word 475
+ 028A F000              .word 240
+ 028C 2602              .word 550
+ 028E 2701              .word 295
+ 0290 1202              .word 530
+ 0292 6400              .word 100
+ 0294 3A02              .word 570
+ 0296 8700              .word 135
+ 0298                   .dbsym e Count_Key _Count_Key A[16:2]kS[KEY]
+ 0298           _Option_Key::
+ 0298 6C01              .word 364
+ 029A AF00              .word 175
+ 029C DA01              .word 474
+ 029E 1D01              .word 285
+ 02A0 0E02              .word 526
+ 02A2 AF00              .word 175
+ 02A4 7C02              .word 636
+ 02A6 1D01              .word 285
+ 02A8 6C01              .word 364
+ 02AA 4B01              .word 331
+ 02AC DA01              .word 474
+ 02AE B901              .word 441
+ 02B0 0E02              .word 526
+ 02B2 4B01              .word 331
+ 02B4 7C02              .word 636
+ 02B6 B901              .word 441
+ 02B8 8002              .word 640
+ 02BA 5000              .word 80
+ 02BC BC02              .word 700
+ 02BE 7800              .word 120
+ 02C0                   .dbsym e Option_Key _Option_Key A[40:5]kS[KEY]
+ 02C0           _Handpiece_Key::
+ 02C0 3A01              .word 314
+ 02C2 A600              .word 166
+ 02C4 7901              .word 377
+ 02C6 D100              .word 209
+ 02C8 7A01              .word 378
+ 02CA A600              .word 166
+ 02CC B801              .word 440
+ 02CE D100              .word 209
+ 02D0 BA01              .word 442
+ 02D2 A600              .word 166
+ 02D4 F801              .word 504
+ 02D6 D100              .word 209
+ 02D8 FA01              .word 506
+ 02DA A600              .word 166
+ 02DC 3802              .word 568
+ 02DE D100              .word 209
+ 02E0 3A02              .word 570
+ 02E2 A600              .word 166
+ 02E4 7802              .word 632
+ 02E6 D100              .word 209
+ 02E8 7802              .word 632
+ 02EA A600              .word 166
+ 02EC B802              .word 696
+ 02EE D100              .word 209
+ 02F0 B802              .word 696
+ 02F2 A600              .word 166
+ 02F4 F802              .word 760
+ 02F6 D100              .word 209
+ 02F8 3A01              .word 314
+ 02FA F900              .word 249
+ 02FC 7901              .word 377
+ 02FE 2401              .word 292
+ 0300 7A01              .word 378
+ 0302 F900              .word 249
+ 0304 B801              .word 440
+ 0306 2401              .word 292
+ 0308 BA01              .word 442
+ 030A F900              .word 249
+ 030C F801              .word 504
+ 030E 2401              .word 292
+ 0310 FA01              .word 506
+ 0312 F900              .word 249
+ 0314 3802              .word 568
+ 0316 2401              .word 292
+ 0318 3A02              .word 570
+ 031A F900              .word 249
+ 031C 7802              .word 632
+ 031E 2401              .word 292
+ 0320 7802              .word 632
+ 0322 F900              .word 249
+ 0324 B802              .word 696
+ 0326 2401              .word 292
+ 0328 B802              .word 696
+ 032A F900              .word 249
+ 032C F802              .word 760
+ 032E 2401              .word 292
+ 0330 3A01              .word 314
+ 0332 4C01              .word 332
+ 0334 7901              .word 377
+ 0336 7701              .word 375
+ 0338 7A01              .word 378
+ 033A 4C01              .word 332
+ 033C B801              .word 440
+ 033E 7701              .word 375
+ 0340 BA01              .word 442
+ 0342 4C01              .word 332
+ 0344 F801              .word 504
+ 0346 7701              .word 375
+ 0348 FA01              .word 506
+ 034A 4C01              .word 332
+ 034C 3802              .word 568
+ 034E 7701              .word 375
+ 0350 3A02              .word 570
+ 0352 4C01              .word 332
+ 0354 7802              .word 632
+ 0356 7701              .word 375
+ 0358 7802              .word 632
+ 035A 4C01              .word 332
+ 035C B802              .word 696
+ 035E 7701              .word 375
+ 0360 B802              .word 696
+ 0362 4C01              .word 332
+ 0364 F802              .word 760
+ 0366 7701              .word 375
+ 0368 DA02              .word 730
+ 036A 6400              .word 100
+ 036C 0203              .word 770
+ 036E 8700              .word 135
+ 0370                   .dbsym e Handpiece_Key _Handpiece_Key A[176:22]kS[KEY]
+ 0370           _CardSet_Key::
+ 0370 4501              .word 325
+ 0372 FF00              .word 255
+ 0374 9A01              .word 410
+ 0376 3B01              .word 315
+ 0378 C701              .word 455
+ 037A FF00              .word 255
+ 037C 1C02              .word 540
+ 037E 3B01              .word 315
+ 0380 0802              .word 520
+ 0382 C800              .word 200
+ 0384 3A02              .word 570
+ 0386 EB00              .word 235
+ 0388                   .dbsym e CardSet_Key _CardSet_Key A[24:3]kS[KEY]
+ 0388           _VerSet_Key::
+ 0388 4501              .word 325
+ 038A FF00              .word 255
+ 038C 9A01              .word 410
+ 038E 3B01              .word 315
+ 0390 C701              .word 455
+ 0392 FF00              .word 255
+ 0394 1C02              .word 540
+ 0396 3B01              .word 315
+ 0398 0802              .word 520
+ 039A C800              .word 200
+ 039C 3A02              .word 570
+ 039E EB00              .word 235
+ 03A0                   .dbsym e VerSet_Key _VerSet_Key A[24:3]kS[KEY]
+ 03A0           _Reset_Key::
+ 03A0 4501              .word 325
+ 03A2 FF00              .word 255
+ 03A4 9A01              .word 410
+ 03A6 3B01              .word 315
+ 03A8 C701              .word 455
+ 03AA FF00              .word 255
+ 03AC 1C02              .word 540
+ 03AE 3B01              .word 315
+ 03B0 0802              .word 520
+ 03B2 C800              .word 200
+ 03B4 3A02              .word 570
+ 03B6 EB00              .word 235
+ 03B8                   .dbsym e Reset_Key _Reset_Key A[24:3]kS[KEY]
+ 03B8           _Paras_Key::
+ 03B8 3E01              .word 318
+ 03BA 1001              .word 272
+ 03BC 8B01              .word 395
+ 03BE 4301              .word 323
+ 03C0 8C01              .word 396
+ 03C2 1001              .word 272
+ 03C4 D801              .word 472
+ 03C6 4301              .word 323
+ 03C8 D901              .word 473
+ 03CA 1001              .word 272
+ 03CC 2502              .word 549
+ 03CE 4301              .word 323
+ 03D0 0802              .word 520
+ 03D2 C800              .word 200
+ 03D4 3A02              .word 570
+ 03D6 EB00              .word 235
+ 03D8                   .dbsym e Paras_Key _Paras_Key A[32:4]kS[KEY]
+ 03D8           _Work_Key::
+ 03D8 2800              .word 40
+ 03DA 6000              .word 96
+ 03DC 6400              .word 100
+ 03DE 3B01              .word 315
+ 03E0 9600              .word 150
+ 03E2 6000              .word 96
+ 03E4 D200              .word 210
+ 03E6 3B01              .word 315
+ 03E8 0401              .word 260
+ 03EA 6000              .word 96
+ 03EC 4001              .word 320
+ 03EE 3B01              .word 315
+ 03F0 7201              .word 370
+ 03F2 6000              .word 96
+ 03F4 AE01              .word 430
+ 03F6 3B01              .word 315
+ 03F8 E001              .word 480
+ 03FA 6000              .word 96
+ 03FC 1C02              .word 540
+ 03FE 3B01              .word 315
+ 0400 4E02              .word 590
+ 0402 6000              .word 96
+ 0404 8A02              .word 650
+ 0406 3B01              .word 315
+ 0408 BC02              .word 700
+ 040A 6000              .word 96
+ 040C F802              .word 760
+ 040E 3B01              .word 315
+ 0410 BE00              .word 190
+ 0412 8A01              .word 394
+ 0414 FF00              .word 255
+ 0416 BC01              .word 444
+ 0418 BE00              .word 190
+ 041A BC01              .word 444
+ 041C FF00              .word 255
+ 041E EE01              .word 494
+ 0420 BE00              .word 190
+ 0422 EE01              .word 494
+ 0424 FF00              .word 255
+ 0426 2002              .word 544
+ 0428 BE00              .word 190
+ 042A 2002              .word 544
+ 042C FF00              .word 255
+ 042E 5202              .word 594
+ 0430 0B02              .word 523
+ 0432 8A01              .word 394
+ 0434 4C02              .word 588
+ 0436 BC01              .word 444
+ 0438 0B02              .word 523
+ 043A BC01              .word 444
+ 043C 4C02              .word 588
+ 043E EE01              .word 494
+ 0440 0B02              .word 523
+ 0442 EE01              .word 494
+ 0444 4C02              .word 588
+ 0446 2002              .word 544
+ 0448 0B02              .word 523
+ 044A 2002              .word 544
+ 044C 4C02              .word 588
+ 044E 5202              .word 594
+ 0450 5002              .word 592
+ 0452 8501              .word 389
+ 0454 B402              .word 692
+ 0456 E901              .word 489
+ 0458 B402              .word 692
+ 045A 8501              .word 389
+ 045C 1803              .word 792
+ 045E E901              .word 489
+ 0460 5002              .word 592
+ 0462 E901              .word 489
+ 0464 B402              .word 692
+ 0466 4D02              .word 589
+ 0468 B402              .word 692
+ 046A E901              .word 489
+ 046C 1803              .word 792
+ 046E 4D02              .word 589
+ 0470                   .dbsym e Work_Key _Work_Key A[152:19]kS[KEY]
+ 0470           _UL_Key::
+ 0470 A401              .word 420
+ 0472 6E00              .word 110
+ 0474 E001              .word 480
+ 0476 AA00              .word 170
+ 0478 A401              .word 420
+ 047A 0401              .word 260
+ 047C E001              .word 480
+ 047E 4001              .word 320
+ 0480 D002              .word 720
+ 0482 3002              .word 560
+ 0484 0C03              .word 780
+ 0486 5802              .word 600
+ 0488 A401              .word 420
+ 048A 9001              .word 400
+ 048C E001              .word 480
+ 048E CC01              .word 460
+ 0490                   .dbsym e UL_Key _UL_Key A[32:4]kS[KEY]
+ 0490           _Intensity_Tab::
+ 0490 0202              .byte 2,2
+ 0492 0202              .byte 2,2
+ 0494 0202              .byte 2,2
+ 0496 0200              .byte 2,0
+ 0498 00                .byte 0
+ 0499 0200              .byte 2,0
+ 049B 0202              .byte 2,2
+ 049D 0202              .byte 2,2
+ 049F 0200              .byte 2,0
+ 04A1 01                .byte 1
+ 04A2 0200              .byte 2,0
+ 04A4 0200              .byte 2,0
+ 04A6 0202              .byte 2,2
+ 04A8 0200              .byte 2,0
+ 04AA 02                .byte 2
+ 04AB 0000              .byte 0,0
+ 04AD 0200              .byte 2,0
+ 04AF 0202              .byte 2,2
+ 04B1 0200              .byte 2,0
+ 04B3 03                .byte 3
+ 04B4                   .dbsym e Intensity_Tab _Intensity_Tab A[36:4:9]kc
+ 04B4           _Intensity_Max::
+ 04B4 0A0A              .byte 10,10
+ 04B6 0A0A              .byte 10,10
+ 04B8 0A0A              .byte 10,10
+ 04BA 0A03              .byte 10,3
+ 04BC 03                .byte 3
+ 04BD                   .dbsym e Intensity_Max _Intensity_Max A[9:9]kc
+ 04BD           _hand::
+ 04BD 0001              .byte 0,1
+ 04BF 0202              .byte 2,2
+ 04C1                   .dbsym e hand _hand A[4:4]kc
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\def.c
+ 0000           _Touch_Y::
+ 0000                   .blkb 2
+ 0002                   .dbsym e Touch_Y _Touch_Y i
+ 0002           _Touch_X::
+ 0002                   .blkb 2
+ 0004                   .dbsym e Touch_X _Touch_X i
+ 0004           _Text1::
+ 0004                   .blkb 20
+ 0018                   .dbsym e Text1 _Text1 A[20:20]c
+ 0018           _Text::
+ 0018                   .blkb 50
+ 004A                   .dbsym e Text _Text A[50:50]c
+ 004A           _SNInput::
+ 004A                   .blkb 16
+ 005A                   .dbsym e SNInput _SNInput A[16:16]c
+ 005A           _passwordInput::
+ 005A                   .blkb 8
+ 0062                   .dbsym e passwordInput _passwordInput A[8:8]c
+ 0062           _RX2Countertail::
+ 0062                   .blkb 1
+ 0063                   .dbsym e RX2Countertail _RX2Countertail c
+ 0063           _RX2Counterhead::
+ 0063                   .blkb 1
+ 0064                   .dbsym e RX2Counterhead _RX2Counterhead c
+ 0064           _RX2Data::
+ 0064                   .blkb 300
+ 0190                   .dbsym e RX2Data _RX2Data A[300:10:30]c
+ 0190           _RX1Countertail::
+ 0190                   .blkb 1
+ 0191                   .dbsym e RX1Countertail _RX1Countertail c
+ 0191           _RX1Counterhead::
+ 0191                   .blkb 1
+ 0192                   .dbsym e RX1Counterhead _RX1Counterhead c
+ 0192           _RX1Data::
+ 0192                   .blkb 600
+ 03EA                   .dbsym e RX1Data _RX1Data A[600:20:30]c
+ 03EA           _RfPer::
+ 03EA                   .blkb 1
+ 03EB                   .dbsym e RfPer _RfPer c
+ 03EB           _Work_counter::
+ 03EB                   .blkb 2
+ 03ED                   .dbsym e Work_counter _Work_counter i
+ 03ED           _Total_counter::
+ 03ED                   .blkb 4
+ 03F1                   .dbsym e Total_counter _Total_counter l
+ 03F1           _Function_Buf::
+ 03F1                   .blkb 9
+ 03FA                   .dbsym e Function_Buf _Function_Buf A[9:9]c
+ 03FA           _Function_Tab::
+ 03FA                   .blkb 9
+ 0403                   .dbsym e Function_Tab _Function_Tab A[9:9]c
+ 0403           _PasswordTab::
+ 0403                   .blkb 6
+ 0409                   .dbsym e PasswordTab _PasswordTab A[6:6]c
+ 0409           ; unsigned char water=0;
+ 0409           ; unsigned char Menu=0;
+ 0409           ; unsigned char MC=0;
+ 0409           ; unsigned char MV=0;
+ 0409           ; unsigned char Clk=0;
+ 0409           ; unsigned char Work=0;
+ 0409           ; unsigned char HandID=255;//按键键值
+ 0409           ; unsigned char Hand_Event=0;
+ 0409           ; unsigned char Foot_Event=0;
+ 0409           ; unsigned char PasswordTab[6];
+ 0409           ; unsigned char DisPage=0;
+ 0409           ; unsigned char KeyID=255;
+ 0409           ; unsigned char BackSet=0;
+ 0409           ; unsigned char VerSet=0;
+ 0409           ; unsigned char WorktimeSet=0;
+ 0409           ; unsigned char PressureSet=0;
+ 0409           ; unsigned char Function_Tab[9];
+ 0409           ; unsigned char Function_Buf[9];
+ 0409           ; unsigned char Function_Count=0;
+ 0409           ; unsigned char Function_Ptr=0;
+ 0409           ; unsigned int  DelayMs=0;
+ 0409           ; unsigned char Page_ptr=0;
+ 0409           ; unsigned char SoundSet=0;
+ 0409           ; unsigned char Sound_Count=0;
+ 0409           ; unsigned long Total_counter;
+ 0409           ; unsigned int  Work_counter;
+ 0409           ; unsigned char ClockSet=0;
+ 0409           ; unsigned char Language=0;
+ 0409           ; unsigned char RfPer;
+ 0409           ; 
+ 0409           ; /***HAO*****************************************************/
+ 0409           ; 
+ 0409           ; 
+ 0409           ; 
+ 0409           ; unsigned char RX1Data[20][30];
+ 0409           ; unsigned char RX1Counterhead;//
+ 0409           ; unsigned char RX1Countertail;
+ 0409           ; 
+ 0409           ; unsigned char RX2Data[10][30];
+ 0409           ; unsigned char RX2Counterhead;//
+ 0409           ; unsigned char RX2Countertail;
+ 0409           ; 
+ 0409           ; unsigned char passwordInput[8];//输入密码
+ 0409           ; unsigned char password[8] = {0x31,0x32,0x31,0x33,0x31,0x34,0x31,0x39};//预设密码
+ 0409           ; unsigned char SNpassword[8] = {0x31,0x32,0x31,0x33,0x31,0x34,0x31,0x39};//SN预设密码
+ 0409           ; unsigned char SNInput[16];//输入SN
+ 0409           ; /***HAO****************************************************/
+ 0409           ; 
+ 0409           ; unsigned char Text[50];
+ 0409           ; unsigned char Text1[20];
+ 0409           ; unsigned char R_buf[250]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+ 0409           ; unsigned char R_buf1[100]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+ 0409           ; unsigned char T_buf[250]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+ 0409           ; unsigned char R_count=0;
+ 0409           ; unsigned char R_count1=0;
+ 0409           ; unsigned char R_Check=0;
+ 0409           ; unsigned char R_full=0;
+ 0409           ; unsigned char R_full1=0;
+ 0409           ; unsigned char T_ptr=0;
+ 0409           ; unsigned char T_count=0;
+ 0409           ; unsigned char Event_count=0;
+ 0409           ; unsigned char CardSet=0;
+ 0409           ; unsigned char Card_Event=0;
+ 0409           ; unsigned char Card_Info=0;
+ 0409           ; unsigned char Card_Command=0;
+ 0409           ; unsigned char Card_ID=0;
+ 0409           ; unsigned char User_ID=0;
+ 0409           ; unsigned char Card_Type=0;
+ 0409           ; unsigned char User_Type=0;
+ 0409           ; unsigned int  Card_Counter=0;
+ 0409           ; unsigned int  User_Counter=0;
+ 0409           ; unsigned char Card_Data[4]={0,0,0,0};
+ 0409           ; unsigned char Touch_Event=0;
+ 0409           ; unsigned char Touch_Buf=0;
+ 0409           ; unsigned int  Touch_ID=65535;
+ 0409           ; unsigned int  Touch_X;
+ 0409           ; unsigned int  Touch_Y;
+ 0409           ; unsigned int w_buf=0;
+ 0409           ; //the is Set Page data define
+ 0409           ; unsigned int SetID=0xffff;
+ 0409           ; unsigned char text_ptr=0;
+ 0409           ; unsigned char datetime[7]={0,0,0,0,0,0,0};
+ 0409           ; 
+ 0409           ; unsigned char Intensity[9]={0,0,0,0,0,0,0,0,0};//Intensity[0] LED等级  Intensity[2] RF等级  Intensity[3] 电机转速等级  Intensity[8] 手柄ID Intensity[1] 红外等级？
+ 0409           ;                                                //Intensity[4] 负压等级  Intensity[5] 吸气时间  Intensity[6] 放气时间  Intensity[7] 电机转向
+ 0409           ; unsigned char Handpiece=0;
+ 0409           ; unsigned char Mode=0;
+ 0409           ; 
+ 0409           ; typedef struct KEY
+ 0409           ; {
+ 0409           ;   unsigned int  XS;
+ 0409           ;   unsigned int  YS;
+ 0409           ;   unsigned int  XE;
+ 0409           ;   unsigned int  YE;
+ 0409           ; };
+ 0409           ; const struct KEY Main_Key[6]=
+ 0409           ; {
+ 0409           ;   { 30, 65,130,185},  //HR
+ 0409           ;   { 30,240,130,360},  //SR
+ 0409           ;   { 30,415,130,535},  //PR
+ 0409           ;   {175, 65,275,185},  //VR
+ 0409           ;   {  0,  0, 60, 50},   //start
+ 0409           ;   {175,240,275, 360}   //爆脂触摸
+ 0409           ; };
+ 0409           ; const struct KEY Start_Key[9]=
+ 0409           ; {
+ 0409           ;   {  0, 50,200, 90},  //time
+ 0409           ;   {  0, 90,200,130},  //touch
+ 0409           ;   {  0,130,200,170},  //sound
+ 0409           ;   {  0,170,200,210},  //language
+ 0409           ;   {  0,210,200,250},  //back set
+ 0409           ;   {  0,250,200,290},  //usb
+ 0409           ;   {  0,290,200,330},  //write
+ 0409           ;   {  0,330,200,370},   //system set
+ 0409           ;   {  0,  0, 60, 50}  //start
+ 0409           ; };
+ 0409           ; const struct KEY Time_Key[13]=
+ 0409           ; {
+ 0409           ;   {319,349,394,399},//0
+ 0409           ;   {319,196,394,246},//1
+ 0409           ;   {395,196,470,246},//2
+ 0409           ;   {471,196,546,246},//3 
+ 0409           ;   {319,247,393,297},//4
+ 0409           ;   {395,247,470,297},//5
+ 0409           ;   {471,247,546,297},//6
+ 0409           ;   {319,298,394,348},//7
+ 0409           ;   {395,298,470,348},//8
+ 0409           ;   {471,298,546,348},//9
+ 0409           ;   {395,349,470,399},//SET
+ 0409           ;   {471,349,546,399},//OK
+ 0409           ;   {530,100,570,135} //BLACK
+ 0409           ; };
+ 0409           ; const struct KEY Sound_Key[3]=
+ 0409           ; {
+ 0409           ;  {440,200,475,235},
+ 0409           ;  {405,330,460,390},
+ 0409           ;  {305,240,405,390}
+ 0409           ; };
+ 0409           ; const struct KEY Language_Key[17]=
+ 0409           ; {
+ 0409           ;   {306,140,396,226},
+ 0409           ;   {396,140,486,226},
+ 0409           ;   {486,140,576,226},
+ 0409           ;   {576,140,666,226},
+ 0409           ;   
+ 0409           ;   {306,226,396,312},
+ 0409           ;   {396,226,486,312},
+ 0409           ;   {486,226,576,312},
+ 0409           ;   {576,226,666,312},
+ 0409           ;   
+ 0409           ;   {306,312,396,398},
+ 0409           ;   {396,312,486,398},
+ 0409           ;   {486,312,576,398},
+ 0409           ;   {576,312,666,398},
+ 0409           ;   
+ 0409           ;   {306,398,396,484},
+ 0409           ;   {396,398,486,484},
+ 0409           ;   {486,398,576,484},
+ 0409           ;   {576,398,666,484},
+ 0409           ;   
+ 0409           ;   {630,100,670,135}
+ 0409           ; };
+ 0409           ; const struct KEY Back_Key[4]=
+ 0409           ; {
+ 0409           ;   {320,408,375,460},
+ 0409           ;   {390,408,445,460},
+ 0409           ;   {460,408,515,460},
+ 0409           ;   {500,200,540,235},
+ 0409           ; };
+ 0409           ; const struct KEY USB_Key[3]=
+ 0409           ; {
+ 0409           ;   {325,255,435,315},
+ 0409           ;   {455,255,565,315},
+ 0409           ;   {520,200,570,235}
+ 0409           ; };
+ 0409           ; const struct KEY Card_Key[16]=
+ 0409           ; {
+ 0409           ;   {320,400,395,450},//0
+ 0409           ;   
+ 0409           ;   {320,247,395,297},//1
+ 0409           ;   {396,247,471,297},//2
+ 0409           ;   {472,247,547,297},//3
+ 0409           ;   
+ 0409           ;   {320,298,395,348},//4
+ 0409           ;   {396,298,471,348},//5
+ 0409           ;   {472,298,547,348},//6
+ 0409           ;   
+ 0409           ;   {320,349,395,399},//7
+ 0409           ;   {396,349,471,399},//8
+ 0409           ;   {472,349,547,399},//9
+ 0409           ;   
+ 0409           ;   
+ 0409           ;   {395,400,471,450},//*  10
+ 0409           ;   {472,400,547,450},//OK 11
+ 0409           ;   
+ 0409           ;   {320,190,395,240},//CardID   12
+ 0409           ;   {396,190,471,240},//Type     13
+ 0409           ;   {472,190,547,240},//Count    14
+ 0409           ;   
+ 0409           ;   {530,100,570,135} //BLACK    15
+ 0409           ; };
+ 0409           ; const struct KEY System_Key[10]=
+ 0409           ; {
+ 0409           ;   {  8, 52,138, 98},//0
+ 0409           ;   {  8, 98,138,144},//1
+ 0409           ;   {  8,144,138,190},//2
+ 0409           ;   {  8,190,138,236},//3
+ 0409           ;   {  8,236,138,282},//4
+ 0409           ;   {  8,282,138,328},//5
+ 0409           ;   {  8,328,138,374},//6
+ 0409           ;   {  8,374,138,420},//7
+ 0409           ;   {  8,420,138,466},//8
+ 0409           ;   {740,  0,799, 45}//9 EXIT
+ 0409           ; };
+ 0409           ; const struct KEY Count_Key[2]=
+ 0409           ; {
+ 0409           ;   {475,240,550,295},
+ 0409           ;   {530,100,570,135}
+ 0409           ; };
+ 0409           ; const struct KEY Option_Key[5]=
+ 0409           ; {
+ 0409           ;   {364,175,474,285},
+ 0409           ;   {526,175,636,285},
+ 0409           ;   {364,331,474,441},
+ 0409           ;   {526,331,636,441},
+ 0409           ;   {640, 80,700,120} 
+ 0409           ; };
+ 0409           ; const struct KEY Handpiece_Key[22]=
+ 0409           ; {
+ 0409           ;   {314,166,377,209},
+ 0409           ;   {378,166,440,209},
+ 0409           ;   {442,166,504,209},
+ 0409           ;   {506,166,568,209},
+ 0409           ;   {570,166,632,209},
+ 0409           ;   {632,166,696,209},
+ 0409           ;   {696,166,760,209},
+ 0409           ;   
+ 0409           ;   {314,249,377,292},
+ 0409           ;   {378,249,440,292},
+ 0409           ;   {442,249,504,292},
+ 0409           ;   {506,249,568,292},
+ 0409           ;   {570,249,632,292}, 
+ 0409           ;   {632,249,696,292},
+ 0409           ;   {696,249,760,292},
+ 0409           ;   
+ 0409           ;   {314,332,377,375},
+ 0409           ;   {378,332,440,375},
+ 0409           ;   {442,332,504,375},
+ 0409           ;   {506,332,568,375},
+ 0409           ;   {570,332,632,375},
+ 0409           ;   {632,332,696,375},
+ 0409           ;   {696,332,760,375},
+ 0409           ;   
+ 0409           ;   {730,100,770,135}
+ 0409           ; };
+ 0409           ; const struct KEY CardSet_Key[3]=
+ 0409           ; {
+ 0409           ;   {325,255,410,315},
+ 0409           ;   {455,255,540,315},
+ 0409           ;   {520,200,570,235}
+ 0409           ; };
+ 0409           ; const struct KEY VerSet_Key[3]=
+ 0409           ; {
+ 0409           ;   {325,255,410,315},
+ 0409           ;   {455,255,540,315},
+ 0409           ;   {520,200,570,235}//exit
+ 0409           ; };
+ 0409           ; const struct KEY Reset_Key[3]=
+ 0409           ; {
+ 0409           ;   {325,255,410,315},
+ 0409           ;   {455,255,540,315},
+ 0409           ;   {520,200,570,235}//exit
+ 0409           ; };
+ 0409           ; const struct KEY Paras_Key[4]=
+ 0409           ; {
+ 0409           ;   {318,272,395,323},
+ 0409           ;   {396,272,472,323},
+ 0409           ;   {473,272,549,323},
+ 0409           ;   {520,200,570,235}//exit
+ 0409           ; };
+ 0409           ; const struct KEY Work_Key[19]=
+ 0409           ; {
+ 0409           ;   { 40,96,100,315},
+ 0409           ;   {150,96,210,315},
+ 0409           ;   {260,96,320,315},
+ 0409           ;   {370,96,430,315},
+ 0409           ;   {480,96,540,315},
+ 0409           ;   {590,96,650,315},
+ 0409           ;   {700,96,760,315},
+ 0409           ;   
+ 0409           ;   {190,394,255,444},
+ 0409           ;   {190,444,255,494},
+ 0409           ;   {190,494,255,544},
+ 0409           ;   {190,544,255,594},
+ 0409           ;   
+ 0409           ;   {523,394,588,444},
+ 0409           ;   {523,444,588,494},
+ 0409           ;   {523,494,588,544},
+ 0409           ;   {523,544,588,594},
+ 0409           ;   
+ 0409           ;   {592,389,692,489},
+ 0409           ;   {692,389,792,489},
+ 0409           ;   {592,489,692,589},
+ 0409           ;   {692,489,792,589}
+ 0409           ; };
+ 0409           ; //?????????
+ 0409           ; const struct KEY UL_Key[4]=
+ 0409           ; {
+ 0409           ;   { 420,110,480,170},
+ 0409           ;   {420,260,480,320},
+ 0409           ;   {720,560,780,600},
+ 0409           ;   {420,400,480,460}
+ 0409           ; };
+ 0409           ; 
+ 0409           ; const unsigned char Intensity_Tab[4][9]=
+ 0409           ; {
+ 0409           ;   //LED LD RF 转速 强度 吸气，放气
+ 0409           ;   { 2, 2, 2, 2, 2, 2, 2, 0, 0},
+ 0409           ;   { 2, 0, 2, 2, 2, 2, 2, 0, 1},
+ 0409           ;   { 2, 0, 2, 0, 2, 2, 2, 0, 2},
+ 0409           ;   { 0, 0, 2, 0, 2, 2, 2, 0, 3}
+ 0409           ; };
+ 0409           ; const unsigned char Intensity_Max[9]={10,10,10,10,10,10,10, 3, 3};
+ 0409           ; const unsigned char hand[4]={0,1,2,2};

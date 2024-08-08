@@ -1,0 +1,873 @@
+                        .module task.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile App\task.c
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\task.c
+ 0000                   .dbfunc e Init_Task _Init_Task fV
+ 0000           ;          Index -> R16
+                        .even
+ 0000           _Init_Task::
+ 0000                   .dbline -1
+ 0000                   .dbline 7
+ 0000           ; #include "includes.h"
+ 0000           ; struct Task Tasks[MAX_TASKS];
+ 0000           ; unsigned char Error_code;
+ 0000           ; unsigned int  Error_tick_const;
+ 0000           ; unsigned char Last_error_code;  
+ 0000           ; void Init_Task(void) 
+ 0000           ; {
+ 0000                   .dbline 9
+ 0000           ;    unsigned char Index;
+ 0000           ;    for(Index = 0; Index <MAX_TASKS; Index++)
+ 0000 0027              clr R16
+ 0002 47C0              xjmp L9
+ 0004           L6:
+ 0004                   .dbline 10
+ 0004           ;      {
+ 0004                   .dbline 11
+ 0004           ;        Tasks[Index].pTask  = 0;
+ 0004 80E0              ldi R24,<_Tasks
+ 0006 90E0              ldi R25,>_Tasks
+ 0008 E02F              mov R30,R16
+ 000A FF27              clr R31
+ 000C EE0F              lsl R30
+ 000E FF1F              rol R31
+ 0010 EE0F              lsl R30
+ 0012 FF1F              rol R31
+ 0014 EE0F              lsl R30
+ 0016 FF1F              rol R31
+ 0018 E80F              add R30,R24
+ 001A F91F              adc R31,R25
+ 001C 2224              clr R2
+ 001E 3324              clr R3
+ 0020 3182              std z+1,R3
+ 0022 2082              std z+0,R2
+ 0024                   .dbline 12
+ 0024           ;        Tasks[Index].Delay  = 0;
+ 0024 80E0              ldi R24,<_Tasks+2
+ 0026 90E0              ldi R25,>_Tasks+2
+ 0028 E02F              mov R30,R16
+ 002A FF27              clr R31
+ 002C EE0F              lsl R30
+ 002E FF1F              rol R31
+ 0030 EE0F              lsl R30
+ 0032 FF1F              rol R31
+ 0034 EE0F              lsl R30
+ 0036 FF1F              rol R31
+ 0038 E80F              add R30,R24
+ 003A F91F              adc R31,R25
+ 003C 3182              std z+1,R3
+ 003E 2082              std z+0,R2
+ 0040                   .dbline 13
+ 0040           ;        Tasks[Index].Period = 0;
+ 0040 80E0              ldi R24,<_Tasks+4
+ 0042 90E0              ldi R25,>_Tasks+4
+ 0044 E02F              mov R30,R16
+ 0046 FF27              clr R31
+ 0048 EE0F              lsl R30
+ 004A FF1F              rol R31
+ 004C EE0F              lsl R30
+ 004E FF1F              rol R31
+ 0050 EE0F              lsl R30
+ 0052 FF1F              rol R31
+ 0054 E80F              add R30,R24
+ 0056 F91F              adc R31,R25
+ 0058 3182              std z+1,R3
+ 005A 2082              std z+0,R2
+ 005C                   .dbline 14
+ 005C           ;        Tasks[Index].RunMe  = 0;
+ 005C 80E0              ldi R24,<_Tasks+6
+ 005E 90E0              ldi R25,>_Tasks+6
+ 0060 E02F              mov R30,R16
+ 0062 FF27              clr R31
+ 0064 EE0F              lsl R30
+ 0066 FF1F              rol R31
+ 0068 EE0F              lsl R30
+ 006A FF1F              rol R31
+ 006C EE0F              lsl R30
+ 006E FF1F              rol R31
+ 0070 E80F              add R30,R24
+ 0072 F91F              adc R31,R25
+ 0074 2082              std z+0,R2
+ 0076                   .dbline 15
+ 0076           ;        Tasks[Index].Co_op  = 0;
+ 0076 80E0              ldi R24,<_Tasks+7
+ 0078 90E0              ldi R25,>_Tasks+7
+ 007A E02F              mov R30,R16
+ 007C FF27              clr R31
+ 007E EE0F              lsl R30
+ 0080 FF1F              rol R31
+ 0082 EE0F              lsl R30
+ 0084 FF1F              rol R31
+ 0086 EE0F              lsl R30
+ 0088 FF1F              rol R31
+ 008A E80F              add R30,R24
+ 008C F91F              adc R31,R25
+ 008E 2082              std z+0,R2
+ 0090                   .dbline 17
+ 0090           ; 
+ 0090           ;        }
+ 0090           L7:
+ 0090                   .dbline 9
+ 0090 0395              inc R16
+ 0092           L9:
+ 0092                   .dbline 9
+ 0092 0B30              cpi R16,11
+ 0094 08F4              brsh X1
+ 0096 B6CF              xjmp L6
+ 0098           X1:
+ 0098           X0:
+ 0098                   .dbline -2
+ 0098           L5:
+ 0098                   .dbline 0 ; func end
+ 0098 0895              ret
+ 009A                   .dbsym r Index 16 c
+ 009A                   .dbend
+ 009A                   .dbfunc e Add_Task _Add_Task fc
+ 009A           ;          Index -> R20
+ 009A           ;          Co_op -> R10,R11
+ 009A           ;         PERIOD -> R12,R13
+ 009A           ;          DELAY -> R18,R19
+ 009A           ;      pFunction -> R16,R17
+                        .even
+ 009A           _Add_Task::
+ 009A 0E940000          xcall push_xgset303C
+ 009E CE80              ldd R12,y+6
+ 00A0 DF80              ldd R13,y+7
+ 00A2 A884              ldd R10,y+8
+ 00A4 B984              ldd R11,y+9
+ 00A6                   .dbline -1
+ 00A6                   .dbline 23
+ 00A6           ; }             
+ 00A6           ; unsigned char Add_Task(void(*pFunction)(void),
+ 00A6           ;                        unsigned int DELAY,
+ 00A6           ;                                          unsigned int PERIOD,
+ 00A6           ;                                          unsigned int Co_op)
+ 00A6           ; {
+ 00A6                   .dbline 24
+ 00A6           ;    unsigned char Index = 0;
+ 00A6 4427              clr R20
+ 00A8 01C0              xjmp L16
+ 00AA           L15:
+ 00AA                   .dbline 26
+ 00AA           ;    while((Tasks[Index].pTask != 0)&&(Index<MAX_TASKS))
+ 00AA           ;     {
+ 00AA                   .dbline 27
+ 00AA           ;        Index++;
+ 00AA 4395              inc R20
+ 00AC                   .dbline 28
+ 00AC           ;     }
+ 00AC           L16:
+ 00AC                   .dbline 25
+ 00AC 80E0              ldi R24,<_Tasks
+ 00AE 90E0              ldi R25,>_Tasks
+ 00B0 E42F              mov R30,R20
+ 00B2 FF27              clr R31
+ 00B4 EE0F              lsl R30
+ 00B6 FF1F              rol R31
+ 00B8 EE0F              lsl R30
+ 00BA FF1F              rol R31
+ 00BC EE0F              lsl R30
+ 00BE FF1F              rol R31
+ 00C0 E80F              add R30,R24
+ 00C2 F91F              adc R31,R25
+ 00C4 2080              ldd R2,z+0
+ 00C6 3180              ldd R3,z+1
+ 00C8 2220              tst R2
+ 00CA 11F4              brne X2
+ 00CC 3320              tst R3
+ 00CE 11F0              breq L18
+ 00D0           X2:
+ 00D0 4B30              cpi R20,11
+ 00D2 58F3              brlo L15
+ 00D4           X3:
+ 00D4           L18:
+ 00D4                   .dbline 29
+ 00D4           ;    if(Index == MAX_TASKS)
+ 00D4 4B30              cpi R20,11
+ 00D6 29F4              brne L19
+ 00D8           X4:
+ 00D8                   .dbline 30
+ 00D8           ;     {                
+ 00D8                   .dbline 31
+ 00D8           ;        Error_code = ERROR_TOO_MANY_RASKS;
+ 00D8 2224              clr R2
+ 00DA 20920300          sts _Error_code,R2
+ 00DE                   .dbline 32
+ 00DE           ;          return MAX_TASKS; 
+ 00DE 0BE0              ldi R16,11
+ 00E0 38C0              xjmp L14
+ 00E2           L19:
+ 00E2                   .dbline 34
+ 00E2           ;     }
+ 00E2           ;    Tasks[Index].pTask = pFunction;
+ 00E2 80E0              ldi R24,<_Tasks
+ 00E4 90E0              ldi R25,>_Tasks
+ 00E6 E42F              mov R30,R20
+ 00E8 FF27              clr R31
+ 00EA EE0F              lsl R30
+ 00EC FF1F              rol R31
+ 00EE EE0F              lsl R30
+ 00F0 FF1F              rol R31
+ 00F2 EE0F              lsl R30
+ 00F4 FF1F              rol R31
+ 00F6 E80F              add R30,R24
+ 00F8 F91F              adc R31,R25
+ 00FA 1183              std z+1,R17
+ 00FC 0083              std z+0,R16
+ 00FE                   .dbline 35
+ 00FE           ;    Tasks[Index].Delay  = DELAY;
+ 00FE 80E0              ldi R24,<_Tasks+2
+ 0100 90E0              ldi R25,>_Tasks+2
+ 0102 E42F              mov R30,R20
+ 0104 FF27              clr R31
+ 0106 EE0F              lsl R30
+ 0108 FF1F              rol R31
+ 010A EE0F              lsl R30
+ 010C FF1F              rol R31
+ 010E EE0F              lsl R30
+ 0110 FF1F              rol R31
+ 0112 E80F              add R30,R24
+ 0114 F91F              adc R31,R25
+ 0116 3183              std z+1,R19
+ 0118 2083              std z+0,R18
+ 011A                   .dbline 36
+ 011A           ;    Tasks[Index].Period = PERIOD;
+ 011A 80E0              ldi R24,<_Tasks+4
+ 011C 90E0              ldi R25,>_Tasks+4
+ 011E E42F              mov R30,R20
+ 0120 FF27              clr R31
+ 0122 EE0F              lsl R30
+ 0124 FF1F              rol R31
+ 0126 EE0F              lsl R30
+ 0128 FF1F              rol R31
+ 012A EE0F              lsl R30
+ 012C FF1F              rol R31
+ 012E E80F              add R30,R24
+ 0130 F91F              adc R31,R25
+ 0132 D182              std z+1,R13
+ 0134 C082              std z+0,R12
+ 0136                   .dbline 37
+ 0136           ;    Tasks[Index].Co_op=Co_op;
+ 0136 80E0              ldi R24,<_Tasks+7
+ 0138 90E0              ldi R25,>_Tasks+7
+ 013A E42F              mov R30,R20
+ 013C FF27              clr R31
+ 013E EE0F              lsl R30
+ 0140 FF1F              rol R31
+ 0142 EE0F              lsl R30
+ 0144 FF1F              rol R31
+ 0146 EE0F              lsl R30
+ 0148 FF1F              rol R31
+ 014A E80F              add R30,R24
+ 014C F91F              adc R31,R25
+ 014E A082              std z+0,R10
+ 0150                   .dbline 38
+ 0150           ;    return Index;
+ 0150 042F              mov R16,R20
+ 0152                   .dbline -2
+ 0152           L14:
+ 0152                   .dbline 0 ; func end
+ 0152 0C940000          xjmp pop_xgset303C
+ 0156                   .dbsym r Index 20 c
+ 0156                   .dbsym r Co_op 10 i
+ 0156                   .dbsym r PERIOD 12 i
+ 0156                   .dbsym r DELAY 18 i
+ 0156                   .dbsym r pFunction 16 pfV
+ 0156                   .dbend
+ 0156                   .dbfunc e Delete_Task _Delete_Task fc
+ 0156           ;     TASK_INDEX -> R16
+                        .even
+ 0156           _Delete_Task::
+ 0156                   .dbline -1
+ 0156                   .dbline 41
+ 0156           ; }
+ 0156           ; unsigned char Delete_Task(unsigned char TASK_INDEX)
+ 0156           ; {
+ 0156                   .dbline 42
+ 0156           ;    if(Tasks[TASK_INDEX].pTask == 0)
+ 0156 80E0              ldi R24,<_Tasks
+ 0158 90E0              ldi R25,>_Tasks
+ 015A E02F              mov R30,R16
+ 015C FF27              clr R31
+ 015E EE0F              lsl R30
+ 0160 FF1F              rol R31
+ 0162 EE0F              lsl R30
+ 0164 FF1F              rol R31
+ 0166 EE0F              lsl R30
+ 0168 FF1F              rol R31
+ 016A E80F              add R30,R24
+ 016C F91F              adc R31,R25
+ 016E 2080              ldd R2,z+0
+ 0170 3180              ldd R3,z+1
+ 0172 2220              tst R2
+ 0174 39F4              brne L25
+ 0176 3320              tst R3
+ 0178 29F4              brne L25
+ 017A           X5:
+ 017A                   .dbline 43
+ 017A           ;     {
+ 017A                   .dbline 44
+ 017A           ;         Error_code = ERROR_CANNONT_DELETE_TASK;
+ 017A 81E0              ldi R24,1
+ 017C 80930300          sts _Error_code,R24
+ 0180                   .dbline 45
+ 0180           ;         return Return_ERROR; 
+ 0180 02E0              ldi R16,2
+ 0182 47C0              xjmp L24
+ 0184           L25:
+ 0184                   .dbline 47
+ 0184           ;       }
+ 0184           ;    Tasks[TASK_INDEX].pTask  = 0;
+ 0184 80E0              ldi R24,<_Tasks
+ 0186 90E0              ldi R25,>_Tasks
+ 0188 E02F              mov R30,R16
+ 018A FF27              clr R31
+ 018C EE0F              lsl R30
+ 018E FF1F              rol R31
+ 0190 EE0F              lsl R30
+ 0192 FF1F              rol R31
+ 0194 EE0F              lsl R30
+ 0196 FF1F              rol R31
+ 0198 E80F              add R30,R24
+ 019A F91F              adc R31,R25
+ 019C 2224              clr R2
+ 019E 3324              clr R3
+ 01A0 3182              std z+1,R3
+ 01A2 2082              std z+0,R2
+ 01A4                   .dbline 48
+ 01A4           ;    Tasks[TASK_INDEX].Delay  = 0;
+ 01A4 80E0              ldi R24,<_Tasks+2
+ 01A6 90E0              ldi R25,>_Tasks+2
+ 01A8 E02F              mov R30,R16
+ 01AA FF27              clr R31
+ 01AC EE0F              lsl R30
+ 01AE FF1F              rol R31
+ 01B0 EE0F              lsl R30
+ 01B2 FF1F              rol R31
+ 01B4 EE0F              lsl R30
+ 01B6 FF1F              rol R31
+ 01B8 E80F              add R30,R24
+ 01BA F91F              adc R31,R25
+ 01BC 3182              std z+1,R3
+ 01BE 2082              std z+0,R2
+ 01C0                   .dbline 49
+ 01C0           ;    Tasks[TASK_INDEX].Period = 0;
+ 01C0 80E0              ldi R24,<_Tasks+4
+ 01C2 90E0              ldi R25,>_Tasks+4
+ 01C4 E02F              mov R30,R16
+ 01C6 FF27              clr R31
+ 01C8 EE0F              lsl R30
+ 01CA FF1F              rol R31
+ 01CC EE0F              lsl R30
+ 01CE FF1F              rol R31
+ 01D0 EE0F              lsl R30
+ 01D2 FF1F              rol R31
+ 01D4 E80F              add R30,R24
+ 01D6 F91F              adc R31,R25
+ 01D8 3182              std z+1,R3
+ 01DA 2082              std z+0,R2
+ 01DC                   .dbline 50
+ 01DC           ;    Tasks[TASK_INDEX].RunMe  = 0;
+ 01DC 80E0              ldi R24,<_Tasks+6
+ 01DE 90E0              ldi R25,>_Tasks+6
+ 01E0 E02F              mov R30,R16
+ 01E2 FF27              clr R31
+ 01E4 EE0F              lsl R30
+ 01E6 FF1F              rol R31
+ 01E8 EE0F              lsl R30
+ 01EA FF1F              rol R31
+ 01EC EE0F              lsl R30
+ 01EE FF1F              rol R31
+ 01F0 E80F              add R30,R24
+ 01F2 F91F              adc R31,R25
+ 01F4 2082              std z+0,R2
+ 01F6                   .dbline 51
+ 01F6           ;    Tasks[TASK_INDEX].Co_op  = 0;
+ 01F6 80E0              ldi R24,<_Tasks+7
+ 01F8 90E0              ldi R25,>_Tasks+7
+ 01FA E02F              mov R30,R16
+ 01FC FF27              clr R31
+ 01FE EE0F              lsl R30
+ 0200 FF1F              rol R31
+ 0202 EE0F              lsl R30
+ 0204 FF1F              rol R31
+ 0206 EE0F              lsl R30
+ 0208 FF1F              rol R31
+ 020A E80F              add R30,R24
+ 020C F91F              adc R31,R25
+ 020E 2082              std z+0,R2
+ 0210                   .dbline 52
+ 0210           ;    return Return_NORMAR;
+ 0210 03E0              ldi R16,3
+ 0212                   .dbline -2
+ 0212           L24:
+ 0212                   .dbline 0 ; func end
+ 0212 0895              ret
+ 0214                   .dbsym r TASK_INDEX 16 c
+ 0214                   .dbend
+ 0214                   .dbfunc e Report_Status _Report_Status fV
+                        .even
+ 0214           _Report_Status::
+ 0214                   .dbline -1
+ 0214                   .dbline 55
+ 0214           ; }  
+ 0214           ; void Report_Status(void)
+ 0214           ;  {
+ 0214                   .dbline 56
+ 0214           ;  ;    //加入空闲任务代码
+ 0214                   .dbline -2
+ 0214           L31:
+ 0214                   .dbline 0 ; func end
+ 0214 0895              ret
+ 0216                   .dbend
+ 0216                   .dbfunc e Updata _Updata fV
+ 0216           ;          Index -> R20
+                        .even
+ 0216           _Updata::
+ 0216 4A93              st -y,R20
+ 0218                   .dbline -1
+ 0218                   .dbline 61
+ 0218           ;  }
+ 0218           ;    
+ 0218           ; //轮询
+ 0218           ; void Updata(void)
+ 0218           ; {
+ 0218                   .dbline 63
+ 0218           ;    unsigned char Index;
+ 0218           ;    for (Index = 0;Index < MAX_TASKS;Index++)
+ 0218 4427              clr R20
+ 021A C2C0              xjmp L36
+ 021C           L33:
+ 021C                   .dbline 64
+ 021C           ;     {
+ 021C                   .dbline 65
+ 021C           ;         if(Tasks[Index].pTask)                  
+ 021C 80E0              ldi R24,<_Tasks
+ 021E 90E0              ldi R25,>_Tasks
+ 0220 E42F              mov R30,R20
+ 0222 FF27              clr R31
+ 0224 EE0F              lsl R30
+ 0226 FF1F              rol R31
+ 0228 EE0F              lsl R30
+ 022A FF1F              rol R31
+ 022C EE0F              lsl R30
+ 022E FF1F              rol R31
+ 0230 E80F              add R30,R24
+ 0232 F91F              adc R31,R25
+ 0234 2080              ldd R2,z+0
+ 0236 3180              ldd R3,z+1
+ 0238 2220              tst R2
+ 023A 19F4              brne X6
+ 023C 3320              tst R3
+ 023E 09F4              brne X12
+ 0240 AEC0              xjmp L37
+ 0242           X12:
+ 0242           X6:
+ 0242                   .dbline 66
+ 0242           ;          {
+ 0242                   .dbline 67
+ 0242           ;            if(Tasks[Index].Delay == 0)         
+ 0242 80E0              ldi R24,<_Tasks+2
+ 0244 90E0              ldi R25,>_Tasks+2
+ 0246 E42F              mov R30,R20
+ 0248 FF27              clr R31
+ 024A EE0F              lsl R30
+ 024C FF1F              rol R31
+ 024E EE0F              lsl R30
+ 0250 FF1F              rol R31
+ 0252 EE0F              lsl R30
+ 0254 FF1F              rol R31
+ 0256 E80F              add R30,R24
+ 0258 F91F              adc R31,R25
+ 025A 2080              ldd R2,z+0
+ 025C 3180              ldd R3,z+1
+ 025E 2220              tst R2
+ 0260 09F0              breq X13
+ 0262 8BC0              xjmp L39
+ 0264           X13:
+ 0264 3320              tst R3
+ 0266 09F0              breq X14
+ 0268 88C0              xjmp L39
+ 026A           X14:
+ 026A           X7:
+ 026A                   .dbline 68
+ 026A           ;                  {
+ 026A                   .dbline 69
+ 026A           ;                if(Tasks[Index].Co_op)           
+ 026A 80E0              ldi R24,<_Tasks+7
+ 026C 90E0              ldi R25,>_Tasks+7
+ 026E E42F              mov R30,R20
+ 0270 FF27              clr R31
+ 0272 EE0F              lsl R30
+ 0274 FF1F              rol R31
+ 0276 EE0F              lsl R30
+ 0278 FF1F              rol R31
+ 027A EE0F              lsl R30
+ 027C FF1F              rol R31
+ 027E E80F              add R30,R24
+ 0280 F91F              adc R31,R25
+ 0282 2080              ldd R2,z+0
+ 0284 2220              tst R2
+ 0286 79F0              breq L42
+ 0288           X8:
+ 0288                   .dbline 70
+ 0288           ;               {
+ 0288                   .dbline 71
+ 0288           ;                        Tasks[Index].RunMe =1;     
+ 0288 80E0              ldi R24,<_Tasks+6
+ 028A 90E0              ldi R25,>_Tasks+6
+ 028C E42F              mov R30,R20
+ 028E FF27              clr R31
+ 0290 EE0F              lsl R30
+ 0292 FF1F              rol R31
+ 0294 EE0F              lsl R30
+ 0296 FF1F              rol R31
+ 0298 EE0F              lsl R30
+ 029A FF1F              rol R31
+ 029C E80F              add R30,R24
+ 029E F91F              adc R31,R25
+ 02A0 81E0              ldi R24,1
+ 02A2 8083              std z+0,R24
+ 02A4                   .dbline 72
+ 02A4           ;                         }
+ 02A4 41C0              xjmp L43
+ 02A6           L42:
+ 02A6                   .dbline 74
+ 02A6           ;                        else
+ 02A6           ;                         {
+ 02A6                   .dbline 75
+ 02A6           ;                               (*Tasks[Index].pTask)();
+ 02A6 80E0              ldi R24,<_Tasks
+ 02A8 90E0              ldi R25,>_Tasks
+ 02AA E42F              mov R30,R20
+ 02AC FF27              clr R31
+ 02AE EE0F              lsl R30
+ 02B0 FF1F              rol R31
+ 02B2 EE0F              lsl R30
+ 02B4 FF1F              rol R31
+ 02B6 EE0F              lsl R30
+ 02B8 FF1F              rol R31
+ 02BA E80F              add R30,R24
+ 02BC F91F              adc R31,R25
+ 02BE A081              ldd R26,z+0
+ 02C0 B181              ldd R27,z+1
+ 02C2 FD01              movw R30,R26
+ 02C4 0E940000          xcall xicallx
+ 02C8                   .dbline 76
+ 02C8           ;                 Tasks[Index].RunMe=0; 
+ 02C8 80E0              ldi R24,<_Tasks+6
+ 02CA 90E0              ldi R25,>_Tasks+6
+ 02CC E42F              mov R30,R20
+ 02CE FF27              clr R31
+ 02D0 EE0F              lsl R30
+ 02D2 FF1F              rol R31
+ 02D4 EE0F              lsl R30
+ 02D6 FF1F              rol R31
+ 02D8 EE0F              lsl R30
+ 02DA FF1F              rol R31
+ 02DC E80F              add R30,R24
+ 02DE F91F              adc R31,R25
+ 02E0 2224              clr R2
+ 02E2 2082              std z+0,R2
+ 02E4                   .dbline 77
+ 02E4           ;                           if(Tasks[Index].Period==0)
+ 02E4 80E0              ldi R24,<_Tasks+4
+ 02E6 90E0              ldi R25,>_Tasks+4
+ 02E8 E42F              mov R30,R20
+ 02EA FF27              clr R31
+ 02EC EE0F              lsl R30
+ 02EE FF1F              rol R31
+ 02F0 EE0F              lsl R30
+ 02F2 FF1F              rol R31
+ 02F4 EE0F              lsl R30
+ 02F6 FF1F              rol R31
+ 02F8 E80F              add R30,R24
+ 02FA F91F              adc R31,R25
+ 02FC 2080              ldd R2,z+0
+ 02FE 3180              ldd R3,z+1
+ 0300 2220              tst R2
+ 0302 91F4              brne L47
+ 0304 3320              tst R3
+ 0306 81F4              brne L47
+ 0308           X9:
+ 0308                   .dbline 78
+ 0308           ;                                {
+ 0308                   .dbline 79
+ 0308           ;                                  Tasks[Index].pTask =0;
+ 0308 80E0              ldi R24,<_Tasks
+ 030A 90E0              ldi R25,>_Tasks
+ 030C E42F              mov R30,R20
+ 030E FF27              clr R31
+ 0310 EE0F              lsl R30
+ 0312 FF1F              rol R31
+ 0314 EE0F              lsl R30
+ 0316 FF1F              rol R31
+ 0318 EE0F              lsl R30
+ 031A FF1F              rol R31
+ 031C E80F              add R30,R24
+ 031E F91F              adc R31,R25
+ 0320 2224              clr R2
+ 0322 3324              clr R3
+ 0324 3182              std z+1,R3
+ 0326 2082              std z+0,R2
+ 0328                   .dbline 80
+ 0328           ;                                }
+ 0328           L47:
+ 0328                   .dbline 81
+ 0328           ;                         }        
+ 0328           L43:
+ 0328                   .dbline 82
+ 0328           ;                        if(Tasks[Index].Period)
+ 0328 80E0              ldi R24,<_Tasks+4
+ 032A 90E0              ldi R25,>_Tasks+4
+ 032C E42F              mov R30,R20
+ 032E FF27              clr R31
+ 0330 EE0F              lsl R30
+ 0332 FF1F              rol R31
+ 0334 EE0F              lsl R30
+ 0336 FF1F              rol R31
+ 0338 EE0F              lsl R30
+ 033A FF1F              rol R31
+ 033C E80F              add R30,R24
+ 033E F91F              adc R31,R25
+ 0340 2080              ldd R2,z+0
+ 0342 3180              ldd R3,z+1
+ 0344 2220              tst R2
+ 0346 19F4              brne X10
+ 0348 3320              tst R3
+ 034A 09F4              brne X15
+ 034C 28C0              xjmp L40
+ 034E           X15:
+ 034E           X10:
+ 034E                   .dbline 83
+ 034E           ;                          {
+ 034E                   .dbline 84
+ 034E           ;                            Tasks[Index].Delay = Tasks[Index].Period;
+ 034E 242E              mov R2,R20
+ 0350 3324              clr R3
+ 0352 220C              lsl R2
+ 0354 331C              rol R3
+ 0356 220C              lsl R2
+ 0358 331C              rol R3
+ 035A 220C              lsl R2
+ 035C 331C              rol R3
+ 035E 2101              movw R4,R2
+ 0360 F101              movw R30,R2
+ 0362 E80F              add R30,R24
+ 0364 F91F              adc R31,R25
+ 0366 2080              ldd R2,z+0
+ 0368 3180              ldd R3,z+1
+ 036A 80E0              ldi R24,<_Tasks+2
+ 036C 90E0              ldi R25,>_Tasks+2
+ 036E F201              movw R30,R4
+ 0370 E80F              add R30,R24
+ 0372 F91F              adc R31,R25
+ 0374 3182              std z+1,R3
+ 0376 2082              std z+0,R2
+ 0378                   .dbline 85
+ 0378           ;                          }    
+ 0378                   .dbline 86
+ 0378           ;                  }
+ 0378 12C0              xjmp L40
+ 037A           L39:
+ 037A                   .dbline 88
+ 037A           ;                 else 
+ 037A           ;                  {
+ 037A                   .dbline 89
+ 037A           ;                    Tasks[Index].Delay -=1;
+ 037A 80E0              ldi R24,<_Tasks+2
+ 037C 90E0              ldi R25,>_Tasks+2
+ 037E 242E              mov R2,R20
+ 0380 3324              clr R3
+ 0382 220C              lsl R2
+ 0384 331C              rol R3
+ 0386 220C              lsl R2
+ 0388 331C              rol R3
+ 038A 220C              lsl R2
+ 038C 331C              rol R3
+ 038E 280E              add R2,R24
+ 0390 391E              adc R3,R25
+ 0392 F101              movw R30,R2
+ 0394 8081              ldd R24,z+0
+ 0396 9181              ldd R25,z+1
+ 0398 0197              sbiw R24,1
+ 039A 9183              std z+1,R25
+ 039C 8083              std z+0,R24
+ 039E                   .dbline 90
+ 039E           ;                  }
+ 039E           L40:
+ 039E                   .dbline 91
+ 039E           ;          }
+ 039E           L37:
+ 039E                   .dbline 92
+ 039E           ;       }
+ 039E           L34:
+ 039E                   .dbline 63
+ 039E 4395              inc R20
+ 03A0           L36:
+ 03A0                   .dbline 63
+ 03A0 4B30              cpi R20,11
+ 03A2 08F4              brsh X16
+ 03A4 3BCF              xjmp L33
+ 03A6           X16:
+ 03A6           X11:
+ 03A6                   .dbline -2
+ 03A6           L32:
+ 03A6                   .dbline 0 ; func end
+ 03A6 4991              ld R20,y+
+ 03A8 0895              ret
+ 03AA                   .dbsym r Index 20 c
+ 03AA                   .dbend
+ 03AA                   .dbfunc e Dispartch_Task _Dispartch_Task fV
+ 03AA           ;          Index -> R20
+                        .even
+ 03AA           _Dispartch_Task::
+ 03AA 4A93              st -y,R20
+ 03AC                   .dbline -1
+ 03AC                   .dbline 96
+ 03AC           ; }     
+ 03AC           ; //调度
+ 03AC           ; void Dispartch_Task(void)
+ 03AC           ;  {
+ 03AC                   .dbline 98
+ 03AC           ;     unsigned char Index;
+ 03AC           ;       for(Index = 0; Index < MAX_TASKS;Index++)
+ 03AC 4427              clr R20
+ 03AE 47C0              xjmp L60
+ 03B0           L57:
+ 03B0                   .dbline 99
+ 03B0           ;         {
+ 03B0                   .dbline 100
+ 03B0           ;           if(Tasks[Index].RunMe>0)
+ 03B0 80E0              ldi R24,<_Tasks+6
+ 03B2 90E0              ldi R25,>_Tasks+6
+ 03B4 E42F              mov R30,R20
+ 03B6 FF27              clr R31
+ 03B8 EE0F              lsl R30
+ 03BA FF1F              rol R31
+ 03BC EE0F              lsl R30
+ 03BE FF1F              rol R31
+ 03C0 EE0F              lsl R30
+ 03C2 FF1F              rol R31
+ 03C4 E80F              add R30,R24
+ 03C6 F91F              adc R31,R25
+ 03C8 2080              ldd R2,z+0
+ 03CA 80E0              ldi R24,0
+ 03CC 8215              cp R24,R2
+ 03CE 08F0              brlo X20
+ 03D0 35C0              xjmp L61
+ 03D2           X20:
+ 03D2           X17:
+ 03D2                   .dbline 101
+ 03D2           ;                 {
+ 03D2                   .dbline 102
+ 03D2           ;                   (*Tasks[Index].pTask)();
+ 03D2 80E0              ldi R24,<_Tasks
+ 03D4 90E0              ldi R25,>_Tasks
+ 03D6 E42F              mov R30,R20
+ 03D8 FF27              clr R31
+ 03DA EE0F              lsl R30
+ 03DC FF1F              rol R31
+ 03DE EE0F              lsl R30
+ 03E0 FF1F              rol R31
+ 03E2 EE0F              lsl R30
+ 03E4 FF1F              rol R31
+ 03E6 E80F              add R30,R24
+ 03E8 F91F              adc R31,R25
+ 03EA A081              ldd R26,z+0
+ 03EC B181              ldd R27,z+1
+ 03EE FD01              movw R30,R26
+ 03F0 0E940000          xcall xicallx
+ 03F4                   .dbline 103
+ 03F4           ;                   Tasks[Index].RunMe-=1;
+ 03F4 80E0              ldi R24,<_Tasks+6
+ 03F6 90E0              ldi R25,>_Tasks+6
+ 03F8 242E              mov R2,R20
+ 03FA 3324              clr R3
+ 03FC 220C              lsl R2
+ 03FE 331C              rol R3
+ 0400 220C              lsl R2
+ 0402 331C              rol R3
+ 0404 220C              lsl R2
+ 0406 331C              rol R3
+ 0408 280E              add R2,R24
+ 040A 391E              adc R3,R25
+ 040C F101              movw R30,R2
+ 040E 8081              ldd R24,z+0
+ 0410 8150              subi R24,1
+ 0412 8083              std z+0,R24
+ 0414                   .dbline 104
+ 0414           ;                       if(Tasks[Index].Period == 0)
+ 0414 80E0              ldi R24,<_Tasks+4
+ 0416 90E0              ldi R25,>_Tasks+4
+ 0418 E42F              mov R30,R20
+ 041A FF27              clr R31
+ 041C EE0F              lsl R30
+ 041E FF1F              rol R31
+ 0420 EE0F              lsl R30
+ 0422 FF1F              rol R31
+ 0424 EE0F              lsl R30
+ 0426 FF1F              rol R31
+ 0428 E80F              add R30,R24
+ 042A F91F              adc R31,R25
+ 042C 2080              ldd R2,z+0
+ 042E 3180              ldd R3,z+1
+ 0430 2220              tst R2
+ 0432 21F4              brne L65
+ 0434 3320              tst R3
+ 0436 11F4              brne L65
+ 0438           X18:
+ 0438                   .dbline 105
+ 0438           ;                         {
+ 0438                   .dbline 106
+ 0438           ;                          Delete_Task(Index);
+ 0438 042F              mov R16,R20
+ 043A 8DDE              xcall _Delete_Task
+ 043C                   .dbline 107
+ 043C           ;                     }
+ 043C           L65:
+ 043C                   .dbline 108
+ 043C           ;             }
+ 043C           L61:
+ 043C                   .dbline 109
+ 043C           ;         }
+ 043C           L58:
+ 043C                   .dbline 98
+ 043C 4395              inc R20
+ 043E           L60:
+ 043E                   .dbline 98
+ 043E 4B30              cpi R20,11
+ 0440 08F4              brsh X21
+ 0442 B6CF              xjmp L57
+ 0444           X21:
+ 0444           X19:
+ 0444                   .dbline -2
+ 0444           L56:
+ 0444                   .dbline 0 ; func end
+ 0444 4991              ld R20,y+
+ 0446 0895              ret
+ 0448                   .dbsym r Index 20 c
+ 0448                   .dbend
+                        .area bss(ram, con, rel)
+ 0000                   .dbfile E:\1.JD_Project\21.Android-360\1.Android-360Code\App\task.c
+ 0000           _Last_error_code::
+ 0000                   .blkb 1
+ 0001                   .dbsym e Last_error_code _Last_error_code c
+ 0001           _Error_tick_const::
+ 0001                   .blkb 2
+ 0003                   .dbsym e Error_tick_const _Error_tick_const i
+ 0003           _Error_code::
+ 0003                   .blkb 1
+ 0004                   .dbsym e Error_code _Error_code c
+ 0004           _Tasks::
+ 0004                   .blkb 88
+ 005C                   .dbstruct 0 8 Task
+ 005C                   .dbfield 0 pTask pfV
+ 005C                   .dbfield 2 Delay i
+ 005C                   .dbfield 4 Period i
+ 005C                   .dbfield 6 RunMe c
+ 005C                   .dbfield 7 Co_op c
+ 005C                   .dbend
+ 005C                   .dbsym e Tasks _Tasks A[88:11]S[Task]
+ 005C           ;       //Report_Status();   加入空闲任务代码
+ 005C           ; }     
